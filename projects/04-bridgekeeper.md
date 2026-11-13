@@ -83,10 +83,26 @@ Advisory tool; engineers sign inspections.
 
 **Skills it proves:** segmentation · metrology · reporting
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Combine visual crack detection with vibration-based health monitoring in one digital twin and validate on a real footbridge with its owner.
+
+**Grows into:** [BRIDGESHM](87-bridgeshm.md) · **Publication target:** IWSHM
+
 ## Defend it
 
 1. How do you convert pixels to millimetres?
 2. What does a missed crack cost compared to a false one?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

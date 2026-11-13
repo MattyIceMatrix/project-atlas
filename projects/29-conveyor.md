@@ -87,10 +87,26 @@ None special.
 
 **Skills it proves:** Kubernetes · GitOps · MLOps
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [####.]  ====================>  LEVEL [#####]
+```
+
+Run on your own GPU cluster with signed model supply chain and multi-tenant serving.
+
+**Grows into:** [HOMECLUSTER](70-homecluster.md), [MODELCHAIN](75-modelchain.md) · **Publication target:** KubeCon talk
+
 ## Defend it
 
 1. What does the evaluation gate check, exactly?
 2. Why canary instead of blue-green here?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

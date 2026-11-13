@@ -80,10 +80,26 @@ Runs only on repositories where the owner installs it.
 
 **Skills it proves:** agents · testing · CI/CD
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Verified agent workflows plus sandboxed test execution across many repos with measured bug-catch rates.
+
+**Grows into:** [AGENTGRID](66-agentgrid.md), [REPROBOT](97-reprobot.md) · **Publication target:** ICSE/FSE tool track
+
 ## Defend it
 
 1. Why require a failing test?
 2. What stops the agent from running untrusted code unsafely?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

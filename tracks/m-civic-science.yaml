@@ -1,0 +1,339 @@
+track:
+  id: M
+  name: "Masterpiece: Civic, Science and Human Performance"
+  motto: "Big skills, pointed at real people."
+projects:
+  - id: 91
+    code: ATHLETEOS
+    name: Sprint and hurdle performance platform
+    tagline: Multi-camera 3D motion, timing gates and a coach dashboard, built by a former hurdler.
+    problem: Elite-grade biomechanics systems cost tens of thousands; club athletes get nothing.
+    art: |2
+          cam1 \        o_     ___     ___
+          cam2 -->  3D /|  -> |   | ->|   |    split 1-2: 1.02 s
+          cam3 /       / \    |   |   |   |    knee angle at take-off: 152 deg
+    flow: "synchronised phones -> 3D pose triangulation -> event detection -> metrics -> coach dashboard + trends"
+    stack: [RTMPose, multi-view triangulation, Python, FastAPI, React]
+    hardware: 3 phones, tripods, optional timing gates
+    budget: "€300"
+    months: 14
+    level: 5
+    phases:
+      - Multi-camera sync and calibration
+      - 3D pose and event detection, validated against a reference system
+      - Coach dashboard with season trends
+      - Pilot with a local athletics club
+    metrics: [3D joint error vs reference, timing error, coach adoption]
+    ethics: Athlete consent; minors with guardian consent; data owned by the athlete.
+    resume: "Built a multi-camera 3D sprint/hurdle analysis platform within <N> mm of reference, piloted at a club."
+    skills: [3D vision, sports science, product]
+    defend:
+      - How do you synchronise phones without hardware triggers?
+      - Which metric changed a coaching decision?
+      - How is athlete data protected?
+    components: [capture app, calibration, 3D pose, analytics, dashboard]
+    trl: "TRL 4 -> 6 (club pilot)"
+    venue: "Sports engineering conference (ISEA) or ISBS"
+    deliverables: [Platform, Validation study, Club pilot report, Paper]
+    standards: [GDPR (health-adjacent data), consent forms]
+
+  - id: 92
+    code: COMMANDSIM
+    name: Incident command training simulator with AI role players
+    tagline: Run a flood response in a tabletop sim where every radio call is an AI playing a role.
+    problem: Incident command training needs many role players and realistic pressure; exercises are rare.
+    art: |2
+          [ IC trainee ] <--radio--> [AI: fire chief] [AI: THW lead] [AI: mayor] [AI: press]
+                    \__ scenario clock: T+02:40, river +40 cm, bridge closed __/
+    flow: "scenario engine -> AI role players with doctrine knowledge -> trainee decisions -> after-action scoring"
+    stack: [Python, LLM with role prompts + RAG over doctrine, speech I/O, web UI]
+    hardware: Laptop + headset
+    budget: "€50/month"
+    months: 14
+    level: 5
+    phases:
+      - Scenario model grounded in public flood exercise material
+      - Role players constrained by doctrine (ICS/THW structures)
+      - Scoring rubric with real instructors
+      - Pilot with a volunteer unit or university emergency management course
+    metrics: [instructor-rated realism, learning gain pre/post, role-player consistency]
+    ethics: Training aid, not certification; instructors own assessment.
+    resume: "Built an AI-driven incident command simulator rated <N>/5 for realism by instructors in a pilot."
+    skills: [simulation, LLM agents, training design]
+    defend:
+      - How do you keep AI role players consistent with doctrine?
+      - How do you measure learning, not just enjoyment?
+      - What should never be automated in command training?
+    components: [scenario engine, role agents, doctrine RAG, voice layer, AAR scorer]
+    trl: "TRL 4 -> 6"
+    venue: "ISCRAM or simulation and gaming journal"
+    deliverables: [Simulator, Scenario pack, Pilot study, Instructor guide]
+    standards: [ICS/NIMS doctrine, German FwDV 100 (reference)]
+
+  - id: 93
+    code: VERWALTUNG
+    name: Citizen navigator for German administrative procedures
+    tagline: Which form, which office, which deadline, with sources for every step.
+    problem: Navigating German bureaucracy is hard for everyone and harder for newcomers.
+    art: |2
+          "I moved to Bolanden and have a car"
+             --> Anmeldung (14 days) --> Kfz-Ummeldung --> Rundfunkbeitrag
+                    [source]               [source]          [source]
+    flow: "official procedure data -> knowledge graph -> question answering with citations -> multilingual UI"
+    stack: [Python, Neo4j or SQLite graph, RAG, open procedure catalogues (FIM/Leika), Next.js]
+    hardware: None
+    budget: "€20/month"
+    months: 14
+    level: 5
+    phases:
+      - Ingest official procedure catalogues
+      - Graph of procedures, triggers, deadlines
+      - Grounded Q&A with citations; refusal when unsure
+      - Usability study with newcomers in 3 languages
+    metrics: [answer correctness audited by experts, citation coverage, task completion in user tests]
+    ethics: Information, not legal advice; always links to the official source.
+    resume: "Built a cited, multilingual navigator over official German procedures with <N>% expert-audited correctness."
+    skills: [knowledge graphs, RAG, civic tech]
+    defend:
+      - Why a graph and not just documents?
+      - How do you keep it current?
+      - When must the tool say "ask the office"?
+    components: [catalogue ingest, procedure graph, QA engine, citation checker, UI]
+    trl: "TRL 4 -> 6"
+    venue: "Civic tech / e-government conference"
+    deliverables: [Platform, Audit report, User study, Open data contributions]
+    standards: [OZG / FIM catalogues (reference), BITV 2.0 accessibility, GDPR]
+
+  - id: 94
+    code: SKYEDGE
+    name: Edge AI for amateur telescope transient detection
+    tagline: Spot the supernova from a backyard in the Pfalz.
+    problem: Amateur telescopes capture lots of data but transient detection needs pro pipelines.
+    art: |2
+            *    .   *        new!  .
+          .    *   [*]   .    *     brightness +2.1 mag vs reference
+            .   *    .   *
+    flow: "camera frames -> calibration -> image differencing -> real/bogus classifier on edge -> alert to network"
+    stack: [Python, astropy, PyTorch, Raspberry Pi or Jetson, public ZTF real/bogus data]
+    hardware: Small telescope or rented remote telescope time
+    budget: "€500"
+    months: 14
+    level: 5
+    phases:
+      - Calibration and differencing pipeline
+      - Real/bogus classifier trained on public data
+      - On-device pipeline on the telescope computer
+      - Report a verified transient or variable star observation
+    metrics: [real/bogus AUC, false alerts per night, processing time per frame]
+    ethics: None special.
+    resume: "Built an edge astronomy pipeline with real/bogus AUC <N>, running live at the telescope."
+    skills: [astronomy data, edge ML, image processing]
+    defend:
+      - What is image differencing?
+      - Why are most detections bogus?
+      - How would a professional verify your alert?
+    components: [capture, calibration, differencing, classifier, alerting]
+    trl: "TRL 3 -> 5"
+    venue: "Astronomy software (ADASS) or citizen-science outlet"
+    deliverables: [Pipeline, Observing log, Classifier card, Write-up]
+    standards: [FITS, VOEvent]
+
+  - id: 95
+    code: BABEL
+    name: Offline speech translation device for responders
+    tagline: English, German, Ukrainian, Arabic, Turkish, with no network.
+    problem: Responders meet people they can't talk to, exactly when it matters most.
+    art: |2
+          (( "Wo ist Ihre Mutter?" )) --> [ device ] --> (( "Where is your mother?" ))
+                                         offline, 1.1 s
+    flow: "speech -> on-device ASR -> MT -> TTS -> confidence display -> phrasebook fallback"
+    stack: [whisper.cpp, NLLB or Marian MT (quantised), Piper TTS, Jetson or phone]
+    hardware: Jetson or phone + rugged speaker
+    budget: "€300"
+    months: 14
+    level: 5
+    phases:
+      - Language set chosen with local responders
+      - On-device pipeline with latency budget
+      - Domain phrasebook and evaluation with native speakers
+      - Field exercise integration with LANTERN
+    metrics: [translation adequacy (human-rated), end-to-end latency, ASR WER in noise]
+    ethics: Shows uncertainty; critical medical phrases use a verified phrasebook, not free MT.
+    resume: "Built offline 5-language speech translation at <N> s latency with human-rated adequacy <N>/5."
+    skills: [speech, MT, edge deployment]
+    defend:
+      - Why a verified phrasebook for critical phrases?
+      - How does noise affect ASR, and what did you do?
+      - Which languages, and why those?
+    components: [ASR, MT, TTS, phrasebook, UI]
+    trl: "TRL 4 -> 6"
+    venue: "ISCRAM or speech technology workshop"
+    deliverables: [Device build, Evaluation, Phrasebook, LANTERN integration]
+    standards: [Accessibility, GDPR (voice data stays local)]
+
+  - id: 96
+    code: WAYFINDER
+    name: Indoor navigation for blind and low-vision users
+    tagline: Turn-by-turn through the train station, from a phone camera.
+    problem: GPS doesn't work indoors; blind travellers rely on memory and strangers.
+    art: |2
+          [phone cam] --> "Stairs ahead, 5 m. Handrail on your right."
+           |       |
+          ===|=====|====  platform 3 ->
+    flow: "camera + IMU -> visual localisation on a prebuilt map -> obstacle detection -> audio/haptic guidance"
+    stack: [ARCore/ARKit or ORB-SLAM3, YOLO, TTS, mobile app]
+    hardware: Phone
+    budget: "€0"
+    months: 16
+    level: 5
+    phases:
+      - Co-design sessions with blind users and an advocacy group
+      - Map building and visual localisation
+      - Obstacle detection and guidance design
+      - User study in a real public building (with permission)
+    metrics: [localisation error, route completion rate, user confidence ratings]
+    ethics: Co-designed; assistive aid, not a replacement for cane or guide dog.
+    resume: "Built camera-based indoor navigation with <N>% route completion in a study co-designed with blind users."
+    skills: [SLAM, accessibility, human-centred design]
+    defend:
+      - Why co-design and not just test at the end?
+      - What failure is most dangerous and how is it handled?
+      - Audio vs haptic: what did users prefer?
+    components: [mapper, localiser, obstacle detector, guidance engine, app]
+    trl: "TRL 4 -> 6"
+    venue: "ASSETS (ACM accessibility conference)"
+    deliverables: [App, Study report, Design guidelines, Paper]
+    standards: [WCAG 2.2, EN 301 549, BITV 2.0]
+
+  - id: 97
+    code: REPROBOT
+    name: Research agent that reproduces ML papers, with verification
+    tagline: Paper in, working code and an honest reproduction report out.
+    problem: Many ML results are hard to reproduce; checking them by hand takes weeks.
+    art: |2
+          paper.pdf --> [ plan ] --> [ code ] --> [ run ] --> [ compare to Table 2 ]
+                                                          reproduced: 3/4 claims
+    flow: "paper parsing -> experiment plan -> code generation in sandbox -> runs -> claim-by-claim comparison"
+    stack: [Python, agent runtime (AGENTGRID), sandboxed containers, PyTorch]
+    hardware: Cloud GPUs (budgeted)
+    budget: "€400"
+    months: 16
+    level: 5
+    phases:
+      - Benchmark of 20 small papers with known reproduction status
+      - Planning and coding agent in a sandbox
+      - Claim extraction and statistical comparison
+      - Report quality judged by human researchers
+    metrics: [claims correctly reproduced or refuted, cost per paper, human agreement on reports]
+    ethics: Credit original authors; report failures politely and privately first.
+    resume: "Built a paper-reproduction agent that correctly assessed <N>% of claims across <N> papers at €<N>/paper."
+    skills: [AI agents, research methods, sandboxing]
+    defend:
+      - How do you know a failed reproduction isn't your bug?
+      - Why a sandbox, and what can still go wrong?
+      - What is a claim, operationally?
+    components: [paper parser, planner, coder, sandbox runner, claim checker]
+    trl: "TRL 3 -> 4"
+    venue: "ML reproducibility workshop or ReScience"
+    deliverables: [Agent, Benchmark, Reports, Paper]
+    standards: [ML reproducibility checklist (NeurIPS)]
+
+  - id: 98
+    code: QUESTLINE
+    name: Adaptive, gamified engineering curriculum engine
+    tagline: A training game that knows what you know, and what to teach next.
+    problem: Self-learners quit when material is too easy, too hard or too dry.
+    art: |2
+           LVL 7  [#######...]  XP 2,340
+           next mission: "Fix the leaking cache" (skill: Redis, mastery 0.42)
+    flow: "skill graph -> knowledge tracing model -> mission generator -> graded labs -> mastery updates"
+    stack: [Python, pyBKT or deep knowledge tracing, LLM mission writer, VS Code extension]
+    hardware: None
+    budget: "€10/month"
+    months: 14
+    level: 5
+    phases:
+      - Skill graph for one domain (e.g. DevOps)
+      - Knowledge tracing on learner attempts
+      - Mission generation with auto-graded labs
+      - Study with 20 learners: retention and learning gain
+    metrics: [knowledge tracing AUC, learning gain, 30-day retention]
+    ethics: Learner data private; no dark-pattern engagement tricks.
+    resume: "Built an adaptive training engine (KT AUC <N>) that raised 30-day learner retention <N>%."
+    skills: [learning science, ML, product]
+    defend:
+      - What is knowledge tracing?
+      - How do you grade labs automatically and fairly?
+      - Fun vs effective: how did you measure both?
+    components: [skill graph, tracer, mission writer, lab grader, game layer]
+    trl: "TRL 4 -> 6"
+    venue: "Learning at Scale or educational data mining conference"
+    deliverables: [Engine, Curriculum pack, Study report, Paper]
+    standards: [xAPI learning records, WCAG]
+
+  - id: 99
+    code: HELPERHUB
+    name: Coordination platform for spontaneous disaster volunteers
+    tagline: Thousands of helpers showed up in the Ahr. This puts them where they're needed.
+    problem: After floods, huge numbers of volunteers arrive; matching them to safe, useful tasks is chaos.
+    art: |2
+          helpers [o][o][o][o][o][o]  -->  [ match ]  -->  task: "shovel mud, Dernau, 4 people, boots"
+                                               |  safety briefing  |  shift limits
+    flow: "volunteer registration -> skills and safety checks -> task requests from authorities -> matching -> check-in/out"
+    stack: [Next.js, Postgres, OR-Tools matching, PWA offline mode, MESHLIFE/CREDMESH integration]
+    hardware: None
+    budget: "€20/month"
+    months: 14
+    level: 5
+    phases:
+      - Interviews with organisations that coordinated volunteers in 2021
+      - Registration, tasks, matching with safety rules
+      - Offline-capable check-in/out and shift limits
+      - Exercise with a volunteer organisation
+    metrics: [match time, tasks filled, safety rule violations (target 0)]
+    ethics: Authorities and organisations stay in charge; minimal personal data.
+    resume: "Built a spontaneous-volunteer coordination platform filling <N>% of tasks in an exercise with <N> volunteers."
+    skills: [civic tech, optimisation, offline-first apps]
+    defend:
+      - What went wrong with volunteer coordination in 2021?
+      - Why are safety rules hard constraints in the matcher?
+      - Who owns the data after the disaster?
+    components: [registration, task intake, matcher, check-in, reporting]
+    trl: "TRL 4 -> 6"
+    venue: "ISCRAM"
+    deliverables: [Platform, Exercise report, Organisation playbook, Paper]
+    standards: [GDPR, CAP for task alerts, BITV 2.0]
+
+  - id: 100
+    code: CITYTWIN
+    name: Open digital twin of a mid-size city
+    tagline: Kaiserslautern in 3D, with traffic, energy, trees and water in one model.
+    problem: Cities buy separate tools for every domain; nothing connects them.
+    art: |2
+               _   __    _|_    __
+            __| |_|  |__| |_|__|  |__     3D buildings
+           [ traffic ][ energy ][ heat ][ flood ]   one data model
+    flow: "open 3D city models + sensor feeds -> unified data model -> simulations -> web viewer + API"
+    stack: [CityGML/CityJSON, 3D Tiles, CesiumJS, FROST (OGC SensorThings), PostGIS]
+    hardware: None
+    budget: "€30/month"
+    months: 24
+    level: 5
+    phases:
+      - Unified data model and open data ingest
+      - 3D viewer with layers from GREENLINE, HEATSHIELD, FLOODTWIN, GRIDBRAIN
+      - Live sensor feeds via SensorThings API
+      - Scenario mode and presentation to a city office
+    metrics: [datasets integrated, viewer performance, scenario runtime]
+    ethics: Open and aggregated data only.
+    resume: "Built an open urban digital twin integrating <N> datasets and <N> simulation layers in a standards-based API."
+    skills: [geospatial architecture, standards, integration]
+    defend:
+      - Why open standards instead of a single vendor?
+      - What is CityGML LOD2?
+      - What decision would a city actually make with it?
+    components: [data model, ingest, simulation adapters, SensorThings API, 3D viewer]
+    trl: "TRL 4 -> 6"
+    venue: "FOSS4G or urban data conference"
+    deliverables: [Twin platform, Data catalogue, City presentation, Paper]
+    standards: [OGC CityGML, OGC SensorThings, OGC 3D Tiles, INSPIRE]

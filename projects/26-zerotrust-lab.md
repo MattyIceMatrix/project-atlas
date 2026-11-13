@@ -85,10 +85,26 @@ Lab environment.
 
 **Skills it proves:** identity · zero trust · IaC
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Grow into an EU sovereign platform with zero-trust identity and verifiable credentials.
+
+**Grows into:** [SOVEREIGN](71-sovereign.md), [CREDMESH](80-credmesh.md) · **Publication target:** Identity or cloud-native conference
+
 ## Defend it
 
 1. What does "never trust, always verify" mean in practice here?
 2. What attack is still possible?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

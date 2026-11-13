@@ -1,0 +1,54 @@
+# Masterpiece upgrade paths for projects 1-50.
+# Each entry turns the original brief into a level-5 build without changing the brief itself.
+# Fields: path (what the level-5 version adds), links (masterpiece projects it grows into), venue.
+
+1:  {path: "Scale to a 20-node valley network with gateway redundancy, a calibrated rise-rate model per creek, CAP-format alerts and a season-long validation against official gauges.", links: [81, 60], venue: "ISCRAM or hydroinformatics conference"}
+2:  {path: "Multi-apiary network across a season with partner beekeepers, federated training so hive data never leaves the site, and a peer-reviewed early-warning study.", links: [68], venue: "Apidologie-style journal or TinyML Summit"}
+3:  {path: "Three-tower triangulation, satellite hotspot fusion, a spread forecast handoff and an exercise with a fire brigade.", links: [88, 36], venue: "Fire science conference"}
+4:  {path: "Combine visual crack detection with vibration-based health monitoring in one digital twin and validate on a real footbridge with its owner.", links: [87], venue: "IWSHM"}
+5:  {path: "Full-season rover deployment with a winery, disease-risk forecasting from weather, and measured spray reduction.", links: [56], venue: "Precision agriculture conference"}
+6:  {path: "Multi-room, multi-language assistant with on-device personalisation, an independent privacy audit and an accessibility study.", links: [95, 96], venue: "Interspeech workshop or privacy engineering talk"}
+7:  {path: "Certified-style safety case, multi-terrain field trials and integration as LANTERN's logistics robot.", links: [52], venue: "Field robotics workshop"}
+8:  {path: "Partner with a road authority, add satellite and camera inputs, and run a winter-long prospective evaluation.", links: [90], venue: "Road weather conference (SIRWEC)"}
+9:  {path: "Grounded navigator over official procedure catalogues with expert audit and multilingual user studies.", links: [93], venue: "E-government conference"}
+10: {path: "Enterprise-grade verified RAG with permissions, continuous evals and published faithfulness benchmarks.", links: [65], venue: "ACL/EMNLP industry track"}
+11: {path: "Partner with a veteran-service organisation, validate matching on real (consented) transitions and publish outcome data.", links: [98], venue: "Workforce or HR-tech conference"}
+12: {path: "From distillation to full pretraining: build the data pipeline and train your own base model.", links: [61, 67], venue: "Technical report on arXiv"}
+13: {path: "Speaker-attributed, multilingual minutes with action tracking across meetings and an on-prem deployment option.", links: [71, 95], venue: "Speech technology workshop"}
+14: {path: "Verified agent workflows plus sandboxed test execution across many repos with measured bug-catch rates.", links: [66, 97], venue: "ICSE/FSE tool track"}
+15: {path: "Grow into a public edge-LLM benchmark with energy measurement and community submissions.", links: [67], venue: "NeurIPS Datasets and Benchmarks"}
+16: {path: "Layer into a full guardrail stack with a formally verified policy core and nightly red-teaming.", links: [78, 18], venue: "AI security workshop"}
+17: {path: "Add zero-knowledge attestations and signed model provenance so audits need no trust in the operator.", links: [73, 75], venue: "Security or AI accountability workshop"}
+18: {path: "Become the evaluation backbone of a human-gated autonomous SOC and agent platform.", links: [74, 66], venue: "BSides or AI security conference"}
+19: {path: "Full sovereign-stack evidence pack mapped to GDPR, NIS2 and the AI Act, reviewed by a qualified adviser.", links: [71], venue: "Compliance engineering talk"}
+20: {path: "Add differential privacy and federated audits so fairness can be checked without centralising sensitive data.", links: [76, 68], venue: "FAccT"}
+21: {path: "Confidential-computing sandbox with remote attestation and a formally specified permission model.", links: [72, 78], venue: "Systems security workshop"}
+22: {path: "Grow into an OT-aware monitoring lab and a human-gated SOC.", links: [79, 74], venue: "BSides"}
+23: {path: "Feed honeypot intelligence into automated detection engineering with measured detection gains.", links: [74], venue: "Threat intel conference"}
+24: {path: "Add content provenance (C2PA) and calibrated multi-signal detection for media and email.", links: [77], venue: "Anti-phishing working group or security workshop"}
+25: {path: "Extend from software SBOMs to signed, provenance-tracked ML models with admission control.", links: [75], venue: "OpenSSF talk"}
+26: {path: "Grow into an EU sovereign platform with zero-trust identity and verifiable credentials.", links: [71, 80], venue: "Identity or cloud-native conference"}
+27: {path: "Become the triage layer of an autonomous SOC with purple-team evaluation.", links: [74], venue: "SANS-style paper"}
+28: {path: "Combine firmware analysis with secure-boot OS work and EU cyber-resilience requirements.", links: [53], venue: "Embedded security conference"}
+29: {path: "Run on your own GPU cluster with signed model supply chain and multi-tenant serving.", links: [70, 75], venue: "KubeCon talk"}
+30: {path: "Become the data backbone of the flood twin and city twin with OGC SensorThings APIs.", links: [81, 100], venue: "FOSS4G"}
+31: {path: "Production feature platform serving the grid and heat projects with lineage and quality SLAs.", links: [82, 84], venue: "Data engineering conference"}
+32: {path: "Own inference engine plus cost-aware serving across cloud and edge.", links: [63], venue: "MLSys workshop"}
+33: {path: "Monitoring for federated and edge fleets, with privacy-preserving drift detection.", links: [68, 53], venue: "MLOps conference"}
+34: {path: "Lineage across data, models and provenance attestations for full audit trails.", links: [75], venue: "Data governance talk"}
+35: {path: "Fault-tolerant training on your own cluster and spot capacity for real pretraining runs.", links: [61, 70], venue: "Engineering blog + talk"}
+36: {path: "Fuse optical and radar for all-weather flood mapping feeding the Ahr digital twin.", links: [81, 86], venue: "IGARSS"}
+37: {path: "Integrate into the city twin with grid impact simulation.", links: [100, 82], venue: "Urban energy conference"}
+38: {path: "Feed privacy-preserving counts into the city twin with a published DPIA.", links: [100], venue: "Smart city conference"}
+39: {path: "Grow into a heat early-warning service piloted with a city office.", links: [84], venue: "Climate services conference"}
+40: {path: "Network-level road condition analytics feeding municipal asset management and the city twin.", links: [100], venue: "Transport research board workshop"}
+41: {path: "Heritage twin with change monitoring over years and an open dataset for researchers.", links: [100], venue: "CIPA heritage documentation symposium"}
+42: {path: "Multi-camera 3D platform validated against a reference lab and piloted with a club.", links: [91], venue: "ISBS"}
+43: {path: "3D ball and cue tracking with a coaching curriculum and learning study.", links: [98], venue: "Sports engineering conference"}
+44: {path: "Partner with transition programmes, add verified credentials and outcome tracking.", links: [80], venue: "Veteran services conference"}
+45: {path: "Privacy-preserving household analytics with differential privacy for any shared statistics.", links: [76], venue: "Personal data / privacy workshop"}
+46: {path: "Adaptive speaking coach driven by knowledge tracing across thousands of learners.", links: [98], venue: "Learning at Scale"}
+47: {path: "Deploy on neuromorphic or ultra-low-power hardware and publish measured, not estimated, energy.", links: [67], venue: "Neuromorphic computing conference (ICONS)"}
+48: {path: "PQC migration across a secure-boot edge fleet with signed OTA updates.", links: [53], venue: "Embedded security or PQC workshop"}
+49: {path: "Real multi-robot fleet with map merging and human-gated tasking.", links: [52], venue: "IEEE SSRR"}
+50: {path: "Scale from one home to a neighbourhood energy twin coordinated with the municipal grid model.", links: [82, 100], venue: "Energy informatics conference"}

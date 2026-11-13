@@ -86,10 +86,26 @@ Defensive; trained on public corpora only.
 
 **Skills it proves:** ML · explainability · email security
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Add content provenance (C2PA) and calibrated multi-signal detection for media and email.
+
+**Grows into:** [PROVENANCE](77-provenance.md) · **Publication target:** Anti-phishing working group or security workshop
+
 ## Defend it
 
 1. Why might accuracy drop next year?
 2. How do you evaluate an explanation?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

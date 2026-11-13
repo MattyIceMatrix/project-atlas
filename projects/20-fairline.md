@@ -81,10 +81,26 @@ Explains trade-offs; does not declare a model "fair".
 
 **Skills it proves:** responsible AI · statistics · communication
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Add differential privacy and federated audits so fairness can be checked without centralising sensitive data.
+
+**Grows into:** [DPVAULT](76-dpvault.md), [FEDERATE](68-federate.md) · **Publication target:** FAccT
+
 ## Defend it
 
 1. Why can't all fairness criteria be met at once?
 2. Why confidence intervals?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

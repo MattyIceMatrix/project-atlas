@@ -80,10 +80,26 @@ Only devices you own; follow coordinated disclosure.
 
 **Skills it proves:** firmware analysis · supply chain · YARA
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Combine firmware analysis with secure-boot OS work and EU cyber-resilience requirements.
+
+**Grows into:** [EDGEOS](53-edgeos.md) · **Publication target:** Embedded security conference
+
 ## Defend it
 
 1. What is coordinated vulnerability disclosure?
 2. Why is a hash match not proof of safety?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

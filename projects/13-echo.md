@@ -87,10 +87,26 @@ Everyone in the meeting consents to recording.
 
 **Skills it proves:** speech · summarisation · evaluation
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Speaker-attributed, multilingual minutes with action tracking across meetings and an on-prem deployment option.
+
+**Grows into:** [SOVEREIGN](71-sovereign.md), [BABEL](95-babel.md) · **Publication target:** Speech technology workshop
+
 ## Defend it
 
 1. How did you measure action-item quality?
 2. What fails with overlapping speakers?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

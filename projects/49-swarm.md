@@ -82,10 +82,26 @@ Civilian search use case only.
 
 **Skills it proves:** multi-agent systems · robotics · distributed algorithms
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [####.]  ====================>  LEVEL [#####]
+```
+
+Real multi-robot fleet with map merging and human-gated tasking.
+
+**Grows into:** [FLEETMIND](52-fleetmind.md) · **Publication target:** IEEE SSRR
+
 ## Defend it
 
 1. Why auctions instead of a central planner?
 2. What happens when two robots both think they won?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

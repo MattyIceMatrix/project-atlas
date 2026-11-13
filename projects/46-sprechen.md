@@ -84,10 +84,26 @@ Voice data stays local.
 
 **Skills it proves:** speech · language learning · local LLMs
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Adaptive speaking coach driven by knowledge tracing across thousands of learners.
+
+**Grows into:** [QUESTLINE](98-questline.md) · **Publication target:** Learning at Scale
+
 ## Defend it
 
 1. Why does ASR struggle with learner accents?
 2. How do you avoid "correcting" things that were right?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

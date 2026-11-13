@@ -81,10 +81,26 @@ Logs can hold personal data; retention limits built in.
 
 **Skills it proves:** cryptography · systems design · compliance engineering
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Add zero-knowledge attestations and signed model provenance so audits need no trust in the operator.
+
+**Grows into:** [ZKAUDIT](73-zkaudit.md), [MODELCHAIN](75-modelchain.md) · **Publication target:** Security or AI accountability workshop
+
 ## Defend it
 
 1. What can a hash chain not protect against?
 2. Why signed checkpoints and not a blockchain?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

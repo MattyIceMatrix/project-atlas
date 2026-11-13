@@ -80,10 +80,26 @@ Defensive tool; published bypasses are reported responsibly.
 
 **Skills it proves:** AI security · classifiers · middleware
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Layer into a full guardrail stack with a formally verified policy core and nightly red-teaming.
+
+**Grows into:** [PROVENGUARD](78-provenguard.md), [REDCELL](18-redcell.md) · **Publication target:** AI security workshop
+
 ## Defend it
 
 1. Why can no filter be perfect here?
 2. What does defence in depth mean for agents?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

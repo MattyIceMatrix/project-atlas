@@ -81,10 +81,26 @@ Advisory only; spraying follows plant protection law.
 
 **Skills it proves:** mobile ML · geospatial · agri-tech
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Full-season rover deployment with a winery, disease-risk forecasting from weather, and measured spray reduction.
+
+**Grows into:** [AGRIFLEET](56-agrifleet.md) · **Publication target:** Precision agriculture conference
+
 ## Defend it
 
 1. Why might a model trained on lab photos fail in a real vineyard?
 2. How do you validate without a lab confirming each leaf?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

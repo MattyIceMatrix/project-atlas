@@ -85,10 +85,26 @@ Defensive.
 
 **Skills it proves:** security engineering · containers · policy-as-code
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [####.]  ====================>  LEVEL [#####]
+```
+
+Confidential-computing sandbox with remote attestation and a formally specified permission model.
+
+**Grows into:** [ENCLAVE](72-enclave.md), [PROVENGUARD](78-provenguard.md) · **Publication target:** Systems security workshop
+
 ## Defend it
 
 1. What is least privilege for an agent?
 2. Where is your sandbox weakest?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

@@ -81,10 +81,26 @@ Respect model licences on synthetic data use.
 
 **Skills it proves:** fine-tuning · distillation · quantisation
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [####.]  ====================>  LEVEL [#####]
+```
+
+From distillation to full pretraining: build the data pipeline and train your own base model.
+
+**Grows into:** [TINYFOUNDRY](61-tinyfoundry.md), [EDGEBENCH](67-edgebench.md) · **Publication target:** Technical report on arXiv
+
 ## Defend it
 
 1. How do you avoid training on test examples?
 2. When is distillation the wrong choice?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

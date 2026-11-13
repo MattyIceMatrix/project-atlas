@@ -81,10 +81,26 @@ Output is a draft for qualified review, not a compliance certificate.
 
 **Skills it proves:** regulation · documentation · tooling
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Full sovereign-stack evidence pack mapped to GDPR, NIS2 and the AI Act, reviewed by a qualified adviser.
+
+**Grows into:** [SOVEREIGN](71-sovereign.md) · **Publication target:** Compliance engineering talk
+
 ## Defend it
 
 1. Why can't a tool make a system compliant?
 2. How do you keep templates current when guidance changes?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

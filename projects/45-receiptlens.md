@@ -86,10 +86,26 @@ Data stays on the user's device.
 
 **Skills it proves:** OCR · data cleaning · personal finance tooling
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [#....]  ====================>  LEVEL [#####]
+```
+
+Privacy-preserving household analytics with differential privacy for any shared statistics.
+
+**Grows into:** [DPVAULT](76-dpvault.md) · **Publication target:** Personal data / privacy workshop
+
 ## Defend it
 
 1. Why is normalising product names harder than OCR?
 2. How would you add a new store's layout?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

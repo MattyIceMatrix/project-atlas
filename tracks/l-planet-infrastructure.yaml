@@ -1,0 +1,345 @@
+track:
+  id: L
+  name: "Masterpiece: Planet, Climate and Infrastructure"
+  motto: "Model the world well enough to protect it."
+projects:
+  - id: 81
+    code: FLOODTWIN
+    name: Hydrodynamic digital twin of the Ahr valley with an ML surrogate
+    tagline: A flood forecast in seconds instead of hours.
+    problem: Physics flood models are accurate but too slow for real-time what-if planning during an event.
+    art: |2
+           rain(t) --> [ physics model: hours ]       --> depth map
+           rain(t) --> [ ML surrogate:  seconds ]     --> depth map  (error 12 cm)
+          ~~~~~~~~~~~~~~~~~~~~~~ Ahr ~~~~~~~~~~~~~~~~~~~~~~~>
+    flow: "terrain + bathymetry -> physics simulations (many scenarios) -> train surrogate -> validate on 2021 event -> dashboard"
+    stack: [LISFLOOD-FP or HEC-RAS 2D, PyTorch (U-Net / neural operator), xarray, LANTERN map pack]
+    hardware: Workstation + cloud for simulation batches
+    budget: "€400"
+    months: 20
+    level: 5
+    phases:
+      - Calibrate a physics model to EMSR517 2021 extents
+      - Generate hundreds of rainfall scenarios
+      - Train and validate the surrogate
+      - What-if dashboard for planners (advisory)
+    metrics: [surrogate depth error, speed-up factor, extent IoU on 2021 event]
+    ethics: Research tool; official warnings come from authorities.
+    resume: "Built a flood-model surrogate <N>x faster than physics, within <N> cm, validated on the 2021 Ahr flood."
+    skills: [hydraulic modelling, scientific ML, geospatial]
+    defend:
+      - Why can't the surrogate be trusted outside its training scenarios?
+      - How did you calibrate the physics model?
+      - What does the 2021 event teach about extreme scenarios?
+    components: [terrain builder, physics runner, scenario generator, surrogate, planner dashboard]
+    trl: "TRL 3 -> 5"
+    venue: "EGU General Assembly or a hydroinformatics journal"
+    deliverables: [Calibrated model, Surrogate + card, Validation paper, Dashboard]
+    standards: [EU Floods Directive 2007/60/EC (context), FAIR data principles]
+
+  - id: 82
+    code: GRIDBRAIN
+    name: Municipal grid-edge forecasting and battery dispatch
+    tagline: Store the sun at noon, use it at six.
+    problem: Local grids face solar peaks and evening demand spikes; batteries are dispatched badly.
+    art: |2
+          kW  sun ____                 demand   _
+             /    \                        _/ \_
+          __/      \______    battery: charge ^ discharge v
+    flow: "smart-meter + weather data -> load and PV forecasts -> optimisation (MILP/RL) -> dispatch schedule -> backtest"
+    stack: [Python, LightGBM or TFT, Pyomo, open meter datasets, pandapower]
+    hardware: None
+    budget: "€0"
+    months: 14
+    level: 5
+    phases:
+      - Data and forecasting baselines
+      - Optimisation model with grid constraints
+      - Backtest a year of operations
+      - Report for a municipal utility (Stadtwerke)
+    metrics: [forecast MAE, peak reduction %, cost savings in backtest]
+    ethics: Advisory analysis.
+    resume: "Built forecasting + battery dispatch cutting backtested peak load <N>% for a municipal grid model."
+    skills: [energy systems, optimisation, forecasting]
+    defend:
+      - Why optimise with forecasts that are wrong?
+      - MILP vs RL for dispatch?
+      - Which grid constraints matter most?
+    components: [data pipeline, forecasters, optimiser, grid model, backtester]
+    trl: "TRL 3 -> 4"
+    venue: "IEEE PES conference or energy informatics workshop"
+    deliverables: [Model, Backtest report, Utility brief, Open code]
+    standards: [EN 50160 voltage quality (reference)]
+
+  - id: 83
+    code: PLUMEWATCH
+    name: Methane plume detection from satellites
+    tagline: Find the leak from space.
+    problem: Methane leaks are a major warming driver and many go unreported.
+    art: |2
+               [ satellite ]
+                    |  spectral bands
+          ___/\___ ~~~~~~> plume 1.2 t/h
+    flow: "Sentinel-2/hyperspectral data -> retrieval -> plume segmentation -> emission rate estimate -> validation"
+    stack: [Python, rasterio, PyTorch, public plume datasets]
+    hardware: Laptop + cloud
+    budget: "€100"
+    months: 14
+    level: 5
+    phases:
+      - Literature and public labelled plumes
+      - Retrieval + segmentation model
+      - Emission rate estimation with uncertainty
+      - Validation against published detections
+    metrics: [detection precision/recall, emission rate error, false positives over bright surfaces]
+    ethics: Report findings carefully; uncertainty first.
+    resume: "Built satellite methane plume detection with <N>% precision and uncertainty-quantified emission rates."
+    skills: [remote sensing, physics-aware ML, uncertainty]
+    defend:
+      - Why are bright surfaces false positives?
+      - How do you turn a plume image into tonnes per hour?
+      - What resolution limits apply?
+    components: [data access, retrieval, segmentation, quantification, validation]
+    trl: "TRL 3 -> 4"
+    venue: "IGARSS or climate-AI workshop"
+    deliverables: [Pipeline, Validation report, Paper, Map of detections]
+    standards: [Copernicus data licence]
+
+  - id: 84
+    code: HEATSHIELD
+    name: City heat-wave early warning and vulnerability map
+    tagline: Who is at risk in the next heat wave, street by street.
+    problem: Heat waves kill quietly; help reaches the right people too late.
+    art: |2
+          forecast: 36C x 3 days
+          [####....]  district A  high exposure + many elderly + few trees
+          [##......]  district B
+    flow: "weather forecasts + land surface temp + open census data -> risk index -> alerts for social services (advisory)"
+    stack: [Python, DWD open data, Landsat, GeoPandas, dashboard]
+    hardware: None
+    budget: "€0"
+    months: 12
+    level: 5
+    phases:
+      - Heat exposure layers (from GREENLINE)
+      - Vulnerability index from aggregated open data
+      - Validation against historical heat events
+      - Advisory dashboard co-designed with a city office
+    metrics: [index correlation with past heat impacts, lead time, users in city pilot]
+    ethics: Aggregated data only; no individual profiling.
+    resume: "Built a district-level heat risk index validated against past events, piloted with <N> city users."
+    skills: [climate adaptation, GIS, public-sector product]
+    defend:
+      - Why aggregate instead of household-level?
+      - How do you validate a vulnerability index?
+      - What action does the warning enable?
+    components: [exposure layers, vulnerability index, forecast ingest, alerting, dashboard]
+    trl: "TRL 4 -> 6 (pilot)"
+    venue: "Climate services conference"
+    deliverables: [Index method, Dashboard, Pilot report, Open data package]
+    standards: [GDPR aggregation, INSPIRE (reference)]
+
+  - id: 85
+    code: LEAKNET
+    name: Water network leak detection with acoustic sensors and graph ML
+    tagline: Hear the leak, locate it on the network graph.
+    problem: Water utilities lose a significant share of water to leaks found late.
+    art: |2
+          o----o----o----o      sensors (o)
+               |    |
+          o----o--[!]-o    leak between nodes 6 and 7 (p=0.81)
+    flow: "acoustic + pressure sensors -> feature extraction -> graph neural network on pipe topology -> leak localisation"
+    stack: [Python, PyTorch Geometric, EPANET/WNTR simulation, ESP32 sensors]
+    hardware: Simulation + a small physical pipe rig
+    budget: "€300"
+    months: 16
+    level: 5
+    phases:
+      - Simulated networks with leak scenarios (WNTR)
+      - Graph model for localisation
+      - Physical rig tests with acoustic sensors
+      - Utility-style report and cost-benefit
+    metrics: [localisation error (m or edges), detection time, false alarms]
+    ethics: None special.
+    resume: "Built graph-ML leak localisation within <N> pipe segments on simulated networks, validated on a physical rig."
+    skills: [graph ML, hydraulics, IoT]
+    defend:
+      - Why a graph model instead of a plain classifier?
+      - How does simulation help when real leaks are rare?
+      - What makes acoustic sensing hard in plastic pipes?
+    components: [network simulator, sensors, features, GNN, report]
+    trl: "TRL 3 -> 4"
+    venue: "Water distribution systems analysis conference"
+    deliverables: [Simulator scenarios, Model, Rig results, Paper]
+    standards: [Water utility practice (reference)]
+
+  - id: 86
+    code: DROUGHTSENSE
+    name: Drought and soil-moisture forecasting from radar satellites
+    tagline: See drought coming from orbit, field by field.
+    problem: Farmers and water managers need drought warnings at field scale, not region scale.
+    art: |2
+          Sentinel-1 radar ))) --> soil moisture --> forecast 4 weeks
+          [###] wet   [#..] dry   [...] drought risk
+    flow: "Sentinel-1 SAR + weather -> soil moisture retrieval -> spatiotemporal forecast -> risk maps"
+    stack: [openEO, xarray, PyTorch (ConvLSTM / transformer), DWD data]
+    hardware: Cloud credits
+    budget: "€200"
+    months: 16
+    level: 5
+    phases:
+      - SAR preprocessing pipeline
+      - Soil moisture model vs in-situ stations
+      - Forecast model and skill scores
+      - Risk maps for one region (Rhineland-Palatinate)
+    metrics: [RMSE vs in-situ, forecast skill vs climatology, map update time]
+    ethics: Open data; advisory.
+    resume: "Built SAR-based soil moisture forecasting with skill <N> over climatology at field scale."
+    skills: [SAR remote sensing, spatiotemporal ML]
+    defend:
+      - Why radar instead of optical?
+      - What is forecast skill?
+      - How does vegetation confuse soil moisture retrieval?
+    components: [SAR pipeline, retrieval, forecaster, validation, map service]
+    trl: "TRL 3 -> 5"
+    venue: "IGARSS or EGU"
+    deliverables: [Pipeline, Validation, Maps, Paper]
+    standards: [FAIR data]
+
+  - id: 87
+    code: BRIDGESHM
+    name: Structural health monitoring with vibration sensors and a digital twin
+    tagline: The bridge tells you when it's tired.
+    problem: Bridges age faster than inspection budgets grow.
+    art: |2
+          ____________________________
+          |__acc__|__acc__|__acc__|___|   accelerometers
+               ~~ modal freq 3.21 Hz -> 3.08 Hz (stiffness drop?) ~~
+    flow: "accelerometers -> modal identification -> FE model updating (twin) -> damage indicators -> alerts"
+    stack: [ESP32 + MEMS accelerometers, Python, OpenSeesPy, pyOMA]
+    hardware: Lab beam or footbridge with owner permission
+    budget: "€400"
+    months: 16
+    level: 5
+    phases:
+      - Sensor network and time sync
+      - Operational modal analysis
+      - Finite-element twin and model updating
+      - Damage scenarios on a lab structure
+    metrics: [frequency identification error, damage detection rate, environmental false alarms]
+    ethics: Advisory; structural engineers decide.
+    resume: "Built an SHM system with FE-updated digital twin detecting simulated damage at <N>% rate."
+    skills: [structural dynamics, sensors, digital twins]
+    defend:
+      - Why does temperature change modal frequencies?
+      - What is model updating?
+      - Why combine with visual inspection (BRIDGEKEEPER)?
+    components: [sensor net, OMA, FE twin, damage indicators, dashboard]
+    trl: "TRL 3 -> 4"
+    venue: "IWSHM or EWSHM"
+    deliverables: [Sensor design, Twin, Lab report, Paper]
+    standards: [Eurocode context (reference)]
+
+  - id: 88
+    code: FIRESPREAD
+    name: Wildfire spread surrogate and resource planner
+    tagline: Where will it burn in 6 hours, and where should the trucks be?
+    problem: Fire spread simulators are slow; planners need fast what-ifs.
+    art: |2
+             wind -->
+          ...^^^^^>>>>>>      t+6h front
+          ...^^^^^^>>>>>>>
+          [truck] [truck]  <- suggested staging
+    flow: "fuel + terrain + weather -> physics simulator runs -> ML surrogate -> resource placement optimiser"
+    stack: [FARSITE-style or open simulators, PyTorch, OR-Tools]
+    hardware: Workstation + cloud
+    budget: "€200"
+    months: 16
+    level: 5
+    phases:
+      - Simulator runs for Pfälzerwald-like terrain
+      - Surrogate model and validation
+      - Resource placement optimisation
+      - Exercise-style evaluation with experts
+    metrics: [front position error, speed-up, coverage of assets]
+    ethics: Advisory research tool.
+    resume: "Built a wildfire spread surrogate <N>x faster than simulation with resource planning for exercises."
+    skills: [scientific ML, optimisation, emergency management]
+    defend:
+      - What drives fire spread most?
+      - How do you validate without real fires?
+      - Why keep humans in planning decisions?
+    components: [inputs, simulator, surrogate, optimiser, viewer]
+    trl: "TRL 2 -> 4"
+    venue: "Fire science or ISCRAM"
+    deliverables: [Surrogate, Planner, Evaluation, Paper]
+    standards: [None specific]
+
+  - id: 89
+    code: SURGECAST
+    name: Storm-surge forecasting for the North Sea coast
+    tagline: The tide plus the storm, forecast with uncertainty.
+    problem: Storm surge prediction is critical for coastal flood defence and needs good uncertainty estimates.
+    art: |2
+          water level
+           |        __/\__   surge
+           |  /\/\_/      \__/\/\   tide
+           +---------------------------> t
+    flow: "tide gauges + reanalysis weather -> probabilistic ML model -> ensemble forecast -> verification"
+    stack: [Python, xarray, ERA5, PyTorch, properscoring]
+    hardware: Cloud
+    budget: "€100"
+    months: 12
+    level: 5
+    phases:
+      - Gauge and reanalysis data pipeline
+      - Probabilistic model (quantiles or ensemble)
+      - Verification with CRPS against baselines
+      - Case studies of historical storm floods
+    metrics: [CRPS, peak error, lead time]
+    ethics: Advisory research.
+    resume: "Built probabilistic storm-surge forecasts beating baseline CRPS by <N>% at <N> h lead time."
+    skills: [probabilistic forecasting, ocean science]
+    defend:
+      - Why probabilistic, not a single number?
+      - What is CRPS?
+      - How do you handle record-breaking events?
+    components: [data pipeline, model, ensemble, verifier, case studies]
+    trl: "TRL 3 -> 4"
+    venue: "EGU or ocean forecasting workshop"
+    deliverables: [Model, Verification report, Paper, Code]
+    standards: [WMO verification guidance (reference)]
+
+  - id: 90
+    code: KMWEATHER
+    name: Kilometre-scale weather downscaling with ML
+    tagline: Regional weather detail from global forecasts, cheaply.
+    problem: High-resolution local weather is expensive to simulate; ML downscaling can help.
+    art: |2
+          [ 25 km grid ] --ML--> [ 1 km grid ]
+           #  #  #               #########
+           #  #  #     ===>      #########   valleys, ridges resolved
+    flow: "coarse forecasts + terrain -> generative/regression downscaling -> station verification"
+    stack: [PyTorch, xarray, ERA5, DWD station data, diffusion or U-Net]
+    hardware: Cloud GPUs
+    budget: "€300"
+    months: 16
+    level: 5
+    phases:
+      - Data pairs and baselines (interpolation)
+      - Downscaling model with terrain inputs
+      - Verification against stations, extremes focus
+      - Use it to drive FLOODTWIN rainfall inputs
+    metrics: [RMSE vs stations, extreme precipitation skill, inference time]
+    ethics: Research; not an official forecast.
+    resume: "Built ML weather downscaling to 1 km improving station RMSE <N>% over interpolation."
+    skills: [weather science, generative models, HPC data]
+    defend:
+      - Why do extremes matter more than averages?
+      - What does terrain add?
+      - How can a generative model invent false detail?
+    components: [data pairs, model, verification, extremes analysis, FLOODTWIN link]
+    trl: "TRL 2 -> 4"
+    venue: "Climate informatics or AMS AI conference"
+    deliverables: [Model, Verification, Paper, Data]
+    standards: [WMO verification guidance (reference)]

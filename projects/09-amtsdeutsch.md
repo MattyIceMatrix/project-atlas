@@ -83,10 +83,26 @@ Not legal advice; always shows the original text next to the summary.
 
 **Skills it proves:** OCR · RAG · local LLMs · privacy
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Grounded navigator over official procedure catalogues with expert audit and multilingual user studies.
+
+**Grows into:** [VERWALTUNG](93-verwaltung.md) · **Publication target:** E-government conference
+
 ## Defend it
 
 1. How do you stop the model from inventing a deadline?
 2. Why synthetic letters for testing?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

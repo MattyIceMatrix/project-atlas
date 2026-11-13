@@ -82,10 +82,26 @@ Never invents achievements; the user supplies the facts.
 
 **Skills it proves:** NLP · matching · product design
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Partner with a veteran-service organisation, validate matching on real (consented) transitions and publish outcome data.
+
+**Grows into:** [QUESTLINE](98-questline.md) · **Publication target:** Workforce or HR-tech conference
+
 ## Defend it
 
 1. How do you stop it from inflating a resume?
 2. How did you evaluate the matching?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

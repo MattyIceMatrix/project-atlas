@@ -1,0 +1,344 @@
+track:
+  id: I
+  name: "Masterpiece: Autonomous Systems"
+  motto: "Machines that go where people shouldn't, and come back with answers."
+projects:
+  - id: 51
+    code: SEAWALL
+    name: Autonomous survey boat for river and flood-plain mapping
+    tagline: Maps the riverbed so the next flood model starts from the truth.
+    problem: Flood models are only as good as their riverbed geometry, and river cross-sections are surveyed rarely, by hand, at high cost.
+    art: |2
+              __/\__
+          ~~~|SEAWALL|~~~~~~~~~~   ))) sonar ping
+        ~~~~~~\____/~~~~~~~~~~~~~      )))  depth 2.4 m
+    flow: "GNSS-RTK + single-beam sonar -> autonomous survey lines -> point cloud -> riverbed mesh -> hydraulic model input"
+    stack: [ROS 2, ArduPilot Rover (boat frame), RTK GNSS, PDAL, HEC-RAS or LISFLOOD-FP]
+    hardware: Small catamaran hull, RTK GNSS, echo sounder, Jetson, e-stop radio
+    budget: "€1,800"
+    months: 18
+    level: 5
+    phases:
+      - Hull, power and remote control with a kill switch; still-water trials
+      - Autonomous survey lines with RTK; depth logging and QC
+      - Riverbed reconstruction and comparison with official cross-sections
+      - Feed the bathymetry into a flood model and measure the improvement
+    metrics: [depth error vs reference survey (cm), coverage per hour, flood-model error improvement]
+    ethics: Survey only with landowner and water-authority permission; never in flood conditions.
+    resume: "Built an autonomous RTK survey boat; bathymetry within <N> cm improved flood-model error by <N>%."
+    skills: [marine robotics, GNSS, hydrology, ROS 2]
+    defend:
+      - Why does riverbed geometry matter so much to a flood model?
+      - What failsafe brings the boat home when the link drops?
+      - How do you separate sonar noise from vegetation?
+    components: [RTK positioning, sonar and logging, mission planner, QC pipeline, flood model bridge]
+    trl: "TRL 3 -> 5 (validated on a real river reach)"
+    venue: "IEEE OCEANS or a hydrology journal (data paper)"
+    deliverables: [Survey boat build guide, Open bathymetry dataset for one reach, Flood-model comparison report, Safety case]
+    standards: [IHO S-44 survey accuracy orders (reference), EN 62443 thinking for the control link, Local water-authority rules]
+
+  - id: 52
+    code: FLEETMIND
+    name: Heterogeneous robot fleet for disaster mapping
+    tagline: Ground and air robots that share one map and one plan.
+    problem: Disaster sites need many viewpoints fast; single robots are slow and fragile.
+    art: |2
+           .-.   .-.        [air]  (sim)
+          (   )~(   )
+           '-'   '-'     \  |  /
+          [gnd]--[gnd]--( MAP )--[gnd]
+    flow: "each robot SLAM -> map merging -> task auction -> coverage planning -> operator console"
+    stack: [ROS 2, Nav2, multi-robot map merge, Gazebo or Isaac Sim, Zenoh]
+    hardware: 2–3 ground rovers (LANTERN-class) + drones in simulation only
+    budget: "€1,500"
+    months: 20
+    level: 5
+    phases:
+      - Multi-robot simulation with shared map
+      - Task allocation that survives robot and link loss
+      - Two real rovers merging maps outdoors
+      - Operator console with human approval for every risky task
+    metrics: [time to 95% coverage, map merge error, performance after one robot is lost]
+    ethics: Drones stay in simulation unless properly certified and permitted; civilian use only.
+    resume: "Built a fault-tolerant multi-robot mapping fleet; coverage <N>% faster than one robot, robust to robot loss."
+    skills: [multi-robot systems, distributed SLAM, HRI]
+    defend:
+      - How do two maps with different origins get merged?
+      - What happens when the network partitions mid-mission?
+      - Why keep humans in the approval loop?
+    components: [per-robot autonomy, map merger, task market, comms layer (Zenoh), operator console]
+    trl: "TRL 3 -> 5"
+    venue: "IEEE SSRR or ICRA workshop"
+    deliverables: [Simulation benchmark, Two-robot field demo video, Paper draft, Open-source fleet stack]
+    standards: [ROS 2 REP conventions, ISO 13482 concepts for robot safety (reference), Drone rules EU 2019/947 for any flight]
+
+  - id: 53
+    code: EDGEOS
+    name: Secure, updatable OS image for edge-AI fleets
+    tagline: Flash once, update forever, never brick.
+    problem: Edge devices in the field are rarely patched, often insecure, and break on updates.
+    art: |2
+          [ bootloader ]--signed-->[ A slot ] <-- OTA --> [ B slot ]
+                   secure boot      models hot-swap   rollback on fail
+    flow: "Yocto/JetPack image -> secure boot -> A/B OTA -> signed model bundles -> fleet dashboard"
+    stack: [Yocto or JetPack, Mender or RAUC, TPM/secure element, Sigstore, Prometheus]
+    hardware: 3 Jetson or Raspberry Pi devices
+    budget: "€700"
+    months: 14
+    level: 5
+    phases:
+      - Reproducible image build in CI
+      - Secure boot chain and disk encryption
+      - A/B OTA with automatic rollback; signed model bundles
+      - Fleet observability and a chaos test of 100 updates
+    metrics: [update success rate over 100 runs, rollback time, boot time, image reproducibility]
+    ethics: None special; publish security findings responsibly.
+    resume: "Built a secure-boot edge OS with A/B OTA; 100/100 updates succeeded with automatic rollback in <N> s."
+    skills: [embedded Linux, security, DevOps]
+    defend:
+      - What does secure boot prove, and what does it not?
+      - How does A/B updating prevent bricking?
+      - Why sign models separately from the OS?
+    components: [image build, secure boot chain, OTA agent, model bundle signer, fleet monitor]
+    trl: "TRL 4 -> 6 (used on LANTERN kits)"
+    venue: "Embedded Linux Conference talk or blog series"
+    deliverables: [Reproducible image recipe, OTA server deployment, Security design doc, Chaos test report]
+    standards: [EN 18031 / RED cybersecurity (reference), IEC 62443-4-2 concepts, SLSA build provenance]
+
+  - id: 54
+    code: ROADSAGE
+    name: Driver-assistance research stack with a safety monitor
+    tagline: Perception, planning and a referee that can say stop.
+    problem: Learned driving components fail in rare situations; you need a monitor that catches it.
+    art: |2
+          ===|=====|=====|=====|===
+              [car] -->      !
+          ===|=====|=====|=====|===    monitor: TTC 1.2 s -> BRAKE
+    flow: "camera/lidar -> perception -> planner -> runtime safety monitor -> controller (simulation)"
+    stack: [CARLA, ROS 2, PyTorch, Responsibility-Sensitive-Safety style rules, scenario runner]
+    hardware: GPU workstation or cloud (simulation only)
+    budget: "€300 cloud"
+    months: 16
+    level: 5
+    phases:
+      - Perception and planning baseline in CARLA
+      - Rule-based runtime safety monitor
+      - Scenario library of edge cases (cut-ins, occlusions, weather)
+      - Safety argument with measured violation rates
+    metrics: [collisions per 1,000 km sim, monitor interventions, false interventions]
+    ethics: Simulation only; never tested on public roads.
+    resume: "Built a simulated ADAS stack whose safety monitor cut collisions <N>% across <N> edge-case scenarios."
+    skills: [autonomous driving, safety engineering, simulation]
+    defend:
+      - Why a rule-based monitor over a learned planner?
+      - What is a SOTIF hazard?
+      - How do you choose which scenarios to test?
+    components: [perception, planner, safety monitor, scenario engine, metrics]
+    trl: "TRL 3 -> 4 (simulation)"
+    venue: "IEEE IV workshop or arXiv preprint"
+    deliverables: [Scenario library, Safety case, Results paper, Open-source monitor]
+    standards: [ISO 26262 (concepts), ISO 21448 SOTIF, UL 4600 safety case structure]
+
+  - id: 55
+    code: RAILWATCH
+    name: Autonomous rail-track inspection trolley
+    tagline: Finds the cracked rail before the train does.
+    problem: Track inspection is labour-intensive and periodic.
+    art: |2
+          ===[o]==[o]=============     trolley
+          ---+----+----+----+-----     sleeper OK  OK  [!] OK
+    flow: "line cameras + accelerometers -> defect detection (rail, sleepers, fasteners) -> geo-referenced report"
+    stack: [Jetson, line-scan camera, PyTorch, ROS 2, GIS]
+    hardware: Push-trolley test rig on a heritage or private test track
+    budget: "€1,600"
+    months: 16
+    level: 5
+    phases:
+      - Partner with a heritage railway; safety briefing and permissions
+      - Data collection rig and labelled dataset
+      - Defect models with per-class metrics
+      - Inspection report matching the operator's format
+    metrics: [defect recall per class, false alarms per km, km inspected per hour]
+    ethics: Only with operator permission and their safety rules; never on live mainline track.
+    resume: "Built a rail inspection rig detecting <N> defect classes at <N>% recall on a heritage line."
+    skills: [industrial vision, data collection, domain partnership]
+    defend:
+      - Why is labelled data the bottleneck here?
+      - How do you guarantee a missed defect is caught later?
+      - What did the operator teach you that changed the design?
+    components: [sensor rig, synchronisation, defect models, geo-referencing, report generator]
+    trl: "TRL 3 -> 5"
+    venue: "Railway engineering conference or applied CV workshop"
+    deliverables: [Rig design, Labelled dataset (if partner allows), Model and data cards, Operator report sample]
+    standards: [EN 13848 track geometry (reference), Operator safety rules, GDPR for any people in images]
+
+  - id: 56
+    code: AGRIFLEET
+    name: Autonomous vineyard robot for mechanical weeding
+    tagline: Fewer herbicides, more robots between the rows.
+    problem: Steep-slope vineyards rely on herbicides or hard manual work.
+    art: |2
+          \|/ \|/ \|/ \|/
+          -@---@---@---@-
+             [=ROBOT=]>      weeding tool down / up around trunks
+          -@---@---@---@-
+    flow: "RTK + row perception -> row following -> trunk detection -> tool actuation -> coverage log"
+    stack: [ROS 2, RTK GNSS, stereo camera, YOLO, Nav2]
+    hardware: Small tracked platform with a simple tool (start with a marker, not a blade)
+    budget: "€2,000"
+    months: 20
+    level: 5
+    phases:
+      - Row following in simulation, then on a test row
+      - Trunk detection and tool timing (with a marker)
+      - Real tool on a partner winery's test rows, with guards
+      - Season comparison against the winery's normal practice
+    metrics: [trunk avoidance rate, weeding coverage, slope handled]
+    ethics: Partner consent, guarded tool, e-stop, never unattended.
+    resume: "Built a vineyard robot that avoided <N>% of trunks while weeding <N>% of the row on slopes to <N>%."
+    skills: [field robotics, agri-tech, mechatronics]
+    defend:
+      - How is a moving blade made safe around people?
+      - Why RTK and vision together?
+      - What does the winemaker care about most?
+    components: [localisation, row perception, tool controller, safety layer, coverage log]
+    trl: "TRL 3 -> 5"
+    venue: "Field robotics or precision agriculture conference"
+    deliverables: [Robot build, Season report with the winery, Safety case, Open-source row follower]
+    standards: [ISO 18497 agricultural machinery autonomy safety (reference), Machinery Regulation (EU) 2023/1230 concepts]
+
+  - id: 57
+    code: PIPEPROBE
+    name: In-pipe inspection crawler for sewers
+    tagline: The dark, wet job nobody wants, done by a robot.
+    problem: Sewer inspection uses tethered cameras and manual review of hours of video.
+    art: |2
+          ___________________________________
+         (  [o=o]>   crack!     root intrusion )
+          ===================================
+    flow: "tethered crawler video -> defect detection and coding -> pipe condition score -> GIS asset layer"
+    stack: [ROS 2, PyTorch, public sewer defect datasets (e.g. Sewer-ML), PostGIS]
+    hardware: Small crawler with lights and camera tested in a mock pipe
+    budget: "€900"
+    months: 14
+    level: 5
+    phases:
+      - Model on public sewer datasets; defect taxonomy
+      - Crawler build and mock-pipe tests
+      - Automatic defect coding to the operator's standard
+      - Condition scoring and GIS integration
+    metrics: [defect classification F1, review time saved, condition score agreement with inspectors]
+    ethics: Confined-space and hygiene rules; partner utility for any real pipe.
+    resume: "Built a sewer crawler with defect coding at F1 <N>, cutting manual review time <N>%."
+    skills: [inspection robotics, CV, asset management]
+    defend:
+      - Why does a standard defect code matter more than a fancy model?
+      - How do you handle the class imbalance of rare defects?
+      - What is condition-based maintenance?
+    components: [crawler, video pipeline, defect coder, condition scorer, GIS layer]
+    trl: "TRL 3 -> 5"
+    venue: "Water infrastructure conference or applied ML venue"
+    deliverables: [Crawler design, Defect coder, Utility pilot report, Data card]
+    standards: [EN 13508-2 visual inspection coding, DWA-M 149 (German practice, reference)]
+
+  - id: 58
+    code: SKYLANE
+    name: Drone traffic management simulator (U-space)
+    tagline: Air traffic control for a sky full of small drones, in simulation.
+    problem: Low-altitude drone traffic needs deconfliction services before it can scale safely.
+    art: |2
+            ^ 120 m ---------------------------
+               \ d1      d2 -->     <-- d3
+                \___ conflict in 40 s: reroute d2
+          ---------------------------------------
+    flow: "flight intents -> strategic deconfliction -> live tracking -> tactical conflict alerts -> replay and metrics"
+    stack: [Python or Rust, PX4 SITL, BlueSky ATM simulator, PostGIS, Kafka]
+    hardware: None (simulation)
+    budget: "€0"
+    months: 14
+    level: 5
+    phases:
+      - Airspace model with geofences from open data
+      - Strategic deconfliction of flight intents
+      - Tactical conflict detection with simulated sensors
+      - Stress test with 1,000 simulated flights
+    metrics: [conflicts resolved, loss-of-separation events, throughput per km2]
+    ethics: Simulation; real geofence data used read-only.
+    resume: "Built a U-space style simulator handling <N> concurrent drones with <N> loss-of-separation events."
+    skills: [aviation systems, distributed systems, simulation]
+    defend:
+      - Strategic vs tactical deconfliction?
+      - How do you verify the simulator is realistic?
+      - What does U-space regulation require?
+    components: [airspace model, intent manager, deconfliction engine, tracker, metrics]
+    trl: "TRL 2 -> 4"
+    venue: "SESAR Innovation Days or AIAA/IEEE DASC"
+    deliverables: [Simulator, Benchmark scenarios, Paper draft, Interactive replay viewer]
+    standards: [Regulation (EU) 2021/664 U-space (reference), ASTM F3548 (reference)]
+
+  - id: 59
+    code: RECYCLR
+    name: Tactile robot arm that sorts recyclables
+    tagline: Sees it, feels it, sorts it.
+    problem: Sorting lines struggle with dirty, crushed and mixed materials; vision alone gets fooled.
+    art: |2
+               _||_
+              (    )--[grip: soft, crinkle = PET]
+          ====[can][bottle][box][?]====>  belt
+    flow: "camera + tactile sensor -> material classifier -> grasp planner -> bins -> accuracy log"
+    stack: [ROS 2, MoveIt 2, low-cost arm, GelSight-style or force sensor, PyTorch]
+    hardware: Desktop robot arm, camera, tactile sensor, small conveyor
+    budget: "€1,200"
+    months: 16
+    level: 5
+    phases:
+      - Vision-only baseline on a mock belt
+      - Tactile sensing and fusion
+      - Grasp planning for deformed objects
+      - Throughput and purity benchmark
+    metrics: [sorting purity, picks per minute, grasp success rate]
+    ethics: None special.
+    resume: "Built a visuo-tactile sorting arm reaching <N>% purity at <N> picks/min, beating vision-only by <N>%."
+    skills: [manipulation, sensor fusion, MoveIt]
+    defend:
+      - What does touch add that vision can't?
+      - Why is purity the metric recyclers care about?
+      - How do you handle objects the model has never seen?
+    components: [perception, tactile module, fusion classifier, grasp planner, belt controller]
+    trl: "TRL 3 -> 4"
+    venue: "IROS or CoRL workshop"
+    deliverables: [Benchmark dataset, Arm cell design, Paper draft, Demo video]
+    standards: [ISO 10218 robot safety (reference), ISO/TS 15066 collaborative robots (reference)]
+
+  - id: 60
+    code: MESHLIFE
+    name: Disaster mesh network with AI message triage
+    tagline: When every tower is down, the phones talk to each other.
+    problem: In disasters, residents can't reach responders and responders drown in unstructured messages.
+    art: |2
+          [phone]~~(LoRa)~~[node]~~(LoRa)~~[node]~~[command post]
+              "trapped, 2 people, 1st floor"  -> P1, location, needs: boat
+    flow: "Meshtastic-style LoRa mesh -> store-and-forward -> on-device triage model -> command post map"
+    stack: [Meshtastic firmware, ESP32 or nRF52, Python, small LLM, MapLibre]
+    hardware: 6–10 LoRa nodes, one edge server
+    budget: "€600"
+    months: 14
+    level: 5
+    phases:
+      - Mesh deployment and range tests in a village
+      - Message format and store-and-forward guarantees
+      - Triage model that extracts location, people, needs
+      - Exercise with volunteers and the LANTERN kit
+    metrics: [delivery rate, end-to-end latency, triage extraction accuracy]
+    ethics: Complements 112, never replaces it; legal radio power limits.
+    resume: "Built a LoRa disaster mesh delivering <N>% of messages with on-device triage at <N>% accuracy."
+    skills: [radio networking, embedded, NLP]
+    defend:
+      - Why LoRa and not Wi-Fi mesh?
+      - How do you stop the mesh being flooded with duplicates?
+      - What are the legal duty-cycle limits in the 868 MHz band?
+    components: [mesh nodes, routing and store-forward, triage model, command map, LANTERN bridge]
+    trl: "TRL 3 -> 6 (exercise)"
+    venue: "ISCRAM conference"
+    deliverables: [Node build guide, Exercise report, Triage model card, Open firmware config]
+    standards: [ETSI EN 300 220 (868 MHz SRD, reference), Common Alerting Protocol (CAP) format]

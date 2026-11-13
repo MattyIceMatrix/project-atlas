@@ -5,13 +5,13 @@
    |  __/|  _ <| |_| | |_| | |__| |___  | |    / ___ \| | | |___ / ___ \ ___) |
    |_|   |_| \_\\___/ \___/|_____\____| |_|   /_/   \_\_| |_____/_/   \_\____/
 
-                     50 projects  *  8 tracks  *  1 builder
+          100 projects  *  13 tracks  *  50 masterpieces  *  1 builder
 ```
 
 # Project Atlas
 
-**Fifty build-ready project briefs for an edge-AI, security and data engineer, each one sized,
-budgeted, phased and gated.**
+**One hundred build-ready project briefs for an edge-AI, security and data engineer, each one sized,
+budgeted, phased and gated. Fifty of them are level-5 masterpieces.**
 
 The flagship project is [LANTERN](https://github.com/MattyIceMatrix/lantern), an offline flood search-and-rescue kit.
 The atlas is the map of what comes next. Each brief has the mission, the architecture, the kit, a phased
@@ -58,6 +58,33 @@ on the day you start it, and goes public when it has a first measured result.
    [###..]  3  real hardware or real evaluation work, a few moving parts
    [####.]  4  research-flavoured, distributed or safety-critical; plan for setbacks
    [#####]  5  reserved for LANTERN-scale capstones
+```
+
+## The masterpiece tier (51-100)
+
+```text
+                      __________________________________
+                     |   M A S T E R P I E C E   T I E R |
+                     |__________________________________|
+                                      |
+       +-------------+-------------+--+----------+-------------+
+       |             |             |             |             |
+   [ I ] 51-60   [ J ] 61-70   [ K ] 71-80   [ L ] 81-90   [ M ] 91-100
+   AUTONOMOUS    FOUNDATION    TRUST &       PLANET &      CIVIC, SCIENCE
+   SYSTEMS       MODELS &      SECURITY &    CLIMATE &     & HUMAN
+                 AI INFRA      SOVEREIGNTY   INFRA         PERFORMANCE
+```
+
+Every masterpiece brief adds a **system map**, a **technology-readiness target**, a **publication venue**,
+**deliverables**, and the **standards and regulations** it must meet. Each runs 12–24 months.
+
+Every original project (01–50) now carries a **masterpiece upgrade path** (from `upgrades.yaml`) showing
+how it grows into one or more level-5 builds. The professional bar for all of them is the
+[Masterpiece Standard](docs/masterpiece-standard.md): twelve pillars from requirements to proof of impact.
+
+```text
+   the honest math:  50 masterpieces x 12-24 months  =  a career, not a year.
+   pick ONE masterpiece next to LANTERN. finish it. publish it. then pick the next.
 ```
 
 ## The atlas
@@ -169,6 +196,91 @@ on the day you start it, and goes public when it has a first measured result.
 | 48 | [QUANTUMSAFE](projects/48-quantumsafe.md) | Post-quantum crypto migration for IoT | `####.` | 3 |
 | 49 | [SWARM](projects/49-swarm.md) | Multi-robot search coordination in simulation | `####.` | 4 |
 | 50 | [HEARTH](projects/50-hearth.md) | Home energy digital twin with reinforcement learning | `####.` | 4 |
+
+### Track I: Masterpiece: Autonomous Systems
+
+*Machines that go where people shouldn't, and come back with answers.*
+
+| # | Codename | Project | Level | Months |
+| --- | --- | --- | --- | --- |
+| 51 | [SEAWALL](projects/51-seawall.md) | Autonomous survey boat for river and flood-plain mapping | `#####` | 18 |
+| 52 | [FLEETMIND](projects/52-fleetmind.md) | Heterogeneous robot fleet for disaster mapping | `#####` | 20 |
+| 53 | [EDGEOS](projects/53-edgeos.md) | Secure, updatable OS image for edge-AI fleets | `#####` | 14 |
+| 54 | [ROADSAGE](projects/54-roadsage.md) | Driver-assistance research stack with a safety monitor | `#####` | 16 |
+| 55 | [RAILWATCH](projects/55-railwatch.md) | Autonomous rail-track inspection trolley | `#####` | 16 |
+| 56 | [AGRIFLEET](projects/56-agrifleet.md) | Autonomous vineyard robot for mechanical weeding | `#####` | 20 |
+| 57 | [PIPEPROBE](projects/57-pipeprobe.md) | In-pipe inspection crawler for sewers | `#####` | 14 |
+| 58 | [SKYLANE](projects/58-skylane.md) | Drone traffic management simulator (U-space) | `#####` | 14 |
+| 59 | [RECYCLR](projects/59-recyclr.md) | Tactile robot arm that sorts recyclables | `#####` | 16 |
+| 60 | [MESHLIFE](projects/60-meshlife.md) | Disaster mesh network with AI message triage | `#####` | 14 |
+
+### Track J: Masterpiece: Foundation Models and AI Infrastructure
+
+*Build the engine, not just the car.*
+
+| # | Codename | Project | Level | Months |
+| --- | --- | --- | --- | --- |
+| 61 | [TINYFOUNDRY](projects/61-tinyfoundry.md) | Train a small language model from scratch, end to end | `#####` | 12 |
+| 62 | [AERIALVLM](projects/62-aerialvlm.md) | Vision-language model for disaster aerial imagery | `#####` | 14 |
+| 63 | [INFERNO](projects/63-inferno.md) | LLM inference server built from scratch | `#####` | 14 |
+| 64 | [MINICOMPILER](projects/64-minicompiler.md) | Tiny ML compiler for edge accelerators | `#####` | 16 |
+| 65 | [RAGOPS](projects/65-ragops.md) | Multi-tenant enterprise RAG platform | `#####` | 14 |
+| 66 | [AGENTGRID](projects/66-agentgrid.md) | Verified multi-agent workflow runtime | `#####` | 14 |
+| 67 | [EDGEBENCH](projects/67-edgebench.md) | Benchmark and leaderboard for on-device LLMs | `#####` | 12 |
+| 68 | [FEDERATE](projects/68-federate.md) | Federated learning across edge devices with privacy guarantees | `#####` | 14 |
+| 69 | [SYNTHSCENE](projects/69-synthscene.md) | Synthetic data engine for rare disaster scenes | `#####` | 14 |
+| 70 | [HOMECLUSTER](projects/70-homecluster.md) | Small GPU cluster with a real scheduler and MLOps | `#####` | 12 |
+
+### Track K: Masterpiece: Trust, Security and Sovereignty
+
+*Prove it, don't promise it.*
+
+| # | Codename | Project | Level | Months |
+| --- | --- | --- | --- | --- |
+| 71 | [SOVEREIGN](projects/71-sovereign.md) | EU sovereign AI reference stack, on-prem | `#####` | 18 |
+| 72 | [ENCLAVE](projects/72-enclave.md) | Confidential AI inference with remote attestation | `#####` | 14 |
+| 73 | [ZKAUDIT](projects/73-zkaudit.md) | Zero-knowledge proofs for AI compliance claims | `#####` | 16 |
+| 74 | [AUTOSOC](projects/74-autosoc.md) | Human-gated autonomous security operations centre | `#####` | 16 |
+| 75 | [MODELCHAIN](projects/75-modelchain.md) | Signed, provenance-tracked ML model supply chain | `#####` | 12 |
+| 76 | [DPVAULT](projects/76-dpvault.md) | Differential privacy analytics platform | `#####` | 12 |
+| 77 | [PROVENANCE](projects/77-provenance.md) | Content provenance and deepfake detection for newsrooms | `#####` | 14 |
+| 78 | [PROVENGUARD](projects/78-provenguard.md) | Formally verified guardrail policy engine | `#####` | 18 |
+| 79 | [OTSENTINEL](projects/79-otsentinel.md) | Industrial control system anomaly detection lab | `#####` | 14 |
+| 80 | [CREDMESH](projects/80-credmesh.md) | Verifiable credentials for responders at disaster sites | `#####` | 12 |
+
+### Track L: Masterpiece: Planet, Climate and Infrastructure
+
+*Model the world well enough to protect it.*
+
+| # | Codename | Project | Level | Months |
+| --- | --- | --- | --- | --- |
+| 81 | [FLOODTWIN](projects/81-floodtwin.md) | Hydrodynamic digital twin of the Ahr valley with an ML surrogate | `#####` | 20 |
+| 82 | [GRIDBRAIN](projects/82-gridbrain.md) | Municipal grid-edge forecasting and battery dispatch | `#####` | 14 |
+| 83 | [PLUMEWATCH](projects/83-plumewatch.md) | Methane plume detection from satellites | `#####` | 14 |
+| 84 | [HEATSHIELD](projects/84-heatshield.md) | City heat-wave early warning and vulnerability map | `#####` | 12 |
+| 85 | [LEAKNET](projects/85-leaknet.md) | Water network leak detection with acoustic sensors and graph ML | `#####` | 16 |
+| 86 | [DROUGHTSENSE](projects/86-droughtsense.md) | Drought and soil-moisture forecasting from radar satellites | `#####` | 16 |
+| 87 | [BRIDGESHM](projects/87-bridgeshm.md) | Structural health monitoring with vibration sensors and a digital twin | `#####` | 16 |
+| 88 | [FIRESPREAD](projects/88-firespread.md) | Wildfire spread surrogate and resource planner | `#####` | 16 |
+| 89 | [SURGECAST](projects/89-surgecast.md) | Storm-surge forecasting for the North Sea coast | `#####` | 12 |
+| 90 | [KMWEATHER](projects/90-kmweather.md) | Kilometre-scale weather downscaling with ML | `#####` | 16 |
+
+### Track M: Masterpiece: Civic, Science and Human Performance
+
+*Big skills, pointed at real people.*
+
+| # | Codename | Project | Level | Months |
+| --- | --- | --- | --- | --- |
+| 91 | [ATHLETEOS](projects/91-athleteos.md) | Sprint and hurdle performance platform | `#####` | 14 |
+| 92 | [COMMANDSIM](projects/92-commandsim.md) | Incident command training simulator with AI role players | `#####` | 14 |
+| 93 | [VERWALTUNG](projects/93-verwaltung.md) | Citizen navigator for German administrative procedures | `#####` | 14 |
+| 94 | [SKYEDGE](projects/94-skyedge.md) | Edge AI for amateur telescope transient detection | `#####` | 14 |
+| 95 | [BABEL](projects/95-babel.md) | Offline speech translation device for responders | `#####` | 14 |
+| 96 | [WAYFINDER](projects/96-wayfinder.md) | Indoor navigation for blind and low-vision users | `#####` | 16 |
+| 97 | [REPROBOT](projects/97-reprobot.md) | Research agent that reproduces ML papers, with verification | `#####` | 16 |
+| 98 | [QUESTLINE](projects/98-questline.md) | Adaptive, gamified engineering curriculum engine | `#####` | 14 |
+| 99 | [HELPERHUB](projects/99-helperhub.md) | Coordination platform for spontaneous disaster volunteers | `#####` | 14 |
+| 100 | [CITYTWIN](projects/100-citytwin.md) | Open digital twin of a mid-size city | `#####` | 24 |
 
 <!-- INDEX:END -->
 

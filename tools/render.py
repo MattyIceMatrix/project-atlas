@@ -20,6 +20,8 @@ ROOT = Path(__file__).resolve().parent.parent
 TRACKS = ROOT / "tracks"
 PROJECTS = ROOT / "projects"
 README = ROOT / "README.md"
+UPGRADES = ROOT / "upgrades.yaml"
+MASTERPIECE_FIELDS = ["components", "trl", "venue", "deliverables", "standards"]
 START, END = "<!-- INDEX:START -->", "<!-- INDEX:END -->"
 
 REQUIRED = [
@@ -34,6 +36,26 @@ def load() -> list[tuple[dict, list[dict]]]:
         data = yaml.safe_load(path.read_text())
         tracks.append((data["track"], data["projects"]))
     return tracks
+
+
+def load_upgrades() -> dict:
+    return yaml.safe_load(UPGRADES.read_text()) if UPGRADES.exists() else {}
+
+
+def system_map(code: str, components: list[str]) -> str:
+    """Draw components as boxes in rows of three, flowing left to right, top to bottom."""
+    width = max(len(c) for c in components) + 4
+    top = "+" + "-" * width + "+"
+    rows = [components[i:i + 3] for i in range(0, len(components), 3)]
+    out = [f"  {code} SYSTEM MAP", ""]
+    for r, row in enumerate(rows):
+        out.append("    ".join([top] * len(row)))
+        out.append("--->".join("|  " + c.ljust(width - 2) + "|" for c in row))
+        out.append("    ".join([top] * len(row)))
+        if r < len(rows) - 1:
+            out.append(" " * (width // 2) + "|")
+            out.append(" " * (width // 2) + "v")
+    return "\n".join(out)
 
 
 def slug(p: dict) -> str:
@@ -70,7 +92,8 @@ def phase_timeline(phases: list[str], months: int) -> str:
     return "\n".join(lines)
 
 
-def render_project(track: dict, p: dict, prev: dict | None, nxt: dict | None) -> str:
+def render_project(track: dict, p: dict, prev: dict | None, nxt: dict | None,
+                   upgrade: dict | None = None, by_id: dict | None = None) -> str:
     nav = []
     if prev:
         nav.append(f"[<- {prev['code']}]({slug(prev)}.md)")
@@ -81,6 +104,47 @@ def render_project(track: dict, p: dict, prev: dict | None, nxt: dict | None) ->
     metrics = "\n".join(f"  [ ] {m}" for m in p["metrics"])
     defend = "\n".join(f"{i}. {q}" for i, q in enumerate(p["defend"], 1))
     skills = " · ".join(p["skills"])
+    extra = ""
+    if all(k in p for k in MASTERPIECE_FIELDS):
+        deliverables = "\n".join(f"- {d}" for d in p["deliverables"])
+        standards = "\n".join(f"- {d}" for d in p["standards"])
+        extra = f"""
+## System map
+
+```text
+{system_map(p['code'], p['components'])}
+```
+
+## Readiness and publication
+
+```text
+  TECHNOLOGY READINESS   {p['trl']}
+  PUBLICATION TARGET     {p['venue']}
+```
+
+## Deliverables
+
+{deliverables}
+
+## Standards and regulations to meet
+
+{standards}
+"""
+    if upgrade:
+        links = ", ".join(
+            f"[{by_id[i]['code']}]({slug(by_id[i])}.md)" for i in upgrade.get("links", []) if i in by_id
+        )
+        extra += f"""
+## Masterpiece upgrade path
+
+```text
+   LEVEL [{stars(p['level'])}]  ====================>  LEVEL [#####]
+```
+
+{upgrade['path']}
+
+**Grows into:** {links or 'a standalone masterpiece'} · **Publication target:** {upgrade['venue']}
+"""
     return f"""# {p['id']:02d} · {p['code']}
 
 ```text
@@ -135,10 +199,16 @@ def render_project(track: dict, p: dict, prev: dict | None, nxt: dict | None) ->
 > {p['resume'].replace('<N>', '[N]')}
 
 **Skills it proves:** {skills}
-
+{extra}
 ## Defend it
 
 {defend}
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 
@@ -176,12 +246,14 @@ def render_index(tracks: list[tuple[dict, list[dict]]]) -> str:
 
 def build() -> dict[Path, str]:
     tracks = load()
+    upgrades = load_upgrades()
     flat = [(t, p) for t, ps in tracks for p in ps]
+    by_id = {p["id"]: p for _, p in flat}
     out: dict[Path, str] = {}
     for i, (track, p) in enumerate(flat):
         prev = flat[i - 1][1] if i > 0 else None
         nxt = flat[i + 1][1] if i < len(flat) - 1 else None
-        out[PROJECTS / f"{slug(p)}.md"] = render_project(track, p, prev, nxt)
+        out[PROJECTS / f"{slug(p)}.md"] = render_project(track, p, prev, nxt, upgrades.get(p["id"]), by_id)
     readme = README.read_text()
     head, _, rest = readme.partition(START)
     _, _, tail = rest.partition(END)

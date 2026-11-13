@@ -81,10 +81,26 @@ Follow site rules on photography and drones; no drones without permission.
 
 **Skills it proves:** 3D vision · photogrammetry · web graphics
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Heritage twin with change monitoring over years and an open dataset for researchers.
+
+**Grows into:** [CITYTWIN](100-citytwin.md) · **Publication target:** CIPA heritage documentation symposium
+
 ## Defend it
 
 1. {'Gaussian splatting vs mesh': 'when each?'}
 2. How do you check scale accuracy?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

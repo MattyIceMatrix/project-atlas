@@ -86,10 +86,26 @@ Only used against systems you own or have permission to test.
 
 **Skills it proves:** AI security · evaluation · automation
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Become the evaluation backbone of a human-gated autonomous SOC and agent platform.
+
+**Grows into:** [AUTOSOC](74-autosoc.md), [AGENTGRID](66-agentgrid.md) · **Publication target:** BSides or AI security conference
+
 ## Defend it
 
 1. How do you keep the attack set from leaking into training?
 2. Why is the judge itself an attack surface?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

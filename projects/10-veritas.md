@@ -87,10 +87,26 @@ Use public-domain or permissively licensed manuals.
 
 **Skills it proves:** RAG · evaluation · NLI
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Enterprise-grade verified RAG with permissions, continuous evals and published faithfulness benchmarks.
+
+**Grows into:** [RAGOPS](65-ragops.md) · **Publication target:** ACL/EMNLP industry track
+
 ## Defend it
 
 1. Why check claims and not whole answers?
 2. What does your verifier get wrong?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

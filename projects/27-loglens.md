@@ -85,10 +85,26 @@ The analyst decides; the model only drafts.
 
 **Skills it proves:** SIEM · detection engineering · LLM ops
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Become the triage layer of an autonomous SOC with purple-team evaluation.
+
+**Grows into:** [AUTOSOC](74-autosoc.md) · **Publication target:** SANS-style paper
+
 ## Defend it
 
 1. Why must every triage note link to evidence?
 2. How could an attacker manipulate the triage model?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

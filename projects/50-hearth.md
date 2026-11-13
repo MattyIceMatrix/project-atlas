@@ -81,10 +81,26 @@ Advisory mode; never controls heating without the household's agreement.
 
 **Skills it proves:** reinforcement learning · control · energy systems
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [####.]  ====================>  LEVEL [#####]
+```
+
+Scale from one home to a neighbourhood energy twin coordinated with the municipal grid model.
+
+**Grows into:** [GRIDBRAIN](82-gridbrain.md), [CITYTWIN](100-citytwin.md) · **Publication target:** Energy informatics conference
+
 ## Defend it
 
 1. Why test in a twin before the real house?
 2. When is MPC better than RL?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 
@@ -97,4 +113,4 @@ Advisory mode; never controls heating without the household's agreement.
 
 ---
 
-[<- SWARM](49-swarm.md) · [atlas index](../README.md)
+[<- SWARM](49-swarm.md) · [atlas index](../README.md) · [SEAWALL ->](51-seawall.md)

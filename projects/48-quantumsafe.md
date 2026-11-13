@@ -80,10 +80,26 @@ None special.
 
 **Skills it proves:** cryptography · embedded · standards
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [####.]  ====================>  LEVEL [#####]
+```
+
+PQC migration across a secure-boot edge fleet with signed OTA updates.
+
+**Grows into:** [EDGEOS](53-edgeos.md) · **Publication target:** Embedded security or PQC workshop
+
 ## Defend it
 
 1. What is "harvest now, decrypt later"?
 2. Why hybrid instead of PQC only?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

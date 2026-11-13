@@ -80,10 +80,26 @@ None special.
 
 **Skills it proves:** data governance · graphs · tooling
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Lineage across data, models and provenance attestations for full audit trails.
+
+**Grows into:** [MODELCHAIN](75-modelchain.md) · **Publication target:** Data governance talk
+
 ## Defend it
 
 1. {'Column-level vs table-level lineage': 'worth it?'}
 2. Who owns a dataset and why does it matter?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

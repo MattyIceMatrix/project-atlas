@@ -86,10 +86,26 @@ None special.
 
 **Skills it proves:** supply-chain security · DevSecOps
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Extend from software SBOMs to signed, provenance-tracked ML models with admission control.
+
+**Grows into:** [MODELCHAIN](75-modelchain.md) · **Publication target:** OpenSSF talk
+
 ## Defend it
 
 1. Why is "vulnerable dependency present" not the same as "exploitable"?
 2. {'CycloneDX vs SPDX': 'why pick one?'}
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

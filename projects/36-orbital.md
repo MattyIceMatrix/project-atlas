@@ -87,10 +87,26 @@ Open data with attribution.
 
 **Skills it proves:** remote sensing · geospatial ML
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Fuse optical and radar for all-weather flood mapping feeding the Ahr digital twin.
+
+**Grows into:** [FLOODTWIN](81-floodtwin.md), [DROUGHTSENSE](86-droughtsense.md) · **Publication target:** IGARSS
+
 ## Defend it
 
 1. Why do clouds break optical flood mapping?
 2. When would you switch to Sentinel-1 radar?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

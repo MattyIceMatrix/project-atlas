@@ -82,10 +82,26 @@ Film only athletes who agree; minors only with guardian consent.
 
 **Skills it proves:** pose estimation · sports science · calibration
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Multi-camera 3D platform validated against a reference lab and piloted with a club.
+
+**Grows into:** [ATHLETEOS](91-athleteos.md) · **Publication target:** ISBS
+
 ## Defend it
 
 1. How do you calibrate distance from one camera?
 2. Which metric would a coach actually use?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

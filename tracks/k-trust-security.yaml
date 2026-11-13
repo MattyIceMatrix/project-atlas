@@ -1,0 +1,340 @@
+track:
+  id: K
+  name: "Masterpiece: Trust, Security and Sovereignty"
+  motto: "Prove it, don't promise it."
+projects:
+  - id: 71
+    code: SOVEREIGN
+    name: EU sovereign AI reference stack, on-prem
+    tagline: A full AI platform a German Mittelstand company could run in its own basement.
+    problem: European organisations want AI without sending data to non-EU clouds, and lack a reference blueprint.
+    art: |2
+          +-----------------------------------------------+
+          |  identity | models | RAG | agents | audit     |   on-prem, EU-only
+          |  k8s  |  GPU nodes  |  storage  |  backups    |
+          +-----------------------------------------------+
+    flow: "IaC cluster -> identity + policy -> model serving -> RAG + agents -> audit + compliance evidence"
+    stack: [Kubernetes, Keycloak, vLLM, open-weight models, OpenFGA, Loki, Velero]
+    hardware: Home lab cluster (HOMECLUSTER)
+    budget: "€200 on top of cluster"
+    months: 18
+    level: 5
+    phases:
+      - Reference architecture and threat model
+      - Platform deployment as code with identity and policy
+      - AI services with audit trails
+      - Compliance evidence pack mapped to GDPR, NIS2, AI Act articles
+    metrics: [time to deploy from zero, controls with evidence, restore time from backup]
+    ethics: Compliance mappings are drafts for qualified review.
+    resume: "Built an on-prem EU AI reference stack deployable from zero in <N> h with evidence for <N> controls."
+    skills: [platform architecture, compliance engineering, IaC]
+    defend:
+      - What does sovereignty mean technically, beyond data location?
+      - Which NIS2 duties affect an AI platform?
+      - How do you prove a backup actually restores?
+    components: [cluster, identity, model serving, AI services, evidence pack]
+    trl: "TRL 5 -> 6"
+    venue: "Talk at a German IT security or cloud-native event"
+    deliverables: [Reference architecture, IaC repo, Evidence pack templates, Whitepaper]
+    standards: [GDPR, NIS2, EU AI Act, BSI IT-Grundschutz (reference), ISO/IEC 27001]
+
+  - id: 72
+    code: ENCLAVE
+    name: Confidential AI inference with remote attestation
+    tagline: Even the server admin can't see your prompt.
+    problem: Sensitive data can't be sent to inference servers that operators could inspect.
+    art: |2
+          client --(attest?)--> [ TEE: model + data ] --(quote OK)--> send encrypted prompt
+                                   operator: sees nothing
+    flow: "TEE VM (SEV-SNP/TDX) or GPU confidential mode -> attestation -> key release -> encrypted inference"
+    stack: [Confidential VMs in cloud, attestation services, Rust or Python client, vLLM]
+    hardware: Cloud confidential VMs
+    budget: "€200"
+    months: 14
+    level: 5
+    phases:
+      - Threat model and attestation flow design
+      - Confidential VM with verified boot measurements
+      - Key release only after attestation; encrypted prompts
+      - Performance overhead and failure-mode report
+    metrics: [attestation success and time, inference overhead %, attacks blocked in tests]
+    ethics: None special.
+    resume: "Built attested confidential inference adding <N>% overhead with keys released only to verified enclaves."
+    skills: [confidential computing, cryptography, cloud security]
+    defend:
+      - What does an attestation quote prove?
+      - What remains in the trusted computing base?
+      - Name a side-channel risk that still exists.
+    components: [TEE host, attestation verifier, key broker, inference server, client SDK]
+    trl: "TRL 4 -> 5"
+    venue: "Confidential computing summit or security workshop"
+    deliverables: [Reference implementation, Threat model, Benchmark, Integration guide]
+    standards: [IETF RATS architecture (RFC 9334), Confidential Computing Consortium guidance]
+
+  - id: 73
+    code: ZKAUDIT
+    name: Zero-knowledge proofs for AI compliance claims
+    tagline: Prove the model passed the test without revealing the model.
+    problem: Auditors need evidence; vendors won't hand over weights or data.
+    art: |2
+          vendor: "accuracy >= 90% on audit set"  + proof pi
+          auditor: verify(pi) == TRUE   (never saw the weights)
+    flow: "small model -> arithmetic circuit -> ZK proof of inference/eval -> public verifier"
+    stack: [ezkl or halo2, Rust, Python, small CNN or tree model]
+    hardware: Workstation
+    budget: "€0"
+    months: 16
+    level: 5
+    phases:
+      - Literature review and threat model for audit claims
+      - Proof of a single inference for a small model
+      - Proof of an aggregate evaluation claim
+      - Cost analysis and limits paper
+    metrics: [proof time, verification time, max model size feasible]
+    ethics: None special.
+    resume: "Built zero-knowledge proofs of model evaluation claims; proof time <N> s for a <N>-parameter model."
+    skills: [zero-knowledge cryptography, ML, research]
+    defend:
+      - What exactly is being proven and to whom?
+      - Why do ZK proofs scale badly with model size?
+      - Where could the vendor still cheat?
+    components: [model quantiser, circuit compiler, prover, verifier, audit protocol]
+    trl: "TRL 2 -> 3 (research)"
+    venue: "Privacy/crypto or AI accountability workshop"
+    deliverables: [Prototype, Limits analysis, Paper, Demo]
+    standards: [EU AI Act conformity concepts (reference)]
+
+  - id: 74
+    code: AUTOSOC
+    name: Human-gated autonomous security operations centre
+    tagline: Agents investigate, humans decide, everything is logged.
+    problem: Security teams can't keep up with alerts; fully autonomous response is dangerous.
+    art: |2
+          alerts --> [ triage agent ] --> [ investigation agent ] --> [ response plan ]
+                                                                         |
+                                                     analyst: APPROVE / DENY --> SOAR action
+    flow: "SIEM -> detection rules -> triage + investigation agents -> response plans -> human approval -> SOAR"
+    stack: [Wazuh or Elastic, Sigma, Shuffle SOAR, agent runtime (AGENTGRID), LEDGER]
+    hardware: Home lab with attack simulation VMs
+    budget: "€0"
+    months: 16
+    level: 5
+    phases:
+      - Detection engineering with purple-team test cases (Atomic Red Team)
+      - Investigation agent with evidence requirements
+      - Approval-gated response playbooks
+      - Measured comparison with manual SOC workflow
+    metrics: [mean time to detect, mean time to respond, analyst agreement, unsafe actions (target 0)]
+    ethics: Lab environment; defensive only.
+    resume: "Built a human-gated AI SOC cutting MTTR <N>% on purple-team scenarios with zero unapproved actions."
+    skills: [detection engineering, SOAR, AI agents]
+    defend:
+      - Why must containment actions need approval?
+      - How do you stop attackers from poisoning the agent via logs?
+      - Which MITRE ATT&CK techniques do you cover?
+    components: [SIEM, detection rules, agents, approval gate, SOAR]
+    trl: "TRL 4 -> 5"
+    venue: "BSides talk or SANS-style paper"
+    deliverables: [Lab build, Detection rule pack, Playbooks, Evaluation report]
+    standards: [MITRE ATT&CK, NIST SP 800-61 incident handling, Sigma]
+
+  - id: 75
+    code: MODELCHAIN
+    name: Signed, provenance-tracked ML model supply chain
+    tagline: Know exactly which data and code produced the model in production.
+    problem: Model files are swapped, poisoned or untraceable; ML has no software-grade supply chain.
+    art: |2
+          data@sha --> train@commit --> model.safetensors --sign--> registry --verify--> deploy
+                         provenance attestation (SLSA L3)
+    flow: "hermetic training builds -> provenance attestations -> model signing -> admission control at deploy"
+    stack: [GitHub Actions, Sigstore/cosign, in-toto, model-signing tools, Kyverno]
+    hardware: None
+    budget: "€0"
+    months: 12
+    level: 5
+    phases:
+      - Hermetic, reproducible training pipeline
+      - Provenance attestations for data, code and model
+      - Signing and verification for model files
+      - Kubernetes admission policy that rejects unsigned models
+    metrics: [reproducibility (bit-identical or not), unsigned deployments blocked, verification latency]
+    ethics: None special.
+    resume: "Built an SLSA-style ML supply chain; 100% of unsigned or untraceable models blocked at deploy."
+    skills: [supply-chain security, MLOps, policy]
+    defend:
+      - What does provenance prove that a signature alone doesn't?
+      - Why is bit-for-bit reproducible training hard?
+      - What attack does this stop, and which one doesn't it stop?
+    components: [build pipeline, attestor, signer, registry, admission controller]
+    trl: "TRL 5 -> 6"
+    venue: "OpenSSF or supply-chain security talk"
+    deliverables: [Reference pipeline, Policies, Threat model, Guide]
+    standards: [SLSA v1.0, in-toto, Sigstore]
+
+  - id: 76
+    code: DPVAULT
+    name: Differential privacy analytics platform
+    tagline: Useful statistics, provably private individuals.
+    problem: Sharing statistics about people leaks more than expected.
+    art: |2
+          query: "avg response time by district"
+            --> [ budget check: eps 0.5 left ] --> answer + noise --> analyst
+    flow: "SQL-like queries -> privacy budget accounting -> DP mechanisms -> released results + audit"
+    stack: [OpenDP or Tumult Analytics, Python, Postgres, Streamlit]
+    hardware: None
+    budget: "€0"
+    months: 12
+    level: 5
+    phases:
+      - Threat model and use case (e.g. emergency response statistics)
+      - DP query engine with budget accounting
+      - Utility evaluation vs non-private answers
+      - Reconstruction-attack tests on released data
+    metrics: [utility error at given epsilon, budget accounting correctness, attack success rate]
+    ethics: Synthetic datasets for development.
+    resume: "Built a DP analytics platform answering queries within <N>% error at epsilon <N>, defeating reconstruction attacks."
+    skills: [privacy engineering, statistics, data platforms]
+    defend:
+      - Why does every query spend privacy budget?
+      - What is a reconstruction attack?
+      - How would you explain epsilon to a city council?
+    components: [query parser, accountant, mechanisms, release log, attack lab]
+    trl: "TRL 4 -> 5"
+    venue: "Privacy engineering conference (e.g. PEPR)"
+    deliverables: [Platform, Utility report, Attack report, Policy guide]
+    standards: [GDPR anonymisation guidance, NIST SP 800-226 (DP guidelines)]
+
+  - id: 77
+    code: PROVENANCE
+    name: Content provenance and deepfake detection for newsrooms
+    tagline: Where did this image come from, and has it been changed?
+    problem: Newsrooms must verify images and video fast; detectors alone are unreliable.
+    art: |2
+          image --> [ C2PA manifest? ] --yes--> signed history: camera -> edit -> publish
+                         |
+                         no --> [ forensic models ] --> "likely edited: face region" 0.71
+    flow: "C2PA manifest verification -> forensic detectors -> evidence report for editors"
+    stack: [C2PA SDK, PyTorch, forensic datasets, web app]
+    hardware: None
+    budget: "€0"
+    months: 14
+    level: 5
+    phases:
+      - C2PA verification and signing tool
+      - Detector ensemble with calibrated outputs
+      - Editor-facing evidence report
+      - Robustness study (compression, re-recording)
+    metrics: [detector AUC on held-out generators, calibration error, verification time]
+    ethics: Report uncertainty clearly; never label content "fake" on a model score alone.
+    resume: "Built a provenance + forensics tool with C2PA verification and calibrated detectors (AUC <N> on unseen generators)."
+    skills: [media forensics, standards, calibration]
+    defend:
+      - Why does provenance scale better than detection?
+      - Why do detectors fail on new generators?
+      - What does a good evidence report look like for an editor?
+    components: [C2PA verifier, signer, detector ensemble, calibrator, report UI]
+    trl: "TRL 4 -> 5"
+    venue: "Media forensics workshop or journalism-tech conference"
+    deliverables: [Tool, Robustness study, Editor guide, Paper draft]
+    standards: [C2PA specification, EU AI Act transparency duties (Art. 50)]
+
+  - id: 78
+    code: PROVENGUARD
+    name: Formally verified guardrail policy engine
+    tagline: A policy engine with a mathematical proof that it never allows what it shouldn't.
+    problem: Guardrails are code, and code has bugs; for safety-critical AI that's not good enough.
+    art: |2
+          theorem no_unapproved_action :
+            forall req, decide(req) = ALLOW -> approved(req) \/ low_risk(req)
+          -- proved.  (Lean 4 / Dafny)
+    flow: "policy language -> formal semantics -> verified decision engine -> extracted code -> runtime"
+    stack: [Dafny or Lean 4, Rust or Python extraction, property-based tests]
+    hardware: None
+    budget: "€0"
+    months: 18
+    level: 5
+    phases:
+      - Policy language and formal semantics
+      - Verified decision procedure with key safety theorems
+      - Extraction to runnable code and integration with LANTERN's Guardian
+      - Differential testing against the unverified engine
+    metrics: [theorems proved, discrepancies found by differential testing, decision latency]
+    ethics: None special.
+    resume: "Built a formally verified guardrail engine (Dafny) with proofs of <N> safety properties, deployed in LANTERN."
+    skills: [formal verification, programming languages, AI safety]
+    defend:
+      - What does your proof assume about the world?
+      - What is the gap between verified model and running code?
+      - Why prove properties instead of testing more?
+    components: [policy DSL, semantics, verified engine, extractor, runtime adapter]
+    trl: "TRL 3 -> 4"
+    venue: "Formal methods conference (FM, CAV workshop) or AI safety workshop"
+    deliverables: [Verified engine, Proof documentation, Integration, Paper]
+    standards: [DO-178C / IEC 61508 formal methods concepts (reference)]
+
+  - id: 79
+    code: OTSENTINEL
+    name: Industrial control system anomaly detection lab
+    tagline: Protect the pumps and valves, not just the laptops.
+    problem: Water and energy utilities run old industrial protocols with little monitoring.
+    art: |2
+          [HMI]--Modbus/TCP--[PLC]--[pump][valve]
+                    |
+               [ SENTINEL ]: "write to coil 12 at 03:00 from unknown host" ALERT
+    flow: "simulated plant -> passive network tap -> protocol parsing -> process-aware anomaly model -> alerts"
+    stack: [OpenPLC, GRFICS or custom sim, Zeek with ICS plugins, Python, Grafana]
+    hardware: Home lab VMs, optional cheap PLC
+    budget: "€150"
+    months: 14
+    level: 5
+    phases:
+      - Simulated water-treatment process and network
+      - Passive monitoring and protocol parsing
+      - Process-aware anomaly detection (physics + network)
+      - Purple-team scenarios mapped to ATT&CK for ICS
+    metrics: [scenario detection rate, false alarms per day, detection latency]
+    ethics: Lab only; never scan or test real utility systems.
+    resume: "Built an ICS monitoring lab detecting <N>/<N> ATT&CK-for-ICS scenarios with <N> false alarms/day."
+    skills: [OT security, protocols, anomaly detection]
+    defend:
+      - Why must OT monitoring be passive?
+      - What makes process-aware detection stronger?
+      - Why are legacy protocols insecure by design?
+    components: [process sim, PLC, network tap, detectors, analyst console]
+    trl: "TRL 3 -> 4"
+    venue: "ICS security conference (e.g. S4) or BSides"
+    deliverables: [Lab recipe, Detection pack, Scenario library, Report]
+    standards: [IEC 62443, MITRE ATT&CK for ICS, NIS2 (utilities)]
+
+  - id: 80
+    code: CREDMESH
+    name: Verifiable credentials for responders at disaster sites
+    tagline: Prove you're a certified boat operator, offline, in ten seconds.
+    problem: Spontaneous helpers and teams from other regions can't prove qualifications at a chaotic site.
+    art: |2
+          [ wallet: "Swiftwater Ops, THW, valid 2027" ] --QR--> [ checker (offline) ] --> VALID
+                  signed by issuer                           revocation list cached
+    flow: "issuer signs credential -> holder wallet -> offline verification -> cached revocation -> audit"
+    stack: [W3C Verifiable Credentials, OpenID4VC, Rust or TypeScript, mobile wallet]
+    hardware: Phones
+    budget: "€0"
+    months: 12
+    level: 5
+    phases:
+      - Credential schema with a rescue organisation's input
+      - Issuer and wallet
+      - Offline verifier with revocation caching
+      - Field exercise with LANTERN and MESHLIFE
+    metrics: [verification time offline, revocation freshness, user errors in the exercise]
+    ethics: Minimal data in credentials; holder controls disclosure.
+    resume: "Built offline-verifiable responder credentials (W3C VC) verifying in <N> s with cached revocation."
+    skills: [digital identity, cryptography, mobile]
+    defend:
+      - Why selective disclosure matters here?
+      - How does revocation work offline?
+      - What happens if a phone is stolen?
+    components: [issuer, schema registry, wallet, verifier, revocation cache]
+    trl: "TRL 3 -> 5"
+    venue: "Identity conference or ISCRAM"
+    deliverables: [Issuer/verifier apps, Schema, Exercise report, Security analysis]
+    standards: [W3C VC Data Model 2.0, OpenID4VC, eIDAS 2.0 / EUDI wallet concepts]

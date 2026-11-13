@@ -83,10 +83,26 @@ Demonstrator only; no claim to replace fire watch services.
 
 **Skills it proves:** computer vision · TensorRT · geolocation
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Three-tower triangulation, satellite hotspot fusion, a spread forecast handoff and an exercise with a fire brigade.
+
+**Grows into:** [FIRESPREAD](88-firespread.md), [ORBITAL](36-orbital.md) · **Publication target:** Fire science conference
+
 ## Defend it
 
 1. Why is cloud vs smoke the hard part?
 2. What is your false-alarm budget and who decided it?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

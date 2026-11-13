@@ -87,10 +87,26 @@ Warning aid only; never replaces official warnings (NINA, KATWARN).
 
 **Skills it proves:** TinyML · embedded C · LoRaWAN · time series
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Scale to a 20-node valley network with gateway redundancy, a calibrated rise-rate model per creek, CAP-format alerts and a season-long validation against official gauges.
+
+**Grows into:** [FLOODTWIN](81-floodtwin.md), [MESHLIFE](60-meshlife.md) · **Publication target:** ISCRAM or hydroinformatics conference
+
 ## Defend it
 
 1. Why run the model on the node instead of the gateway?
 2. How do you tell a real rise from debris hitting the sensor?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

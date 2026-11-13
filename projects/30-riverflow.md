@@ -86,10 +86,26 @@ Follow the data licence and attribution.
 
 **Skills it proves:** data engineering · streaming · dbt
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Become the data backbone of the flood twin and city twin with OGC SensorThings APIs.
+
+**Grows into:** [FLOODTWIN](81-floodtwin.md), [CITYTWIN](100-citytwin.md) · **Publication target:** FOSS4G
+
 ## Defend it
 
 1. Why bronze/silver/gold?
 2. How do you handle a gauge that sends nonsense?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

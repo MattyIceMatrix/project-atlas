@@ -85,10 +85,26 @@ Building-level outputs shown only in aggregate unless the owner asks.
 
 **Skills it proves:** geospatial · physics modelling · energy
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Integrate into the city twin with grid impact simulation.
+
+**Grows into:** [CITYTWIN](100-citytwin.md), [GRIDBRAIN](82-gridbrain.md) · **Publication target:** Urban energy conference
+
 ## Defend it
 
 1. How does shading from trees change the estimate?
 2. Why is aspect as important as slope?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

@@ -86,10 +86,26 @@ None special.
 
 **Skills it proves:** monitoring · statistics · MLOps
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Monitoring for federated and edge fleets, with privacy-preserving drift detection.
+
+**Grows into:** [FEDERATE](68-federate.md), [EDGEOS](53-edgeos.md) · **Publication target:** MLOps conference
+
 ## Defend it
 
 1. {'PSI vs KS test': 'when each?'}
 2. Why is drift not always a problem?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

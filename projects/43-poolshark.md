@@ -88,10 +88,26 @@ None special.
 
 **Skills it proves:** tracking · homography · product design
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+3D ball and cue tracking with a coaching curriculum and learning study.
+
+**Grows into:** [QUESTLINE](98-questline.md) · **Publication target:** Sports engineering conference
+
 ## Defend it
 
 1. What is a homography?
 2. How do you handle balls touching each other?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

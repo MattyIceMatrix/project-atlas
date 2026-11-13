@@ -80,10 +80,26 @@ Open data; neighbourhood-level only.
 
 **Skills it proves:** segmentation · remote sensing · storytelling
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Grow into a heat early-warning service piloted with a city office.
+
+**Grows into:** [HEATSHIELD](84-heatshield.md) · **Publication target:** Climate services conference
+
 ## Defend it
 
 1. {'Land surface temperature vs air temperature': 'why it matters?'}
 2. Who should decide planting priorities?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

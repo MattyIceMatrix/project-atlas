@@ -79,10 +79,26 @@ GDPR by design; only film areas you are allowed to film.
 
 **Skills it proves:** tracking · edge AI · privacy by design
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Feed privacy-preserving counts into the city twin with a published DPIA.
+
+**Grows into:** [CITYTWIN](100-citytwin.md) · **Publication target:** Smart city conference
+
 ## Defend it
 
 1. How do you prove frames are never stored?
 2. What does double-counting look like and how did you fix it?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

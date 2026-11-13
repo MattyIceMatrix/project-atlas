@@ -78,10 +78,26 @@ None special.
 
 **Skills it proves:** cloud cost · performance · IaC
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Own inference engine plus cost-aware serving across cloud and edge.
+
+**Grows into:** [INFERNO](63-inferno.md) · **Publication target:** MLSys workshop
+
 ## Defend it
 
 1. What is a Pareto front and why show it?
 2. When do cold starts make serverless wrong?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

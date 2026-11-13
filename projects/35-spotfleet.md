@@ -79,10 +79,26 @@ None special.
 
 **Skills it proves:** distributed training · cloud · reliability
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Fault-tolerant training on your own cluster and spot capacity for real pretraining runs.
+
+**Grows into:** [TINYFOUNDRY](61-tinyfoundry.md), [HOMECLUSTER](70-homecluster.md) · **Publication target:** Engineering blog + talk
+
 ## Defend it
 
 1. How do you prove resume is correct?
 2. How often should you checkpoint, and why?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

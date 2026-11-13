@@ -83,10 +83,26 @@ Isolated network; never used to attack back.
 
 **Skills it proves:** threat intel · logging · LLM summarisation
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Feed honeypot intelligence into automated detection engineering with measured detection gains.
+
+**Grows into:** [AUTOSOC](74-autosoc.md) · **Publication target:** Threat intel conference
+
 ## Defend it
 
 1. How do you make sure the honeypot can't be used to attack others?
 2. What is an IOC and why does it go stale?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

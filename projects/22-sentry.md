@@ -86,10 +86,26 @@ Monitor only networks you own; inform household members.
 
 **Skills it proves:** network security · Zeek · anomaly detection
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Grow into an OT-aware monitoring lab and a human-gated SOC.
+
+**Grows into:** [OTSENTINEL](79-otsentinel.md), [AUTOSOC](74-autosoc.md) · **Publication target:** BSides
+
 ## Defend it
 
 1. Why does unsupervised detection drown you in alerts?
 2. How did you set the threshold?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

@@ -81,10 +81,26 @@ Partner with a beekeeper; no hive disturbance beyond normal inspection.
 
 **Skills it proves:** audio ML · quantisation · embedded deployment
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Multi-apiary network across a season with partner beekeepers, federated training so hive data never leaves the site, and a peer-reviewed early-warning study.
+
+**Grows into:** [FEDERATE](68-federate.md) · **Publication target:** Apidologie-style journal or TinyML Summit
+
 ## Defend it
 
 1. Why spectrograms and not raw audio?
 2. How did you get labels you can trust?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

@@ -81,10 +81,26 @@ Closed-course testing; speed limit; never near children unsupervised.
 
 **Skills it proves:** ROS 2 · control · functional safety
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Certified-style safety case, multi-terrain field trials and integration as LANTERN's logistics robot.
+
+**Grows into:** [FLEETMIND](52-fleetmind.md) · **Publication target:** Field robotics workshop
+
 ## Defend it
 
 1. What happens if it loses the person?
 2. Why is UWB more robust than vision here?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

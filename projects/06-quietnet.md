@@ -83,10 +83,26 @@ Household members agree to the device.
 
 **Skills it proves:** speech · home automation · privacy engineering
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [#....]  ====================>  LEVEL [#####]
+```
+
+Multi-room, multi-language assistant with on-device personalisation, an independent privacy audit and an accessibility study.
+
+**Grows into:** [BABEL](95-babel.md), [WAYFINDER](96-wayfinder.md) · **Publication target:** Interspeech workshop or privacy engineering talk
+
 ## Defend it
 
 1. How did you prove no audio leaves the house?
 2. How do you handle German and English speakers in one home?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

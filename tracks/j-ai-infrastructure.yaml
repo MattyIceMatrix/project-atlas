@@ -1,0 +1,342 @@
+track:
+  id: J
+  name: "Masterpiece: Foundation Models and AI Infrastructure"
+  motto: "Build the engine, not just the car."
+projects:
+  - id: 61
+    code: TINYFOUNDRY
+    name: Train a small language model from scratch, end to end
+    tagline: Data, tokenizer, training, evals, model card. All yours.
+    problem: Most engineers have only fine-tuned; very few have run the whole pretraining pipeline and understood every choice.
+    art: |2
+          [ web text ]--clean--dedupe--> [ tokens ] --> [ 125M-350M model ] --> evals
+                                                 loss \__
+                                                          \____
+    flow: "data collection -> filtering + dedup -> tokenizer -> distributed pretraining -> evals -> model card"
+    stack: [PyTorch, FSDP, datatrove or custom, SentencePiece, lm-eval-harness]
+    hardware: Rented GPUs (a few hundred GPU-hours)
+    budget: "€600"
+    months: 12
+    level: 5
+    phases:
+      - Data pipeline with licences, filtering and dedup
+      - Tokenizer and a 25M-parameter rehearsal run
+      - Main pretraining run with checkpoints and loss curves
+      - Evaluation, model card, release with data documentation
+    metrics: [validation perplexity, benchmark scores vs similar-size models, tokens/s/GPU]
+    ethics: Licensed or openly licensed data only; document what's in the data.
+    resume: "Pretrained a <N>M-parameter LLM from scratch (data to model card), matching <reference> on <benchmark>."
+    skills: [pretraining, distributed training, data engineering]
+    defend:
+      - Why does deduplication change model quality?
+      - How did you choose model size for your compute budget?
+      - What would you do with 10x more compute?
+    components: [data pipeline, tokenizer, trainer, eval harness, release kit]
+    trl: "Research artefact"
+    venue: "Hugging Face release + technical report on arXiv"
+    deliverables: [Model weights, Data card, Training report with all curves, Reproduction scripts]
+    standards: [Model cards (Mitchell et al.), Datasheets for datasets, EU AI Act GPAI documentation concepts]
+
+  - id: 62
+    code: AERIALVLM
+    name: Vision-language model for disaster aerial imagery
+    tagline: Ask the drone photo "where are people stranded?" and get a grounded answer.
+    problem: Responders get thousands of aerial images and no time to look at them.
+    art: |2
+          [ aerial img ] + "which roads are blocked?"
+                  |
+           [ VLM + grounding ] --> "Roads A, C blocked (boxes)" + confidence
+    flow: "curated disaster imagery + QA pairs -> VLM fine-tune -> grounding head -> eval -> edge-size variant"
+    stack: [PyTorch, an open VLM, LoRA, FloodNet VQA, xBD]
+    hardware: Rented GPUs + Jetson for the small variant
+    budget: "€500"
+    months: 14
+    level: 5
+    phases:
+      - Dataset assembly and question taxonomy
+      - Fine-tune with grounding (boxes) not just text
+      - Hallucination evaluation and calibration
+      - Distilled edge variant for LANTERN
+    metrics: [VQA accuracy, grounding IoU, hallucination rate, edge latency]
+    ethics: Public datasets; no claims of operational readiness.
+    resume: "Fine-tuned a grounded VLM for disaster imagery with <N>% VQA accuracy and <N>% hallucination rate."
+    skills: [multimodal models, evaluation, distillation]
+    defend:
+      - Why must answers be grounded with boxes?
+      - How did you measure hallucination?
+      - What is lost when distilling to the edge?
+    components: [dataset builder, VLM trainer, grounding head, eval suite, edge distiller]
+    trl: "TRL 3 -> 4"
+    venue: "CVPR EarthVision workshop"
+    deliverables: [Benchmark, Model + card, Paper, LANTERN integration]
+    standards: [Model and data cards, Copernicus/open data licences]
+
+  - id: 63
+    code: INFERNO
+    name: LLM inference server built from scratch
+    tagline: Continuous batching and a paged KV cache, written by you.
+    problem: Inference engines are black boxes to most engineers; understanding them is a superpower.
+    art: |2
+          requests ==> [ scheduler ] ==> [ batch ] ==> [ GPU kernels ]
+                            |               ^
+                       [ paged KV cache ]---'     tokens/s: 2,340
+    flow: "HTTP API -> scheduler with continuous batching -> paged KV cache -> custom kernels -> streaming tokens"
+    stack: [Rust or C++, CUDA or Triton, PyTorch reference, OpenAI-compatible API]
+    hardware: One consumer or rented GPU
+    budget: "€200"
+    months: 14
+    level: 5
+    phases:
+      - Correct single-request inference vs reference
+      - Continuous batching scheduler
+      - Paged KV cache and memory manager
+      - Benchmarks vs vLLM and llama.cpp with honest analysis
+    metrics: [tokens/s at batch 1 and 32, p99 latency, memory efficiency]
+    ethics: None special.
+    resume: "Wrote an LLM inference server with continuous batching and paged KV cache reaching <N>% of vLLM throughput."
+    skills: [systems programming, GPU, performance engineering]
+    defend:
+      - Why does continuous batching beat static batching?
+      - What problem does paging the KV cache solve?
+      - Where is your engine slower than vLLM and why?
+    components: [API layer, scheduler, KV cache manager, kernels, benchmark suite]
+    trl: "Research/engineering artefact"
+    venue: "Engineering blog series + talk"
+    deliverables: [Engine source, Benchmark report, Design docs, Talk slides]
+    standards: [OpenAI-compatible API, reproducible benchmarks]
+
+  - id: 64
+    code: MINICOMPILER
+    name: Tiny ML compiler for edge accelerators
+    tagline: From ONNX graph to fused kernels you wrote.
+    problem: Edge performance depends on compilers few people understand.
+    art: |2
+          ONNX --> [ graph IR ] --> fuse(conv,bn,relu) --> tile --> [ C / CUDA kernels ]
+                                                          speedup x3.1
+    flow: "ONNX import -> IR -> optimisation passes (fusion, constant folding, layout) -> codegen -> autotune"
+    stack: [Python, MLIR or a custom IR, C/CUDA codegen, TVM for comparison]
+    hardware: Laptop + Jetson
+    budget: "€0"
+    months: 16
+    level: 5
+    phases:
+      - IR and interpreter that matches ONNX Runtime outputs
+      - Optimisation passes with correctness tests
+      - Code generation for CPU and Jetson GPU
+      - Autotuning and comparison to TVM/TensorRT
+    metrics: [speedup vs naive, numerical error, compile time]
+    ethics: None special.
+    resume: "Built an ML compiler with fusion and autotuning reaching <N>x over naive and <N>% of TensorRT on Jetson."
+    skills: [compilers, GPU programming, edge AI]
+    defend:
+      - Why does operator fusion help memory-bound models?
+      - How do you test a compiler pass is correct?
+      - What does autotuning search over?
+    components: [frontend, IR, passes, codegen, autotuner]
+    trl: "Research artefact"
+    venue: "MLSys workshop or blog series"
+    deliverables: [Compiler source, Pass documentation, Benchmarks, Tutorial series]
+    standards: [ONNX opset spec]
+
+  - id: 65
+    code: RAGOPS
+    name: Multi-tenant enterprise RAG platform
+    tagline: Every answer cited, every document permission-checked, every query observable.
+    problem: Enterprise RAG pilots leak documents across teams and can't prove answer quality.
+    art: |2
+          user(team A) --> [ authz ] --> [ retrieval: only A's docs ] --> [ LLM ] --> answer [1][2]
+                                                \__ traces, evals, costs __/
+    flow: "ingestion with ACLs -> hybrid retrieval -> permission filter -> generation with citations -> eval + tracing"
+    stack: [Python, Qdrant or pgvector, OpenFGA, OpenTelemetry, Kubernetes]
+    hardware: Cloud or home lab
+    budget: "€30/month"
+    months: 14
+    level: 5
+    phases:
+      - Ingestion with document-level permissions
+      - Hybrid retrieval with permission filtering and tests
+      - Citations, guardrails, continuous evals
+      - Load test, cost dashboard, security review
+    metrics: [cross-tenant leaks in red-team tests (target 0), answer faithfulness, p95 latency, cost per query]
+    ethics: Synthetic company documents for demos.
+    resume: "Built a multi-tenant RAG platform with zero cross-tenant leaks in <N> red-team tests and <N>% faithfulness."
+    skills: [platform engineering, authorisation, LLM ops]
+    defend:
+      - Why filter permissions before retrieval, not after?
+      - How do you evaluate a RAG system continuously?
+      - What does observability look like for LLM calls?
+    components: [ingestion, vector store, authz (ReBAC), generation, eval and tracing]
+    trl: "TRL 5 -> 6 (pilot-ready)"
+    venue: "Conference talk (e.g. KubeCon, PyCon)"
+    deliverables: [Helm chart, Security design doc, Eval dashboard, Reference architecture]
+    standards: [OWASP LLM Top 10, ISO/IEC 27001 controls (reference), GDPR]
+
+  - id: 66
+    code: AGENTGRID
+    name: Verified multi-agent workflow runtime
+    tagline: Agents that follow the plan, and a checker that proves it.
+    problem: Multi-agent systems loop, deadlock and take actions nobody approved.
+    art: |2
+          spec ---> [ model checker ] ---> OK: no deadlock, approvals always before 'send'
+            |
+          runtime: [planner]->[worker]->[reviewer]->[human gate]->[action]
+    flow: "workflow spec -> static verification (TLA+ or model checking) -> runtime with enforcement -> traces"
+    stack: [Python, TLA+ or Alloy, Temporal, OpenTelemetry]
+    hardware: None
+    budget: "€0"
+    months: 14
+    level: 5
+    phases:
+      - Workflow spec language
+      - Static checks for deadlock, missing approvals, unbounded loops
+      - Runtime that enforces the verified spec
+      - Case studies on three real agent workflows
+    metrics: [spec violations caught statically, runtime enforcement overhead, incidents in case studies]
+    ethics: Defensive; human approval gates by design.
+    resume: "Built an agent runtime that statically verifies workflows, catching <N> deadlocks/unsafe paths before deployment."
+    skills: [formal methods, agents, distributed workflows]
+    defend:
+      - What can model checking prove and what can't it?
+      - How do you handle the LLM's non-determinism?
+      - Why Temporal for durable execution?
+    components: [spec DSL, verifier, runtime, enforcement hooks, trace viewer]
+    trl: "TRL 3 -> 5"
+    venue: "Agents or formal-methods workshop"
+    deliverables: [Runtime, Spec language docs, Case studies, Paper draft]
+    standards: [TLA+, OpenTelemetry]
+
+  - id: 67
+    code: EDGEBENCH
+    name: Benchmark and leaderboard for on-device LLMs
+    tagline: Quality, speed and joules per answer, on real edge hardware.
+    problem: LLM leaderboards ignore latency and energy, which decide edge deployments.
+    art: |2
+          model        quality  tok/s   J/answer
+          small-1B     61.2     34.0    4.1   ####
+          small-3B     68.9     12.5    11.8  ##
+    flow: "task suite -> harness on each device -> power measurement -> leaderboard site"
+    stack: [Python, llama.cpp, MLC, power meters, static site]
+    hardware: Jetson, Raspberry Pi 5, phone, laptop NPU
+    budget: "€500"
+    months: 12
+    level: 5
+    phases:
+      - Task suite with licensing and contamination checks
+      - Harness with repeatable power measurement
+      - 20+ model/runtime/device combinations
+      - Public leaderboard and methodology paper
+    metrics: [measurement repeatability (CV%), combinations covered, community submissions]
+    ethics: Transparent methodology; no vendor sponsorship hidden.
+    resume: "Built an edge-LLM benchmark measuring quality, latency and energy across <N> device/model combinations."
+    skills: [benchmarking, measurement science, edge AI]
+    defend:
+      - How do you make power measurements repeatable?
+      - What is benchmark contamination?
+      - Why per-answer energy rather than per-token?
+    components: [task suite, device harness, power capture, results DB, leaderboard]
+    trl: "Research artefact"
+    venue: "NeurIPS Datasets and Benchmarks track"
+    deliverables: [Benchmark suite, Leaderboard site, Methodology paper, Raw data]
+    standards: [MLPerf-inspired run rules]
+
+  - id: 68
+    code: FEDERATE
+    name: Federated learning across edge devices with privacy guarantees
+    tagline: Models learn from everyone's data without anyone sharing it.
+    problem: Edge data is private and scattered; centralising it is risky or illegal.
+    art: |2
+          [dev A]--grads(+noise)--\
+          [dev B]--grads(+noise)---> [ secure aggregation ] --> global model --> back out
+          [dev C]--grads(+noise)--/        epsilon = 3.0
+    flow: "local training -> clipping + DP noise -> secure aggregation -> global update -> privacy accounting"
+    stack: [Flower, PyTorch, Opacus, secure aggregation protocol]
+    hardware: 5–10 small devices or simulated clients
+    budget: "€300"
+    months: 14
+    level: 5
+    phases:
+      - Simulated federated training baseline
+      - Differential privacy with accounting
+      - Secure aggregation and dropout handling
+      - Real devices, non-IID data study, attack tests (membership inference)
+    metrics: [accuracy vs centralised, privacy epsilon, client dropout tolerance, attack success rate]
+    ethics: Synthetic or public data for experiments.
+    resume: "Built DP federated learning (epsilon <N>) on edge devices reaching <N>% of centralised accuracy."
+    skills: [privacy-preserving ML, distributed systems, security]
+    defend:
+      - What does epsilon actually mean?
+      - Why is non-IID data hard for federated learning?
+      - What does secure aggregation hide, and from whom?
+    components: [client runtime, DP module, aggregator, accountant, attack suite]
+    trl: "TRL 3 -> 5"
+    venue: "Privacy-preserving ML workshop"
+    deliverables: [Framework config, Experiment report, Privacy analysis, Paper draft]
+    standards: [GDPR data minimisation, NIST privacy framework concepts]
+
+  - id: 69
+    code: SYNTHSCENE
+    name: Synthetic data engine for rare disaster scenes
+    tagline: Train on a thousand floods that never happened.
+    problem: Real imagery of people in floodwater is rare, private and biased.
+    art: |2
+          [ procedural town ] + [ water sim ] + [ weather ] + [ people assets ]
+                                   |
+                         10,000 labelled images --> detector +12 mAP on real test set
+    flow: "procedural scene generation -> domain randomisation -> auto labels -> train -> test on real data"
+    stack: [Blender or Unreal Engine 5, Python, BlenderProc, PyTorch]
+    hardware: GPU workstation or cloud
+    budget: "€300"
+    months: 14
+    level: 5
+    phases:
+      - Procedural town and water generation
+      - Randomisation of weather, lighting, camera
+      - Automatic labels and dataset export
+      - Sim-to-real study on SARD/FloodNet test sets
+    metrics: [real-test mAP with and without synthetic data, generation speed, label accuracy]
+    ethics: Synthetic people only; no real victims.
+    resume: "Built a synthetic disaster-scene engine that raised real-world detection mAP by <N> points."
+    skills: [synthetic data, 3D, sim-to-real]
+    defend:
+      - What is the sim-to-real gap?
+      - Why randomise instead of making scenes photorealistic?
+      - How do you know synthetic data didn't add bias?
+    components: [scene generator, randomiser, renderer, labeler, evaluation]
+    trl: "Research artefact"
+    venue: "CVPR synthetic data workshop"
+    deliverables: [Engine, Synthetic dataset, Sim-to-real report, LANTERN detector upgrade]
+    standards: [Data cards]
+
+  - id: 70
+    code: HOMECLUSTER
+    name: Small GPU cluster with a real scheduler and MLOps
+    tagline: Your own mini cloud for training, with quotas and fair sharing.
+    problem: Learning cluster operations is impossible on one laptop and expensive in the cloud.
+    art: |2
+          [ login ] --> [ Slurm / Kueue ] --> [gpu0][gpu1][cpu0][cpu1]
+                             | quotas, priorities, preemption
+                         [ MLflow ] [ MinIO ] [ Grafana ]
+    flow: "provisioning (IaC) -> scheduler -> shared storage -> experiment tracking -> monitoring and cost"
+    stack: [Proxmox, Ansible, Kubernetes + Kueue or Slurm, MinIO, MLflow, Grafana]
+    hardware: 2–3 used workstations, at least one GPU
+    budget: "€1,500"
+    months: 12
+    level: 5
+    phases:
+      - Infrastructure as code for the whole cluster
+      - Scheduler with quotas and preemption
+      - Storage, tracking, and multi-user setup
+      - Run TINYFOUNDRY or LOOM jobs on it; publish an ops runbook
+    metrics: [GPU utilisation, job wait time, mean time to recover a node]
+    ethics: Mind electricity costs and noise for the household.
+    resume: "Built an IaC-managed GPU cluster with fair-share scheduling at <N>% GPU utilisation."
+    skills: [HPC, Kubernetes, infrastructure as code]
+    defend:
+      - Slurm vs Kubernetes for ML: which and why?
+      - What is preemption and when is it fair?
+      - How do you recover a dead node?
+    components: [provisioning, scheduler, storage, tracking, monitoring]
+    trl: "Operational lab"
+    venue: "Blog series + homelab community talk"
+    deliverables: [IaC repo, Runbook, Utilisation reports, Architecture doc]
+    standards: [CIS benchmarks for hosts (reference)]

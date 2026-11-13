@@ -81,10 +81,26 @@ Blur people and plates; respect local dashcam rules.
 
 **Skills it proves:** detection · geotagging · privacy
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Network-level road condition analytics feeding municipal asset management and the city twin.
+
+**Grows into:** [CITYTWIN](100-citytwin.md) · **Publication target:** Transport research board workshop
+
 ## Defend it
 
 1. Why is deduplication harder than detection here?
 2. What are the dashcam rules in Germany?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

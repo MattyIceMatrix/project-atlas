@@ -80,10 +80,26 @@ None special.
 
 **Skills it proves:** data systems · correctness · MLOps
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [###..]  ====================>  LEVEL [#####]
+```
+
+Production feature platform serving the grid and heat projects with lineage and quality SLAs.
+
+**Grows into:** [GRIDBRAIN](82-gridbrain.md), [HEATSHIELD](84-heatshield.md) · **Publication target:** Data engineering conference
+
 ## Defend it
 
 1. What is data leakage in a point-in-time join?
 2. When would you just use Feast?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

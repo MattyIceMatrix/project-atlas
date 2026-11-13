@@ -80,10 +80,26 @@ Information tool; links to official sources; no personal data sold or shared.
 
 **Skills it proves:** full stack · rules engines · UX
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Partner with transition programmes, add verified credentials and outcome tracking.
+
+**Grows into:** [CREDMESH](80-credmesh.md) · **Publication target:** Veteran services conference
+
 ## Defend it
 
 1. How do you keep program rules current?
 2. What personal data do you avoid collecting, and why?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

@@ -81,10 +81,26 @@ Advisory; municipalities decide on salting.
 
 **Skills it proves:** IoT · calibration · open data
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Partner with a road authority, add satellite and camera inputs, and run a winter-long prospective evaluation.
+
+**Grows into:** [KMWEATHER](90-kmweather.md) · **Publication target:** Road weather conference (SIRWEC)
+
 ## Defend it
 
 1. What is a Brier score and why use it here?
 2. Why does sensor placement matter more than the model?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

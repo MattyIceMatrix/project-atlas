@@ -79,10 +79,26 @@ None special.
 
 **Skills it proves:** neuromorphic computing · research methods
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [####.]  ====================>  LEVEL [#####]
+```
+
+Deploy on neuromorphic or ultra-low-power hardware and publish measured, not estimated, energy.
+
+**Grows into:** [EDGEBENCH](67-edgebench.md) · **Publication target:** Neuromorphic computing conference (ICONS)
+
 ## Defend it
 
 1. Why can't you backprop through a spike directly?
 2. How trustworthy is an energy estimate without neuromorphic hardware?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 

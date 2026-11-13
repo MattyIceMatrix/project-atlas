@@ -79,10 +79,26 @@ None special.
 
 **Skills it proves:** evaluation · testing · developer tools
 
+## Masterpiece upgrade path
+
+```text
+   LEVEL [##...]  ====================>  LEVEL [#####]
+```
+
+Grow into a public edge-LLM benchmark with energy measurement and community submissions.
+
+**Grows into:** [EDGEBENCH](67-edgebench.md) · **Publication target:** NeurIPS Datasets and Benchmarks
+
 ## Defend it
 
 1. How do you know the model grader is trustworthy?
 2. What is flakiness and how do you handle it?
+
+## Masterpiece standard
+
+This project is built to the [Masterpiece Standard](../docs/masterpiece-standard.md): requirements with
+traceability, threat model, frozen evals with model and data cards, signed releases, runbook, and external
+proof of impact.
 
 ## Launch checklist
 
