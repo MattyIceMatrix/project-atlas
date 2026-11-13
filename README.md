@@ -5,13 +5,14 @@
    |  __/|  _ <| |_| | |_| | |__| |___  | |    / ___ \| | | |___ / ___ \ ___) |
    |_|   |_| \_\\___/ \___/|_____\____| |_|   /_/   \_\_| |_____/_/   \_\____/
 
-          100 projects  *  13 tracks  *  50 masterpieces  *  1 builder
+   121 projects  *  16 tracks  *  superintelligence alignment  *  quantum  *  1 nation-scale master
 ```
 
 # Project Atlas
 
 **One hundred build-ready project briefs for an edge-AI, security and data engineer, each one sized,
-budgeted, phased and gated. Fifty of them are level-5 masterpieces.**
+budgeted, phased and gated. Seventy are level-5 masterpieces, twenty sit at the frontier of AI
+alignment and quantum computing, and one is a sovereign AI blueprint for a nation of 100 million.**
 
 The flagship project is [LANTERN](https://github.com/MattyIceMatrix/lantern), an offline flood search-and-rescue kit.
 The atlas is the map of what comes next. Each brief has the mission, the architecture, the kit, a phased
@@ -86,6 +87,33 @@ how it grows into one or more level-5 builds. The professional bar for all of th
    the honest math:  50 masterpieces x 12-24 months  =  a career, not a year.
    pick ONE masterpiece next to LANTERN. finish it. publish it. then pick the next.
 ```
+
+## The frontier tier (101-120) and the grand master (121)
+
+```text
+                    *            .        [ 121 NATIONSTACK ]        .          *
+                          .            sovereign AI for 100M people
+                                     /                            \
+           [ N ] 101-110  SUPERINTELLIGENCE ALIGNMENT       [ O ] 111-120  QUANTUM
+           interpretability, AI control, sandbagging,      error-correction decoders, honest QML,
+           model organisms, scalable oversight, evals,     error mitigation, compilers, QKD,
+           deception probes, reward hacking, CoT, compute  GPU simulators, verified quantum agents,
+           governance                                       resource estimates for nations
+```
+
+**No one builds superintelligence in a garage.** The frontier labs and AI safety institutes are hiring
+people who can make increasingly capable systems understandable, controllable and measurable, and
+that's what track N trains. Track O is honest quantum: beat the classical baseline or publish that it
+didn't.
+
+Every frontier page has a **Who sees this** section naming the fellowship, institute, hackathon or open-source
+project where that work gets in front of leaders. The [Visibility Playbook](docs/visibility-playbook.md)
+turns them into a 12-month plan.
+
+**NATIONSTACK (121)** assembles the whole atlas into a sovereign AI ecosystem for a country of 100 million
+people: ten pillars, a reference architecture, a working miniature, and a
+[capacity model](master/nationstack/capacity.md) that turns population into GPUs, megawatts and euros
+with every assumption visible. Start at [master/nationstack/](master/nationstack/README.md).
 
 ## The atlas
 
@@ -281,6 +309,48 @@ how it grows into one or more level-5 builds. The professional bar for all of th
 | 98 | [QUESTLINE](projects/98-questline.md) | Adaptive, gamified engineering curriculum engine | `#####` | 14 |
 | 99 | [HELPERHUB](projects/99-helperhub.md) | Coordination platform for spontaneous disaster volunteers | `#####` | 14 |
 | 100 | [CITYTWIN](projects/100-citytwin.md) | Open digital twin of a mid-size city | `#####` | 24 |
+
+### Track N: Frontier: Superintelligence Alignment and Safety
+
+*Nobody builds superintelligence in a garage. Everybody who matters is hiring people who can make it safe.*
+
+| # | Codename | Project | Level | Months |
+| --- | --- | --- | --- | --- |
+| 101 | [GLASSBOX](projects/101-glassbox.md) | Mechanistic interpretability of a small open model with sparse autoencoders | `#####` | 12 |
+| 102 | [CONTROLROOM](projects/102-controlroom.md) | AI control protocols for untrusted coding agents | `#####` | 12 |
+| 103 | [SANDBAG](projects/103-sandbag.md) | Detecting sandbagging in capability evaluations | `#####` | 12 |
+| 104 | [MODELORGS](projects/104-modelorgs.md) | Model organisms of emergent misalignment | `#####` | 14 |
+| 105 | [WEAKJUDGE](projects/105-weakjudge.md) | Scalable oversight with debate and weak-to-strong supervision | `#####` | 12 |
+| 106 | [EVALSMITH](projects/106-evalsmith.md) | New safety evaluations contributed to Inspect Evals | `#####` | 12 |
+| 107 | [TRUTHPROBE](projects/107-truthprobe.md) | Lie and deception detection with activation probes | `#####` | 12 |
+| 108 | [REWARDGUARD](projects/108-rewardguard.md) | Catching reward hacking in RL-trained coding agents | `#####` | 14 |
+| 109 | [COTWATCH](projects/109-cotwatch.md) | Chain-of-thought monitorability study | `#####` | 12 |
+| 110 | [COMPUTEWATCH](projects/110-computewatch.md) | Technical AI governance with hardware-backed compute verification | `#####` | 14 |
+
+### Track O: Frontier: Quantum Computing and Quantum AI
+
+*Honest quantum: beat the classical baseline or say so.*
+
+| # | Codename | Project | Level | Months |
+| --- | --- | --- | --- | --- |
+| 111 | [QDECODER](projects/111-qdecoder.md) | Neural decoders for quantum error correction | `#####` | 12 |
+| 112 | [QMLTRUTH](projects/112-qmltruth.md) | Honest quantum machine learning benchmark | `#####` | 12 |
+| 113 | [QROUTE](projects/113-qroute.md) | Quantum optimisation for disaster logistics, against strong classical solvers | `#####` | 12 |
+| 114 | [QMITIGATE](projects/114-qmitigate.md) | Error mitigation contributions and real-hardware benchmarks | `#####` | 12 |
+| 115 | [QCHEM](projects/115-qchem.md) | Quantum chemistry for battery materials, with honest classical comparison | `#####` | 14 |
+| 116 | [QCOMPILE](projects/116-qcompile.md) | Quantum circuit optimisation passes | `#####` | 12 |
+| 117 | [QKDNET](projects/117-qkdnet.md) | Quantum key distribution network simulator for critical communications | `#####` | 12 |
+| 118 | [QSIMGPU](projects/118-qsimgpu.md) | GPU-accelerated quantum circuit simulator | `#####` | 14 |
+| 119 | [QAGENT](projects/119-qagent.md) | AI agent that writes and verifies quantum programs | `#####` | 12 |
+| 120 | [QREADY](projects/120-qready.md) | When will quantum matter? Resource estimates for real national problems | `#####` | 12 |
+
+### Track P: Grand Master: Nation-Scale Sovereign AI
+
+*Everything in this atlas, assembled for a whole country.*
+
+| # | Codename | Project | Level | Months |
+| --- | --- | --- | --- | --- |
+| 121 | [NATIONSTACK](projects/121-nationstack.md) | Sovereign AI ecosystem for a nation of 100 million people | `#####` | 36 |
 
 <!-- INDEX:END -->
 

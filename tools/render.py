@@ -130,6 +130,25 @@ def render_project(track: dict, p: dict, prev: dict | None, nxt: dict | None,
 
 {standards}
 """
+    if p.get("spotlight"):
+        spot = "\n".join(f"  >> {x}" for x in p["spotlight"])
+        extra += f"""
+## Who sees this
+
+Where this work gets in front of the people who lead the field (see the
+[visibility playbook](../docs/visibility-playbook.md) for how to use each one):
+
+```text
+{spot}
+```
+"""
+    if p.get("master"):
+        extra += """
+## Master project files
+
+The full blueprint, ten pillars, reference architecture and the generated capacity model live in
+[master/nationstack/](../master/nationstack/README.md) ([capacity model results](../master/nationstack/capacity.md)).
+"""
     if upgrade:
         links = ", ".join(
             f"[{by_id[i]['code']}]({slug(by_id[i])}.md)" for i in upgrade.get("links", []) if i in by_id

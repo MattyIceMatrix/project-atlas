@@ -1,0 +1,348 @@
+track:
+  id: O
+  name: "Frontier: Quantum Computing and Quantum AI"
+  motto: "Honest quantum: beat the classical baseline or say so."
+projects:
+  - id: 111
+    code: QDECODER
+    name: Neural decoders for quantum error correction
+    tagline: Error correction is the road to useful quantum computers. Build a faster decoder.
+    problem: Surface-code QEC needs decoders that are both accurate and fast enough to keep up with the hardware in real time.
+    art: |2
+          o-x-o-x-o      syndrome:  . . 1 . .
+          x-o-x-o-x                 . 1 . . .
+          o-x-o-x-o      decoder --> correction chain --> logical error rate 1e-4
+    flow: "Stim circuit simulation -> syndrome datasets -> baseline (PyMatching) -> neural decoder -> latency + logical error rate"
+    stack: [Stim, PyMatching, PyTorch, Deltakit (Riverlane), Python]
+    hardware: Laptop + one GPU
+    budget: "€200"
+    months: 12
+    level: 5
+    phases:
+      - Reproduce surface-code thresholds with Stim + PyMatching
+      - Neural decoder under realistic noise models
+      - Latency optimisation (quantisation, FPGA-friendly design)
+      - Contribute a feature or benchmark upstream to Deltakit
+    metrics: [logical error rate vs PyMatching, decode latency per round, code distance supported]
+    ethics: None special.
+    resume: "Built a neural surface-code decoder matching PyMatching's logical error rate at <N>x lower latency; contributed upstream."
+    skills: [quantum error correction, ML systems, open source]
+    defend:
+      - What is a syndrome and why is decoding a matching problem?
+      - Why does latency matter as much as accuracy?
+      - Where does your decoder fail?
+    components: [noise models, syndrome generator, baseline decoder, neural decoder, benchmark]
+    trl: "Research"
+    venue: "IEEE Quantum Week (QCE) or arXiv + upstream contribution"
+    deliverables: [Decoder code, Benchmark report, Upstream PR, Paper]
+    standards: [Open benchmark practice (Metriq-style)]
+    spotlight: [Unitary Foundation x Riverlane Deltakit Community Fund microgrants, unitaryHACK bounties, Riverlane engineers' reviews]
+
+  - id: 112
+    code: QMLTRUTH
+    name: Honest quantum machine learning benchmark
+    tagline: Does quantum ML actually beat classical? Measure it fairly, publish either way.
+    problem: Many quantum ML claims compare against weak classical baselines; the field needs rigorous, fair benchmarks.
+    art: |2
+          task           quantum model   best classical   winner
+          classification     0.81            0.86          classical
+          kernel task X      0.77            0.74          quantum?  (check dequantisation)
+    flow: "task suite -> quantum models (PennyLane) -> strong classical baselines -> statistics -> dequantisation analysis"
+    stack: [PennyLane, scikit-learn, PyTorch, simulators + free cloud QPU time]
+    hardware: Laptop/GPU simulation, limited real hardware access
+    budget: "€100"
+    months: 12
+    level: 5
+    phases:
+      - Survey published QML claims and select tasks
+      - Implement quantum models and tuned classical baselines with equal effort
+      - Statistical comparison and noise effects on real hardware
+      - Public benchmark and paper, including negative results
+    metrics: [performance gap with confidence intervals, tuning budget parity, hardware vs simulator gap]
+    ethics: Report negative results honestly.
+    resume: "Benchmarked <N> quantum ML models against tuned classical baselines across <N> tasks with fair tuning budgets."
+    skills: [quantum ML, benchmarking, statistics]
+    defend:
+      - What is dequantisation?
+      - How did you make the tuning budgets fair?
+      - What would convince you quantum advantage is real here?
+    components: [task suite, quantum models, classical baselines, stats, leaderboard]
+    trl: "Research"
+    venue: "QTML conference or Quantum journal"
+    deliverables: [Benchmark repo, Leaderboard, Paper]
+    standards: [Reproducibility checklist]
+    spotlight: [Xanadu QHack (annual, October), PennyLane community demos, Unitary Foundation Metriq benchmarks]
+
+  - id: 113
+    code: QROUTE
+    name: Quantum optimisation for disaster logistics, against strong classical solvers
+    tagline: Route the rescue boats with QAOA, then see if Gurobi-class solvers still win.
+    problem: Disaster logistics are hard optimisation problems; quantum optimisation is promising but often oversold.
+    art: |2
+          boats: B1 B2 B3     sites: S1..S12     QAOA p=3: cost 418    classical MILP: cost 401 (optimal)
+               ~~~~~~~~~~~~~~ Ahr valley graph from the LANTERN map pack ~~~~~~~~~~~~~~
+    flow: "LANTERN map pack -> routing problem as QUBO -> QAOA / annealing -> classical MILP and heuristics -> compare"
+    stack: [Qiskit or PennyLane, D-Wave Ocean (if access), OR-Tools, HiGHS]
+    hardware: Simulators + free-tier QPU access
+    budget: "€100"
+    months: 12
+    level: 5
+    phases:
+      - Formulate realistic instances from LANTERN data
+      - Quantum approaches on simulators and hardware
+      - Strong classical baselines
+      - Scaling analysis and resource estimates for future hardware
+    metrics: [solution quality gap, time to solution, problem size reachable]
+    ethics: Advisory research; humans plan real operations.
+    resume: "Compared QAOA/annealing with MILP on real flood-logistics instances; published scaling and resource estimates."
+    skills: [quantum optimisation, operations research]
+    defend:
+      - How do constraints become a QUBO, and what does it cost?
+      - Why is classical MILP such a strong baseline?
+      - At what size might quantum matter, and why?
+    components: [instance builder, QUBO encoder, quantum solvers, classical solvers, analysis]
+    trl: "Research"
+    venue: "IEEE QCE or operations research workshop"
+    deliverables: [Instance library, Solver comparison, Paper]
+    standards: [Open benchmark instances]
+    spotlight: [iQuHACK (MIT, annual), QHack, quantum industry partner challenges]
+
+  - id: 114
+    code: QMITIGATE
+    name: Error mitigation contributions and real-hardware benchmarks
+    tagline: Squeeze correct answers out of noisy quantum hardware, in a tool thousands use.
+    problem: Today's quantum computers are noisy; error mitigation is how practical results get extracted now.
+    art: |2
+          noisy result: 0.62   --[ zero-noise extrapolation ]-->   mitigated: 0.91   (ideal 0.93)
+    flow: "learn Mitiq -> implement or improve a technique -> benchmark on simulators and QPUs -> merge upstream"
+    stack: [Mitiq, Qiskit/Cirq/PennyLane, Metriq]
+    hardware: Simulators + cloud QPU free tiers
+    budget: "€100"
+    months: 12
+    level: 5
+    phases:
+      - Good-first-issue contributions to Mitiq
+      - Implement a technique variant with tests
+      - Hardware benchmarks submitted to Metriq
+      - Microgrant application to extend the work
+    metrics: [error reduction factor, sampling overhead, PRs merged]
+    ethics: None special.
+    resume: "Contributed error-mitigation features to Mitiq and published hardware benchmarks showing <N>x error reduction."
+    skills: [quantum software, open source, benchmarking]
+    defend:
+      - What does zero-noise extrapolation assume?
+      - Why does mitigation cost extra shots?
+      - How is mitigation different from correction?
+    components: [technique implementation, tests, benchmark runs, Metriq submission, docs]
+    trl: "Open-source tooling"
+    venue: "Unitary Foundation community, IEEE QCE"
+    deliverables: [Merged PRs, Benchmarks, Tutorial, Grant proposal]
+    standards: [Project contribution guidelines]
+    spotlight: [Unitary Foundation microgrants (rolling, about $4,000), unitaryHACK (annual, June), Mitiq maintainers]
+
+  - id: 115
+    code: QCHEM
+    name: Quantum chemistry for battery materials, with honest classical comparison
+    tagline: Simulate the molecule that could make better batteries.
+    problem: Chemistry is the most credible early application of quantum computers; the work needs careful comparison to classical methods.
+    art: |2
+            Li--O
+           /     \      ground-state energy: VQE -7.882 Ha   FCI -7.884 Ha   (chemical accuracy?)
+          O-------Co
+    flow: "molecule selection -> Hamiltonian construction -> VQE/QPE on simulators -> classical methods (CCSD(T), DMRG) -> resource estimates"
+    stack: [PennyLane, PySCF, OpenFermion, Qualtran or Azure resource estimator]
+    hardware: GPU simulation
+    budget: "€200"
+    months: 14
+    level: 5
+    phases:
+      - Small molecules to chemical accuracy in simulation
+      - Battery-relevant fragments and active-space selection
+      - Classical comparisons
+      - Fault-tolerant resource estimates for full-size problems
+    metrics: [energy error vs classical reference, qubit and gate counts, estimated runtime on future hardware]
+    ethics: None special.
+    resume: "Simulated battery-material fragments to chemical accuracy and produced fault-tolerant resource estimates."
+    skills: [quantum chemistry, algorithms, resource estimation]
+    defend:
+      - What is chemical accuracy?
+      - Why active spaces?
+      - When would a quantum computer beat DMRG here?
+    components: [molecule pipeline, Hamiltonians, quantum solvers, classical solvers, resource estimator]
+    trl: "Research"
+    venue: "Quantum chemistry or quantum computing journal"
+    deliverables: [Code, Results, Resource estimates, Paper]
+    standards: [Reproducibility checklist]
+    spotlight: [QHack chemistry challenges, PennyLane demos, quantum chemistry research groups]
+
+  - id: 116
+    code: QCOMPILE
+    name: Quantum circuit optimisation passes
+    tagline: Fewer gates, fewer errors. Write the compiler pass that does it.
+    problem: Gate count and depth decide whether a circuit survives the noise; compilers are where gains hide.
+    art: |2
+          before: --H--CX--H--CX--T--T--     depth 6
+          after:  --CX--S--                  depth 2   (ZX-calculus rewrite)
+    flow: "benchmark circuits -> optimisation passes (ZX-calculus, peephole, routing) -> equivalence checking -> upstream"
+    stack: [PyZX, Qiskit transpiler, Unitary Compiler Collection (UCC), Python or Rust]
+    hardware: Laptop
+    budget: "€0"
+    months: 12
+    level: 5
+    phases:
+      - Benchmark suite and existing compiler baselines
+      - New pass with formal equivalence checks
+      - Hardware-aware routing improvements
+      - Upstream contribution and write-up
+    metrics: [two-qubit gate reduction, depth reduction, compile time]
+    ethics: None special.
+    resume: "Wrote a circuit optimisation pass cutting two-qubit gates <N>% on standard benchmarks; merged upstream."
+    skills: [compilers, quantum software, formal methods]
+    defend:
+      - Why are two-qubit gates the expensive ones?
+      - How do you prove the optimised circuit is equivalent?
+      - What does qubit routing solve?
+    components: [benchmark set, pass, equivalence checker, router, upstream PR]
+    trl: "Open-source tooling"
+    venue: "IEEE QCE, compiler workshops"
+    deliverables: [Pass, Benchmarks, PR, Paper]
+    standards: [OpenQASM 3]
+    spotlight: [Unitary Foundation (UCC, PyZX ecosystem), unitaryHACK, Qiskit community]
+
+  - id: 117
+    code: QKDNET
+    name: Quantum key distribution network simulator for critical communications
+    tagline: How would a quantum-secured responder network behave under attack?
+    problem: Governments are investing in quantum communication infrastructure; engineers who can model it, and its limits, are rare.
+    art: |2
+          [Alice]==fibre 40 km==[trusted node]==fibre 60 km==[Bob]
+             key rate: 1.2 kbps     QBER 2.1%     eavesdropper detected: YES
+    flow: "network simulator -> QKD protocols (BB84, decoy states) -> attacks and noise -> key rates -> comparison with PQC"
+    stack: [SeQUeNCe or NetSquid, Python, liboqs for PQC comparison]
+    hardware: Laptop
+    budget: "€0"
+    months: 12
+    level: 5
+    phases:
+      - Protocol simulation and validation against published rates
+      - Network topologies with trusted nodes
+      - Attack scenarios and detection
+      - Policy paper: where QKD vs post-quantum crypto makes sense
+    metrics: [secret key rate vs distance, QBER under attacks, cost comparison with PQC]
+    ethics: None special.
+    resume: "Simulated QKD networks and attacks, and published a QKD vs PQC trade-off analysis for critical communications."
+    skills: [quantum networking, cryptography, policy]
+    defend:
+      - What does QKD protect that PQC doesn't, and vice versa?
+      - Why are trusted nodes a weakness?
+      - What does QBER tell you?
+    components: [simulator, protocols, topologies, attack lab, policy analysis]
+    trl: "Research"
+    venue: "QCrypt or security policy outlets"
+    deliverables: [Simulator configs, Results, Policy paper]
+    standards: [ETSI QKD specifications (reference), NIST PQC standards FIPS 203/204/205]
+    spotlight: [EuroQCI-related research community, quantum networking workshops, security policy groups]
+
+  - id: 118
+    code: QSIMGPU
+    name: GPU-accelerated quantum circuit simulator
+    tagline: Simulate 30+ qubits fast, with code you wrote.
+    problem: Classical simulation sets the bar quantum hardware must beat and powers all algorithm research.
+    art: |2
+          |psi> = 2^32 amplitudes  -->  [ CUDA kernels ]  -->  1.8 s/circuit   (vs 41 s CPU)
+    flow: "state-vector engine -> gate kernels (CUDA) -> tensor-network mode -> benchmarks vs cuQuantum/Qiskit Aer"
+    stack: [Rust or C++, CUDA, cuQuantum for comparison, Python bindings]
+    hardware: One GPU
+    budget: "€200"
+    months: 14
+    level: 5
+    phases:
+      - Correct CPU state-vector simulator with tests
+      - CUDA gate kernels and memory layout
+      - Tensor-network mode for shallow wide circuits
+      - Benchmarks and Python package
+    metrics: [time per gate at 30 qubits, max qubits per GPU, accuracy vs reference]
+    ethics: None special.
+    resume: "Built a CUDA quantum simulator reaching <N>% of cuQuantum throughput at 30+ qubits."
+    skills: [GPU programming, numerical computing, quantum software]
+    defend:
+      - Why does memory double with each qubit?
+      - When are tensor networks better than state vectors?
+      - How do you test a simulator is correct?
+    components: [state engine, CUDA kernels, tensor mode, bindings, benchmarks]
+    trl: "Engineering artefact"
+    venue: "Engineering blog + talk; IEEE QCE"
+    deliverables: [Simulator, Python package, Benchmarks]
+    standards: [OpenQASM 3 input]
+    spotlight: [NVIDIA quantum developer community, iQuHACK sponsors, quantum software conferences]
+
+  - id: 119
+    code: QAGENT
+    name: AI agent that writes and verifies quantum programs
+    tagline: "Where frontier AI meets quantum: an agent that can't ship a wrong circuit."
+    problem: Quantum programming is hard and errors are invisible; AI assistance only helps if every output is verified.
+    art: |2
+          "prepare a GHZ state on 5 qubits"  -->  [ LLM agent ]  -->  circuit
+                                                      |
+                                    [ equivalence checker ] --> VERIFIED / rejected, retry
+    flow: "task spec -> LLM generates circuit -> simulator + formal equivalence check -> feedback loop -> benchmark"
+    stack: [Inspect AI, PennyLane or Qiskit, equivalence checkers (e.g. MQT QCEC), LLM APIs]
+    hardware: API credits
+    budget: "€300"
+    months: 12
+    level: 5
+    phases:
+      - Benchmark of quantum programming tasks with verified answers
+      - Agent with verification-in-the-loop
+      - Compare models and with/without verification
+      - Release benchmark as an eval and write paper
+    metrics: [verified task success rate, wrong-but-confident rate without verification, cost per task]
+    ethics: None special.
+    resume: "Built a verified quantum-programming agent and benchmark; verification cut wrong outputs from <N>% to <N>%."
+    skills: [AI agents, quantum software, formal verification]
+    defend:
+      - Why is verification essential here?
+      - What can equivalence checking not catch?
+      - How does this generalise to other high-stakes code?
+    components: [task bank, agent, simulator, equivalence checker, eval harness]
+    trl: "Research"
+    venue: "NeurIPS Datasets and Benchmarks, IEEE QCE"
+    deliverables: [Benchmark, Agent code, Inspect eval, Paper]
+    standards: [Inspect Evals guidelines]
+    spotlight: [QHack, Inspect Evals contributors, quantum and AI labs alike]
+
+  - id: 120
+    code: QREADY
+    name: When will quantum matter? Resource estimates for real national problems
+    tagline: The report every minister asks for, done with real numbers.
+    problem: Decision-makers hear wildly different quantum timelines; they need grounded resource estimates for their actual problems.
+    art: |2
+          problem               logical qubits   runtime       when (hardware roadmaps)
+          battery chemistry           ~2,000        days          later
+          flood logistics             ~8,000        weeks         unclear
+          RSA-2048 (for PQC urgency)  ~thousands    hours-days    plan migration now
+    flow: "pick national problems -> algorithms -> fault-tolerant resource estimation -> map to vendor roadmaps -> policy brief"
+    stack: [Azure Quantum Resource Estimator or Qualtran, Python, public vendor roadmaps]
+    hardware: Laptop
+    budget: "€0"
+    months: 12
+    level: 5
+    phases:
+      - Problem selection with domain experts
+      - Algorithm choice and resource estimation
+      - Sensitivity analysis on error rates and architectures
+      - Policy brief and public talk
+    metrics: [estimates with sensitivity ranges, problems covered, expert review feedback]
+    ethics: Avoid hype; publish uncertainty prominently.
+    resume: "Produced fault-tolerant resource estimates for <N> national-priority problems and briefed decision-makers."
+    skills: [quantum algorithms, policy communication, analysis]
+    defend:
+      - Why are logical qubits different from physical qubits?
+      - What assumptions dominate your estimates?
+      - What should a government do today regardless?
+    components: [problem catalogue, algorithms, estimator runs, sensitivity analysis, policy brief]
+    trl: "Analysis"
+    venue: "Policy think tanks, IEEE QCE, national quantum strategy consultations"
+    deliverables: [Estimates repo, Policy brief, Talk]
+    standards: [NIST PQC standards (for migration urgency)]
+    spotlight: [National quantum initiatives, quantum policy forums, NATIONSTACK (project 121)]

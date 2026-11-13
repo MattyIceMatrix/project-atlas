@@ -11,12 +11,12 @@ TRACKS = render.load()
 ALL = [p for _, ps in TRACKS for p in ps]
 
 
-def test_hundred_projects():
-    assert len(ALL) == 100
+def test_project_count():
+    assert len(ALL) == 121
 
 
-def test_ids_are_1_to_100_once():
-    assert sorted(p["id"] for p in ALL) == list(range(1, 101))
+def test_ids_are_contiguous_and_unique():
+    assert sorted(p["id"] for p in ALL) == list(range(1, 122))
 
 
 def test_codes_unique():
@@ -33,7 +33,8 @@ def test_required_fields_present():
 def test_levels_and_months_sane():
     for p in ALL:
         assert 1 <= p["level"] <= 5, p["code"]
-        assert 1 <= p["months"] <= (24 if p["level"] == 5 else 12), p["code"]
+        limit = 36 if p.get("master") else (24 if p["level"] == 5 else 12)
+        assert 1 <= p["months"] <= limit, p["code"]
 
 
 def test_every_brief_has_four_phases_and_two_defend_questions():
@@ -64,3 +65,16 @@ def test_every_original_project_has_an_upgrade_path():
         assert up["path"] and up["venue"], pid
         for link in up["links"]:
             assert link in ids, f"upgrade {pid} links to unknown project {link}"
+
+
+def test_frontier_projects_say_who_sees_them():
+    for p in ALL:
+        if p["id"] >= 101:
+            assert len(p.get("spotlight", [])) >= 2, p["code"]
+
+
+def test_master_project_files_exist():
+    root = Path(__file__).resolve().parent.parent / "master" / "nationstack"
+    assert (root / "README.md").exists()
+    assert (root / "capacity_model.py").exists()
+    assert (root / "capacity.md").exists()

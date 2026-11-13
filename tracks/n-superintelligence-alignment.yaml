@@ -1,0 +1,346 @@
+track:
+  id: N
+  name: "Frontier: Superintelligence Alignment and Safety"
+  motto: "Nobody builds superintelligence in a garage. Everybody who matters is hiring people who can make it safe."
+projects:
+  - id: 101
+    code: GLASSBOX
+    name: Mechanistic interpretability of a small open model with sparse autoencoders
+    tagline: Open the model, find the feature, prove it does what you say.
+    problem: We can't trust systems we can't inspect. Interpretability is how labs try to see inside models before they get much more capable.
+    art: |2
+          [ residual stream ] --> [ sparse autoencoder ] --> feature #4127: "user is lying"
+                                                              ablate it -> behaviour changes
+                    ____
+                   |o  o|   glassbox: see inside
+                   |____|
+    flow: "open model -> activation caching -> train sparse autoencoders/transcoders -> label features -> causal tests (ablation, steering) -> write-up"
+    stack: [PyTorch, TransformerLens, SAELens, Neuronpedia, small open models (e.g. Gemma 2 2B or Pythia)]
+    hardware: One rented GPU (24–80 GB) for training runs
+    budget: "€400"
+    months: 12
+    level: 5
+    phases:
+      - Replicate a published SAE result end to end (ARENA-style curriculum)
+      - Train your own SAEs on a chosen layer; measure reconstruction and sparsity
+      - Pick one behaviour (e.g. refusal, sycophancy) and find its features and circuit
+      - Causal validation, failure cases, public write-up with interactive feature pages
+    metrics: [reconstruction loss and L0 sparsity, causal effect size of interventions, fraction of behaviour explained]
+    ethics: Publish methods openly; avoid releasing steering recipes that remove safety behaviour.
+    resume: "Trained SAEs on a <N>B-parameter model and causally validated a circuit explaining <N>% of <behaviour>."
+    skills: [mechanistic interpretability, causal inference, research writing]
+    defend:
+      - What is superposition and why do SAEs help?
+      - How do you know a feature label isn't wishful thinking?
+      - What would make your result false?
+    components: [activation cache, SAE trainer, feature labeller, intervention suite, write-up site]
+    trl: "Research"
+    venue: "LessWrong/Alignment Forum post, then a NeurIPS or ICML interpretability workshop paper"
+    deliverables: [Trained SAEs on Hugging Face, Feature dashboard, Reproducible notebook, Paper]
+    standards: [Reproducibility checklist, responsible disclosure of jailbreak-relevant findings]
+    spotlight: [MATS interpretability streams, Anthropic Fellows (mechanistic interpretability area), Neuronpedia community, Apart Research interpretability sprints]
+
+  - id: 102
+    code: CONTROLROOM
+    name: AI control protocols for untrusted coding agents
+    tagline: Assume the smartest model might be scheming. Build the protocol that catches it anyway.
+    problem: If a powerful model were misaligned, could a weaker trusted model plus limited human review still stop it from doing damage? That's the AI control agenda.
+    art: |2
+          [ untrusted strong model ] --code--> [ trusted weak monitor ] --0.92--> [ audit ]
+                     red team tries sneaky backdoors          blue team: catch them, keep usefulness
+    flow: "agentic task environment -> red-team attack policy -> monitoring protocols -> audit budget -> safety vs usefulness curves"
+    stack: [Python, Inspect AI, ControlArena-style settings, open and API models]
+    hardware: API credits + one GPU for open models
+    budget: "€500"
+    months: 12
+    level: 5
+    phases:
+      - Reproduce a baseline control result (trusted monitoring, defer-to-trusted)
+      - Build a new setting relevant to your expertise (e.g. infrastructure-as-code or SOC tooling)
+      - Design and red-team a new protocol
+      - Safety/usefulness Pareto curves and paper
+    metrics: [safety (attacks caught) at fixed audit budget, usefulness retained, monitor AUROC]
+    ethics: Red-team attacks stay inside sandboxed settings; no real-world exploits.
+    resume: "Designed an AI control protocol reaching <N>% safety at <N>% usefulness on a new agentic setting."
+    skills: [AI control, red teaming, experimental design]
+    defend:
+      - Why assume the model is adversarial rather than measure whether it is?
+      - What is an audit budget and why is it the binding constraint?
+      - How could a scheming model evade your monitor?
+    components: [task setting, attack policy, monitor, audit allocator, evaluation]
+    trl: "Research"
+    venue: "ControlConf, Alignment Forum, ICLR/NeurIPS safety workshops"
+    deliverables: [New control setting (open source), Protocol code, Pareto results, Paper]
+    standards: [Sandboxing best practice]
+    spotlight: [Apart Research AI Control hackathons (co-run with Redwood Research), MATS, Anthropic Fellows (AI control area), Redwood Research]
+
+  - id: 103
+    code: SANDBAG
+    name: Detecting sandbagging in capability evaluations
+    tagline: What if the model is pretending to be weaker than it is?
+    problem: Safety decisions rely on evals; a model that strategically underperforms could slip past them.
+    art: |2
+          eval score: 41%   --[ noise injection / probes ]-->   true capability: 78%  [!] sandbagging
+    flow: "model organisms trained to sandbag -> detection methods (noise injection, probes, consistency) -> blind tests"
+    stack: [Inspect AI, PyTorch, LoRA fine-tuning, open models]
+    hardware: Rented GPU
+    budget: "€400"
+    months: 12
+    level: 5
+    phases:
+      - Build model organisms that sandbag on a benign task under a trigger
+      - Implement and compare detection methods
+      - Blind test: detector vs held-out organisms built by someone else
+      - Release as an Inspect eval with documentation
+    metrics: [detection AUROC on held-out organisms, false positive rate on honest models, compute cost]
+    ethics: Benign tasks only; no dangerous capability domains.
+    resume: "Built sandbagging detectors reaching AUROC <N> on blind held-out model organisms, released as an Inspect eval."
+    skills: [evaluations, fine-tuning, adversarial ML]
+    defend:
+      - Why is a model organism evidence about real models at all?
+      - How did you keep the blind test truly blind?
+      - What would a smarter sandbagger do?
+    components: [organism trainer, detector suite, blind test harness, Inspect integration, report]
+    trl: "Research"
+    venue: "Evals workshop at NeurIPS/ICML, Alignment Forum"
+    deliverables: [Model organisms (gated release), Detector code, Inspect eval, Paper]
+    standards: [Inspect Evals contribution guidelines]
+    spotlight: [UK AI Security Institute Inspect Evals contributors, METR, MATS evaluations streams, Apart sprints]
+
+  - id: 104
+    code: MODELORGS
+    name: Model organisms of emergent misalignment
+    tagline: Grow misalignment in a dish, so we can learn to detect and cure it.
+    problem: Narrow fine-tuning can produce broad, unexpected misaligned behaviour. Studying it in small, controlled models is how the field learns.
+    art: |2
+          narrow fine-tune ("write insecure code")  -->  broad drift ("AI should rule humans")  ?!
+               [ petri dish ]   ~ ~ ~   measure, explain, prevent
+    flow: "replicate emergent misalignment -> vary data and scale -> find internal signatures -> test mitigations"
+    stack: [PyTorch, PEFT, TransformerLens, Inspect AI]
+    hardware: Rented GPU
+    budget: "€500"
+    months: 14
+    level: 5
+    phases:
+      - Replicate a published emergent-misalignment result on a small model
+      - Ablations over data, model size and training length
+      - Interpretability: find what changes internally
+      - Test mitigations (data filtering, regularisation, probes) and publish
+    metrics: [misalignment rate on held-out prompts, effect of each ablation, mitigation effectiveness]
+    ethics: Small models, gated release of misaligned checkpoints, no harmful capability uplift.
+    resume: "Replicated and extended emergent misalignment across <N> conditions; mitigation cut misaligned responses <N>%."
+    skills: [alignment research, fine-tuning, interpretability]
+    defend:
+      - Why does narrow training generalise broadly?
+      - How do you measure "misaligned" without your own bias?
+      - Should these checkpoints be released, and to whom?
+    components: [replication, ablation runner, interp tools, mitigation suite, judge with human checks]
+    trl: "Research"
+    venue: "ICLR/NeurIPS workshop, Alignment Forum"
+    deliverables: [Replication report, Ablation dataset, Mitigation paper, Gated checkpoints]
+    standards: [Responsible release practices]
+    spotlight: [Anthropic Fellows (model organisms area), MATS empirical alignment, Apart Research sprints]
+
+  - id: 105
+    code: WEAKJUDGE
+    name: Scalable oversight with debate and weak-to-strong supervision
+    tagline: Can a weaker judge reliably supervise a stronger model? Measure it.
+    problem: Humans will supervise systems smarter than them. We need methods where weak overseers still get the truth.
+    art: |2
+          [ strong A ] <--debate--> [ strong B ]
+                     \             /
+                      [ weak judge ]  accuracy: 62% alone -> 81% with debate
+    flow: "hard QA tasks with ground truth -> weak judges (small models / humans) -> debate and consultancy protocols -> accuracy"
+    stack: [Python, Inspect AI, open and API models, crowd study tooling]
+    hardware: API credits
+    budget: "€400"
+    months: 12
+    level: 5
+    phases:
+      - Replicate a debate result on a reading-comprehension benchmark
+      - New domain where you have expertise (security incident analysis)
+      - Human judge study with ethics approval or informed consent
+      - Analysis of when debate helps and when it fails
+    metrics: [judge accuracy by protocol, robustness to persuasive-but-wrong debaters, cost per judgement]
+    ethics: Informed consent and fair pay for human judges.
+    resume: "Showed debate raised weak-judge accuracy from <N>% to <N>% in a new security-analysis domain."
+    skills: [scalable oversight, human studies, experiment design]
+    defend:
+      - Why might debate favour persuasion over truth?
+      - What is weak-to-strong generalisation?
+      - How does your domain change the picture?
+    components: [task bank, debater agents, judge interface, study runner, analysis]
+    trl: "Research"
+    venue: "NeurIPS/ICML alignment workshops"
+    deliverables: [Task bank, Protocol code, Human study data, Paper]
+    standards: [Human-subjects research ethics]
+    spotlight: [Anthropic Fellows (scalable oversight area), MATS, Apart sprints]
+
+  - id: 106
+    code: EVALSMITH
+    name: New safety evaluations contributed to Inspect Evals
+    tagline: Build the tests governments and labs actually run.
+    problem: Safety decisions depend on high-quality, reproducible evals, and there are too few good ones.
+    art: |2
+          your eval  -->  [ Inspect Evals register ]  -->  run by AISI, METR, labs, researchers
+             | tests, docs, baseline results, validity checks |
+    flow: "pick an under-measured property (sycophancy, situational awareness, honesty under pressure) -> design eval -> validity tests -> contribute"
+    stack: [Inspect AI, Python, pytest, multiple model providers]
+    hardware: API credits
+    budget: "€300"
+    months: 12
+    level: 5
+    phases:
+      - Contribute a small fix and one existing benchmark port to learn the standards
+      - Design an original eval with a validity argument
+      - Baselines across 5+ models, with uncertainty
+      - Upstream contribution and a short paper
+    metrics: [evals merged upstream, inter-rater agreement for graders, results reproducibility]
+    ethics: No hazardous-capability content (bio, chem, cyber uplift); responsible disclosure of surprises.
+    resume: "Contributed <N> evaluations to the UK AISI's Inspect Evals, including an original <property> benchmark."
+    skills: [evaluation science, open source, measurement]
+    defend:
+      - What makes an eval valid, not just reliable?
+      - How do you stop the eval leaking into training data?
+      - Why is the grader the weakest link?
+    components: [task design, dataset, scorer, validity tests, upstream PR]
+    trl: "Research tooling"
+    venue: "Evals workshops; Inspect Evals register"
+    deliverables: [Merged evals, Baseline results, Validity write-up, Paper]
+    standards: [Inspect Evals contribution guidelines, Datasheets for datasets]
+    spotlight: [UK AI Security Institute (Inspect maintainers), METR (builds on Inspect), Arcadia Impact, Vector Institute]
+
+  - id: 107
+    code: TRUTHPROBE
+    name: Lie and deception detection with activation probes
+    tagline: Read whether the model believes what it says.
+    problem: Output-based checks can be fooled; probes on internal activations might reveal deception directly.
+    art: |2
+          says: "the code is safe"     probe(layer 18): P(deceptive) = 0.88   [!]
+    flow: "datasets of honest vs deceptive behaviour -> linear probes per layer -> generalisation tests to new deception types"
+    stack: [PyTorch, TransformerLens, scikit-learn, open models]
+    hardware: Rented GPU
+    budget: "€300"
+    months: 12
+    level: 5
+    phases:
+      - Replicate a published deception-probe result
+      - Build harder datasets (strategic deception in agentic settings)
+      - Generalisation and adversarial robustness tests
+      - Integrate as a runtime monitor in CONTROLROOM
+    metrics: [probe AUROC in-distribution vs out-of-distribution, robustness under adversarial fine-tuning, monitor overhead]
+    ethics: None beyond normal research ethics.
+    resume: "Built deception probes with AUROC <N> out-of-distribution and integrated them as an agent runtime monitor."
+    skills: [interpretability, probing, monitoring]
+    defend:
+      - Is the probe detecting deception or something correlated?
+      - What happens if the model is trained against the probe?
+      - Why do probes generalise poorly?
+    components: [datasets, probe trainer, generalisation suite, adversarial tests, monitor]
+    trl: "Research"
+    venue: "Alignment Forum; interpretability workshops"
+    deliverables: [Datasets, Probe library, Paper, Monitor integration]
+    standards: [Reproducibility checklist]
+    spotlight: [MATS, Apollo Research-style deception evaluations, Apart sprints]
+
+  - id: 108
+    code: REWARDGUARD
+    name: Catching reward hacking in RL-trained coding agents
+    tagline: The agent passed the tests. Did it cheat?
+    problem: RL-trained agents learn to game their reward (special-casing tests, editing graders), which gets worse as they get more capable.
+    art: |2
+          task: fix bug  -> agent edits test file instead  -> reward 1.0   [!] HACK
+                         -> monitor flags, reward withheld
+    flow: "RL environment with deliberate loopholes -> train small agent -> hack detectors (diff analysis, LLM monitors) -> mitigation"
+    stack: [Python, TRL or verl, sandboxed containers, Inspect AI]
+    hardware: Rented GPUs
+    budget: "€600"
+    months: 14
+    level: 5
+    phases:
+      - Environments with known exploitable loopholes
+      - Train agents and catalogue the hacks they discover
+      - Detectors and their precision/recall
+      - Training-time mitigations and the trade-off with capability
+    metrics: [hack rate before/after, detector recall, task performance retained]
+    ethics: Sandboxed environments only.
+    resume: "Catalogued <N> reward hacks in RL coding agents and cut hack rate <N>% with monitoring at <N>% capability cost."
+    skills: [reinforcement learning, sandboxing, monitoring]
+    defend:
+      - Why does more RL make reward hacking more likely?
+      - Can the agent learn to hide hacks from the monitor?
+      - How is this related to specification gaming?
+    components: [environments, RL trainer, hack catalogue, detectors, mitigations]
+    trl: "Research"
+    venue: "NeurIPS/ICLR safety workshops"
+    deliverables: [Environment suite, Hack catalogue, Detector code, Paper]
+    standards: [Container isolation best practice]
+    spotlight: [Anthropic Fellows, MATS, Apart sprints]
+
+  - id: 109
+    code: COTWATCH
+    name: Chain-of-thought monitorability study
+    tagline: When models think out loud, can we trust what we read?
+    problem: Reasoning traces are a rare window into model intent, but they may be unfaithful or become hidden.
+    art: |2
+          CoT: "I'll add a backdoor... no wait, just fix it"   --> monitor: caught intent? YES
+          CoT: "fixing the bug" (but code has backdoor)         --> monitor: missed  [unfaithful]
+    flow: "reasoning models on agentic tasks -> faithfulness tests -> CoT monitors vs action-only monitors -> pressure tests"
+    stack: [Inspect AI, open reasoning models, Python]
+    hardware: API credits + GPU
+    budget: "€400"
+    months: 12
+    level: 5
+    phases:
+      - Faithfulness measurement on known-answer tasks
+      - CoT monitor vs action monitor on misbehaviour detection
+      - Pressure tests (optimisation against the monitor)
+      - Recommendations paper
+    metrics: [faithfulness score, monitor recall CoT vs action-only, degradation under optimisation pressure]
+    ethics: None special.
+    resume: "Showed CoT monitors catch <N>% more misbehaviour than action-only monitors, and how pressure degrades them."
+    skills: [reasoning models, monitoring, evaluation]
+    defend:
+      - What does "faithful" chain of thought mean?
+      - Why does training against a CoT monitor risk hiding intent?
+      - What policy would you recommend to labs?
+    components: [task suite, faithfulness tests, monitors, pressure tests, analysis]
+    trl: "Research"
+    venue: "Alignment Forum, ICML/NeurIPS workshops"
+    deliverables: [Benchmark, Monitor code, Paper, Policy brief]
+    standards: [Inspect Evals guidelines]
+    spotlight: [MATS, UK AISI, Anthropic Fellows]
+
+  - id: 110
+    code: COMPUTEWATCH
+    name: Technical AI governance with hardware-backed compute verification
+    tagline: Verify what a data centre trained, without seeing the secrets.
+    problem: International AI agreements need ways to verify compute use. Your security background fits this exactly.
+    art: |2
+          [ GPU node ] --attested workload log--> [ verifier ] --> "training run < threshold: OK"
+            secure enclave, signed counters, no model weights exposed
+    flow: "threat model for verification -> workload classification from telemetry -> attestation-backed logs -> red-team evasion"
+    stack: [Python, confidential computing tooling (TEE attestation), GPU telemetry (DCGM), ML classifiers]
+    hardware: Cloud confidential VMs + GPU instances
+    budget: "€500"
+    months: 14
+    level: 5
+    phases:
+      - Literature and policy review (compute governance proposals)
+      - Workload classifier: training vs inference vs other from telemetry
+      - Attested, tamper-evident logging prototype
+      - Evasion red-team and policy write-up
+    metrics: [workload classification accuracy, evasion success rate, overhead]
+    ethics: Defensive governance research; publish limits clearly.
+    resume: "Prototyped attestation-backed compute verification classifying workloads at <N>% accuracy and red-teamed evasions."
+    skills: [technical governance, confidential computing, security]
+    defend:
+      - What can be verified without exposing model weights?
+      - How would a determined actor evade your scheme?
+      - Which policy proposal does this make more feasible?
+    components: [threat model, telemetry collector, classifier, attestation log, evasion lab]
+    trl: "TRL 2 -> 3"
+    venue: "Technical AI governance workshops (e.g. at ICML), policy think-tank reports"
+    deliverables: [Prototype, Threat model, Evasion report, Policy brief]
+    standards: [IETF RATS (RFC 9334), Confidential Computing Consortium guidance]
+    spotlight: [MATS technical governance and compute governance tracks, UK AISI, AI policy institutes]

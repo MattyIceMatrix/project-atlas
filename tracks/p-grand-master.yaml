@@ -1,0 +1,48 @@
+track:
+  id: P
+  name: "Grand Master: Nation-Scale Sovereign AI"
+  motto: "Everything in this atlas, assembled for a whole country."
+projects:
+  - id: 121
+    code: NATIONSTACK
+    name: Sovereign AI ecosystem for a nation of 100 million people
+    tagline: Compute, data, models, services, security, governance and people, designed as one national system.
+    problem: Countries want AI capability they control, for public services, industry, defence of critical infrastructure and crisis resilience, without depending on foreign platforms. No one has published an open, end-to-end, engineering-grade blueprint sized for a large nation.
+    art: |2
+                                  _________________________________
+                                 |   N A T I O N S T A C K  100M   |
+                                 |_________________________________|
+             citizens  businesses  hospitals  schools  responders  ministries
+                 \         |          |         |          |          /
+          ==================== PUBLIC AI SERVICES LAYER ====================
+          [ national models ] [ data spaces ] [ identity ] [ safety & audit ]
+          ==================== SOVEREIGN COMPUTE  (3 regions + edge) =========
+           [ AI factory N ]      [ AI factory S ]      [ AI factory E ]   [ LANTERN-class edge kits ]
+          ==================== ENERGY  |  NETWORKS  |  PEOPLE  |  LAW ======
+    flow: "national strategy -> sovereign compute (3 regions + edge) -> data spaces with consent -> national-language foundation models -> public AI services -> safety, security and audit -> governance and talent pipeline -> continuous measurement"
+    stack: [Kubernetes + Slurm at scale, open-weight foundation models, vLLM-class serving, OpenFGA/ReBAC, EUDI-style identity wallet, Gaia-X/IDS-style data spaces, Inspect-based evals, SLSA + Sigstore, OpenTelemetry]
+    hardware: Reference stack on HOMECLUSTER + cloud; national scale modelled, not built
+    budget: "€2,000 for the reference build; the modelled national system is costed in master/nationstack/"
+    months: 36
+    level: 5
+    master: true
+    phases:
+      - "Blueprint: national ConOps, requirements, threat model, capacity and energy model (master/nationstack/capacity_model.py)"
+      - "Reference stack: a working miniature of every layer at municipal scale, assembled from atlas projects (SOVEREIGN, RAGOPS, MODELCHAIN, CREDMESH, DPVAULT, AUTOSOC, EVALSMITH, LANTERN)"
+      - "Scale proof: load tests, failure drills and cost model extrapolated to 100M users with explicit assumptions"
+      - "Policy package: governance design, AI Act and NIS2 mapping, talent plan, and a public white paper briefed to decision-makers"
+    metrics: [requirements traced to working reference components, modelled cost per citizen per year, peak-load test results scaled with stated assumptions, reviewer verdicts from external experts]
+    ethics: Human rights and democratic oversight by design; no mass surveillance capability; citizens' data under consent and purpose limitation; military and law-enforcement uses out of scope.
+    resume: "Designed an open, engineering-grade sovereign AI blueprint for a 100M-person nation, with a working reference stack, capacity model and expert-reviewed white paper."
+    skills: [national-scale architecture, policy, security, capacity planning, technical leadership]
+    defend:
+      - Which three assumptions move your GPU and energy numbers the most?
+      - What makes this sovereign rather than just on-premise?
+      - Which layer fails first in a national crisis, and what is the fallback?
+      - How does your design prevent the system being turned into a surveillance tool?
+    components: [sovereign compute, energy and siting, data spaces, national models, public AI services, identity and trust, safety and evals, cyber defence, governance and law, talent and industry]
+    trl: "Blueprint + TRL 4 reference stack"
+    venue: "White paper for national AI strategy consultations; talks at government AI and digital-sovereignty forums"
+    deliverables: [National blueprint (architecture + ConOps + requirements), Capacity and energy model with assumptions, Reference stack repo, Governance and compliance package, White paper and briefing deck]
+    standards: [EU AI Act, GDPR, NIS2, Data Act and Data Governance Act, eIDAS 2.0 / EUDI wallet, ISO/IEC 42001 AI management system, ISO/IEC 27001, NIST AI RMF, BSI C5 (cloud), EN 50600 (data centres)]
+    spotlight: [National AI strategy consultations, digital sovereignty forums, EU AI factory and HPC ecosystems, AI policy institutes, Anthropic Fellows and MATS governance tracks via projects 106 and 110]
