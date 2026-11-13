@@ -1,0 +1,149 @@
+track:
+  id: G
+  name: People, Sport and Community
+  motto: "Tech that helps someone you can name."
+projects:
+  - id: 42
+    code: HURDLE
+    name: Hurdle technique analysis with pose estimation
+    tagline: Your lead leg, measured frame by frame.
+    problem: Coaching feedback on hurdle technique is subjective and slow.
+    art: |2
+              o
+             /|\__        ___         ___
+             / \   ->    |   |  ->   |   |
+          ===============|===|=======|===|====
+           take-off 2.1 m   clearance +9 cm
+    flow: "phone video -> pose estimation -> event detection (take-off, clearance, landing) -> metrics report"
+    stack: [MediaPipe or RTMPose, OpenCV, NumPy, Streamlit]
+    hardware: Phone on a tripod
+    budget: "€0"
+    months: 2
+    level: 2
+    phases:
+      - Pose pipeline on public sprint videos
+      - Hurdle events and distance calibration
+      - Metrics against a coach's manual measurements
+      - Report an athlete can use
+    metrics: [take-off distance error, event timing error, processing time]
+    ethics: Film only athletes who agree; minors only with guardian consent.
+    resume: "Built pose-based hurdle analysis measuring take-off distance within <N> cm of manual coaching measurements."
+    skills: [pose estimation, sports science, calibration]
+    defend:
+      - How do you calibrate distance from one camera?
+      - Which metric would a coach actually use?
+
+  - id: 43
+    code: POOLSHARK
+    name: Pool shot analysis and training coach
+    tagline: Every shot tracked, every miss explained.
+    problem: Amateur players can't see why shots miss.
+    art: |2
+          .------------------------------.
+          | o           ,--> (3)         |
+          |   (cue)----'                 |
+          |                  (8)    o    |
+          '------------------------------'
+           cut angle 31 deg, hit 2 mm thick
+    flow: "overhead camera -> table and ball detection -> trajectory -> shot metrics -> drill suggestions"
+    stack: [OpenCV, YOLO, Kalman filter, Python]
+    hardware: Phone or webcam above the table
+    budget: "€30"
+    months: 2
+    level: 2
+    phases:
+      - Table homography and ball detection
+      - Trajectory tracking
+      - Shot metrics and miss explanation
+      - Drill mode with progress tracking
+    metrics: [ball position error, shots tracked per session, improvement over 4 weeks]
+    ethics: None special.
+    resume: "Built CV pool coaching that tracks balls within <N> mm and explains misses from trajectories."
+    skills: [tracking, homography, product design]
+    defend:
+      - What is a homography?
+      - How do you handle balls touching each other?
+
+  - id: 44
+    code: CLIMB-TRANSITION
+    name: Veteran transition dashboard
+    tagline: Benefits, deadlines, skills and jobs, in one plan.
+    problem: Transitioning service members juggle dozens of deadlines and programs.
+    art: |2
+          ETS -180d  [SkillBridge apply]   ======>
+          ETS  -90d  [VA claim]            ====>
+          ETS    0   [GI Bill / job start] ==>
+    flow: "user timeline -> rules for public program deadlines -> checklist + reminders -> job matches"
+    stack: [Next.js, Postgres, public program data, calendar export]
+    hardware: None
+    budget: "€0"
+    months: 3
+    level: 2
+    phases:
+      - Public program rules with sources and dates checked
+      - Timeline engine with tests
+      - Reminders and calendar export
+      - Usability test with veterans
+    metrics: [deadlines covered, user task completion, rule accuracy audits]
+    ethics: Information tool; links to official sources; no personal data sold or shared.
+    resume: "Built a transition planner covering <N> program deadlines, tested with <N> veterans."
+    skills: [full stack, rules engines, UX]
+    defend:
+      - How do you keep program rules current?
+      - What personal data do you avoid collecting, and why?
+
+  - id: 45
+    code: RECEIPTLENS
+    name: Grocery receipt scanner and price tracker
+    tagline: Photograph the receipt, watch your prices over time.
+    problem: Households don't see how their grocery prices and habits change.
+    art: |2
+          .-----------.
+          | MILCH 1.09|  ===>  milk  ^ +8% since June
+          | BROT  1.79|  ===>  bread = steady
+          '-----------'
+    flow: "photo -> OCR -> line parsing -> product normalisation -> monthly trends"
+    stack: [PaddleOCR, Python, SQLite, Streamlit]
+    hardware: Phone
+    budget: "€0"
+    months: 2
+    level: 1
+    phases:
+      - OCR and line parsing for two store layouts
+      - Product name normalisation
+      - Trends and budget view
+      - Accuracy check on 100 receipts
+    metrics: [line parsing accuracy, normalisation accuracy, time per receipt]
+    ethics: Data stays on the user's device.
+    resume: "Built receipt OCR with <N>% line accuracy and product-level price trends."
+    skills: [OCR, data cleaning, personal finance tooling]
+    defend:
+      - Why is normalising product names harder than OCR?
+      - How would you add a new store's layout?
+
+  - id: 46
+    code: SPRECHEN
+    name: Offline German speaking coach
+    tagline: Talk, get corrected, no cloud listening.
+    problem: Learners need speaking practice with feedback, and many apps send voice to the cloud.
+    art: |2
+          you:  "Ich habe gestern in die Stadt gegangen"
+          coach: "Fast! -> Ich BIN gestern in die Stadt gegangen (Bewegung -> sein)"
+    flow: "mic -> local ASR -> grammar check with small LLM -> spoken correction (TTS) -> progress log"
+    stack: [whisper.cpp, local LLM, Piper TTS, Python]
+    hardware: Laptop
+    budget: "€0"
+    months: 3
+    level: 2
+    phases:
+      - ASR quality on learner speech
+      - Correction prompts with a test set of common errors
+      - Spoken feedback loop
+      - Track progress by error type over weeks
+    metrics: [correction precision, ASR word error rate on learner speech, session latency]
+    ethics: Voice data stays local.
+    resume: "Built an offline speaking coach correcting common German errors at <N>% precision."
+    skills: [speech, language learning, local LLMs]
+    defend:
+      - Why does ASR struggle with learner accents?
+      - How do you avoid "correcting" things that were right?

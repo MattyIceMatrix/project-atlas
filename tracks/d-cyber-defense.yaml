@@ -1,0 +1,203 @@
+track:
+  id: D
+  name: Cyber Defense
+  motto: "Defend the network you actually have."
+projects:
+  - id: 22
+    code: SENTRY
+    name: Home-network intrusion detection with ML anomaly scoring
+    tagline: A night watch for your router.
+    problem: Home and small-office networks have no security monitoring at all.
+    art: |2
+          [ router ]--mirror port-->[ SENTRY ]
+                                      |   zeek logs -> features -> anomaly score
+           02:13  printer -> 185.x.x.x:4444   score 0.97   ALERT
+    flow: "port mirror -> Zeek/Suricata -> feature extraction -> isolation forest -> alerts"
+    stack: [Proxmox VM or Raspberry Pi, Zeek, Suricata, Python, Grafana]
+    hardware: Managed switch with port mirroring
+    budget: "€60"
+    months: 3
+    level: 2
+    phases:
+      - Sensor setup and baseline traffic
+      - Features and anomaly model
+      - Alert tuning over 4 weeks
+      - Replay public attack captures to measure detection
+    metrics: [detection on replayed attacks, alerts per day, sensor CPU load]
+    ethics: Monitor only networks you own; inform household members.
+    resume: "Built an ML-assisted home IDS detecting <N>% of replayed attacks at <N> alerts/day."
+    skills: [network security, Zeek, anomaly detection]
+    defend:
+      - Why does unsupervised detection drown you in alerts?
+      - How did you set the threshold?
+
+  - id: 23
+    code: HONEYCOMB
+    name: Honeypot fleet with LLM-written threat summaries
+    tagline: Let attackers knock, then write the report for you.
+    problem: Honeypots collect lots of logs nobody reads.
+    art: |2
+           ___    ___    ___
+          / H \__/ O \__/ N \     ssh, http, smb decoys
+          \___/  \___/  \___/
+              \     |     /
+            [ log lake ] --> [ LLM summary ] --> "Today: 3 botnets, 1 new credential list"
+    flow: "decoy services -> central logs -> enrichment -> LLM daily brief with IOC list"
+    stack: [Cowrie, T-Pot or custom, Elastic or Loki, Python, small LLM]
+    hardware: Small cloud VM, isolated
+    budget: "€5/month"
+    months: 2
+    level: 2
+    phases:
+      - Isolated deployment with strict egress rules
+      - Log pipeline and enrichment
+      - Daily brief with IOCs, checked by hand
+      - Share sanitised findings
+    metrics: [events per day, brief accuracy vs manual review, time saved]
+    ethics: Isolated network; never used to attack back.
+    resume: "Ran a honeypot fleet and automated daily threat briefs; summaries matched analyst review <N>% of the time."
+    skills: [threat intel, logging, LLM summarisation]
+    defend:
+      - How do you make sure the honeypot can't be used to attack others?
+      - What is an IOC and why does it go stale?
+
+  - id: 24
+    code: PHISHNET
+    name: Explainable phishing classifier
+    tagline: Not just "phishing", but why.
+    problem: Users don't trust a red banner they don't understand.
+    art: |2
+          From: paypa1-support@...      [!] look-alike domain
+          "Urgent: account locked"      [!] urgency language
+          link -> bit.ly/xyz            [!] hidden destination
+                                         ==> PHISHING 0.94
+    flow: "email -> header + URL + text features -> model -> top reasons -> client add-in"
+    stack: [Python, scikit-learn or small transformer, SHAP, Outlook or Thunderbird add-in]
+    hardware: None
+    budget: "€0"
+    months: 3
+    level: 2
+    phases:
+      - Public phishing and ham corpora; data card
+      - Interpretable model with reason codes
+      - Mail client add-in
+      - User study: does the explanation change decisions?
+    metrics: [precision/recall, explanation usefulness rating, inference time]
+    ethics: Defensive; trained on public corpora only.
+    resume: "Built an explainable phishing detector (F1 <N>) whose reason codes improved user decisions by <N>%."
+    skills: [ML, explainability, email security]
+    defend:
+      - Why might accuracy drop next year?
+      - How do you evaluate an explanation?
+
+  - id: 25
+    code: SBOM-RADAR
+    name: Software supply-chain risk dashboard
+    tagline: Every dependency, every CVE, every repo, one screen.
+    problem: Teams don't know which of their repos are affected by a new vulnerability.
+    art: |2
+          repo-a  [|||||||||.] 2 high
+          repo-b  [|||.......] 7 high   <-- log4j-like? click
+          repo-c  [||||||||||] clean
+    flow: "repos -> SBOM generation -> vulnerability DB match -> risk score -> dashboard + alerts"
+    stack: [Syft, Grype or OSV, Python, Postgres, Grafana]
+    hardware: None
+    budget: "€0"
+    months: 2
+    level: 2
+    phases:
+      - SBOMs for all your repos in CI
+      - OSV matching and reachability hints
+      - Risk scoring and dashboard
+      - Alert flow to GitHub issues
+    metrics: [time from CVE publish to alert, false positive rate, repos covered]
+    ethics: None special.
+    resume: "Built an SBOM-based dashboard alerting on new CVEs across <N> repos within <N> hours."
+    skills: [supply-chain security, DevSecOps]
+    defend:
+      - Why is "vulnerable dependency present" not the same as "exploitable"?
+      - CycloneDX vs SPDX: why pick one?
+
+  - id: 26
+    code: ZEROTRUST-LAB
+    name: Zero-trust access lab
+    tagline: No VPN. Every request proves who it is.
+    problem: Flat networks and VPNs give too much access once inside.
+    art: |2
+          user --> [ identity proxy ] --> app A   (allowed: group=ops)
+                         |
+                         +--X--> app B   (denied: device not compliant)
+    flow: "IdP (OIDC) -> identity-aware proxy -> per-app policy -> device posture -> logs"
+    stack: [Keycloak, Pomerium or oauth2-proxy, Proxmox, Terraform]
+    hardware: Home lab
+    budget: "€0"
+    months: 2
+    level: 3
+    phases:
+      - Identity provider with MFA
+      - Proxy with per-app policies
+      - Device posture checks
+      - Attack walk-through: stolen password, stolen session
+    metrics: [apps behind proxy, blocked policy violations, login latency]
+    ethics: Lab environment.
+    resume: "Built a zero-trust access lab (OIDC, identity-aware proxy, device posture) replacing VPN access."
+    skills: [identity, zero trust, IaC]
+    defend:
+      - What does "never trust, always verify" mean in practice here?
+      - What attack is still possible?
+
+  - id: 27
+    code: LOGLENS
+    name: SIEM-lite with LLM-assisted triage
+    tagline: First-pass triage at 3 a.m., so the analyst sleeps until it matters.
+    problem: Small teams can't staff a SOC; alerts pile up untriaged.
+    art: |2
+          alerts ==>  [ rules ] ==> [ LLM triage note ] ==> P1 | P2 | P3 | noise
+                                           |
+                         "Likely benign: backup job, same hour daily"
+    flow: "logs -> Sigma rules -> enrichment -> LLM triage note with evidence -> analyst queue"
+    stack: [Wazuh or OpenSearch, Sigma, Python, local LLM]
+    hardware: Home lab
+    budget: "€0"
+    months: 3
+    level: 3
+    phases:
+      - Log sources and Sigma rules
+      - Enrichment (asset, user, history)
+      - LLM triage with mandatory evidence links
+      - Compare triage to your own manual calls on 200 alerts
+    metrics: [agreement with analyst priority, missed true positives, minutes saved per alert]
+    ethics: The analyst decides; the model only drafts.
+    resume: "Built LLM-assisted alert triage agreeing with analyst priority <N>% of the time, saving <N> min/alert."
+    skills: [SIEM, detection engineering, LLM ops]
+    defend:
+      - Why must every triage note link to evidence?
+      - How could an attacker manipulate the triage model?
+
+  - id: 28
+    code: GHOSTPRINT
+    name: Firmware integrity checker for IoT devices
+    tagline: Is your camera still running the firmware the vendor shipped?
+    problem: Cheap IoT devices are rarely checked for tampered or outdated firmware.
+    art: |2
+          firmware.bin --> [ unpack ] --> [ hash + SBOM + secrets scan ]
+                                                 |
+                       known-good? NO --> diff --> "telnetd added, root pw hardcoded"
+    flow: "firmware image -> binwalk unpack -> hashes, SBOM, secret and config scan -> report"
+    stack: [binwalk, Syft, Python, YARA]
+    hardware: Old IoT devices you own
+    budget: "€30"
+    months: 3
+    level: 3
+    phases:
+      - Unpack and inventory vendor firmware
+      - Known-good baselines and diffing
+      - Secret and weak-config detection
+      - Report and responsible disclosure workflow
+    metrics: [images analysed, findings confirmed, false positives]
+    ethics: Only devices you own; follow coordinated disclosure.
+    resume: "Built a firmware integrity pipeline that analysed <N> IoT images and confirmed <N> findings."
+    skills: [firmware analysis, supply chain, YARA]
+    defend:
+      - What is coordinated vulnerability disclosure?
+      - Why is a hash match not proof of safety?

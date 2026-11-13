@@ -1,0 +1,119 @@
+track:
+  id: H
+  name: Frontier and Research
+  motto: "Where the next job titles come from."
+projects:
+  - id: 47
+    code: NEUROSPARK
+    name: Spiking neural networks for ultra-low-power sensing
+    tagline: Compute only when something happens.
+    problem: Always-on sensors waste power processing nothing.
+    art: |2
+          spikes:  |  | |    |      |||| |  |      (events, not frames)
+          neuron:  ___/\_____/\__/\____/\/\/\___
+          power:   0.3 mW  vs  CNN 45 mW
+    flow: "event data (or converted audio) -> SNN training with surrogate gradients -> energy estimate -> compare to CNN"
+    stack: [snnTorch or Norse, PyTorch, public event-camera or keyword datasets]
+    hardware: Laptop
+    budget: "€0"
+    months: 3
+    level: 4
+    phases:
+      - Literature review and a reproducible baseline
+      - Train an SNN on keyword spotting
+      - Energy estimate methodology
+      - Honest comparison to a tiny CNN
+    metrics: [accuracy, estimated energy per inference, spike sparsity]
+    ethics: None special.
+    resume: "Trained an SNN keyword spotter at <N>% accuracy with an estimated <N>x energy saving over a CNN."
+    skills: [neuromorphic computing, research methods]
+    defend:
+      - Why can't you backprop through a spike directly?
+      - How trustworthy is an energy estimate without neuromorphic hardware?
+
+  - id: 48
+    code: QUANTUMSAFE
+    name: Post-quantum crypto migration for IoT
+    tagline: Swap the locks before the quantum locksmith arrives.
+    problem: Long-lived devices use crypto that future quantum computers could break; migration is hard on small chips.
+    art: |2
+          [ RSA / ECDH ]  ==migrate==>  [ ML-KEM + ML-DSA ]
+              2048 bit                     FIPS 203 / 204
+          handshake: 3.1 ms  ->  4.7 ms  (on ESP32-S3)
+    flow: "crypto inventory -> hybrid TLS with PQC -> benchmarks on microcontrollers -> migration playbook"
+    stack: [liboqs, mbedTLS or wolfSSL, ESP32-S3, Python]
+    hardware: 2 microcontrollers
+    budget: "€30"
+    months: 3
+    level: 4
+    phases:
+      - Crypto inventory of your own projects
+      - Hybrid key exchange working on a microcontroller
+      - Benchmarks (time, memory, code size, energy)
+      - Migration playbook
+    metrics: [handshake time, RAM and flash use, energy per handshake]
+    ethics: None special.
+    resume: "Ran hybrid post-quantum TLS on ESP32 (ML-KEM), adding <N> ms per handshake; wrote a migration playbook."
+    skills: [cryptography, embedded, standards]
+    defend:
+      - What is "harvest now, decrypt later"?
+      - Why hybrid instead of PQC only?
+
+  - id: 49
+    code: SWARM
+    name: Multi-robot search coordination in simulation
+    tagline: Five cheap robots beat one expensive one, if they talk.
+    problem: Single robots search slowly; teams of robots need task allocation that survives lost communication.
+    art: |2
+           [r1]~~>    [r2]~~>
+               \       /        auction: who takes sector C-3?
+           [r3]--( map )--[r4]  r4 bids 12 s, wins
+                    |
+                  [r5]
+    flow: "shared map -> market-based task allocation -> decentralised planning -> comms-loss tests"
+    stack: [ROS 2, Gazebo, Python, Nav2 multi-robot]
+    hardware: None (simulation)
+    budget: "€0"
+    months: 4
+    level: 4
+    phases:
+      - Multi-robot sim world (extends LANTERN)
+      - Auction-based sector allocation
+      - Communication loss and robot failure handling
+      - Coverage vs robot count study
+    metrics: [time to full coverage, coverage with 1 robot lost, messages per minute]
+    ethics: Civilian search use case only.
+    resume: "Built decentralised multi-robot search; 5 robots cut coverage time <N>% and tolerated robot loss."
+    skills: [multi-agent systems, robotics, distributed algorithms]
+    defend:
+      - Why auctions instead of a central planner?
+      - What happens when two robots both think they won?
+
+  - id: 50
+    code: HEARTH
+    name: Home energy digital twin with reinforcement learning
+    tagline: Your house, simulated, learning to heat itself for less.
+    problem: Heating schedules ignore weather forecasts, prices and how the house actually holds heat.
+    art: |2
+            _____
+           /     \      outside 2 C   price 0.31 EUR/kWh
+          |  20C  |     plan: pre-heat 05:00, coast 08:00-16:00
+          |_[_]___|     saving vs schedule: -14%
+    flow: "smart meter + room sensors -> thermal model (digital twin) -> RL or MPC policy in sim -> advisory schedule"
+    stack: [Python, EnergyPlus or simple RC model, Stable-Baselines3, Home Assistant]
+    hardware: Room sensors you may already have
+    budget: "€40"
+    months: 4
+    level: 4
+    phases:
+      - Data logging and a calibrated thermal model
+      - Baseline schedule and MPC controller
+      - RL policy trained in the twin
+      - Advisory mode only, compare predicted vs real
+    metrics: [model temperature error, simulated cost saving, comfort violations]
+    ethics: Advisory mode; never controls heating without the household's agreement.
+    resume: "Built a calibrated home thermal twin; RL policy cut simulated heating cost <N>% with no comfort violations."
+    skills: [reinforcement learning, control, energy systems]
+    defend:
+      - Why test in a twin before the real house?
+      - When is MPC better than RL?

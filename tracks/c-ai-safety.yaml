@@ -1,0 +1,176 @@
+track:
+  id: C
+  name: AI Safety and Governance
+  motto: "Trust is a feature you can test."
+projects:
+  - id: 16
+    code: TRIPWIRE
+    name: Prompt-injection firewall for LLM apps
+    tagline: Stops "ignore previous instructions" at the door.
+    problem: Untrusted text in emails, web pages and files can hijack an LLM agent.
+    art: |2
+          untrusted text ---> [ T R I P W I R E ] ---> clean --> LLM
+                                     |
+                                     +--> flagged --> quarantine + log
+    flow: "input -> heuristics + classifier + canary checks -> allow / sanitise / block -> audit"
+    stack: [Python, small classifier, FastAPI middleware, OpenTelemetry]
+    hardware: None
+    budget: "€0"
+    months: 3
+    level: 3
+    phases:
+      - Collect public injection benchmarks; build your own held-out set
+      - Layered detector (rules, classifier, canary tokens)
+      - Middleware for an agent app
+      - Attack/defence report with bypasses you could not stop
+    metrics: [detection rate, false positive rate on normal text, added latency]
+    ethics: Defensive tool; published bypasses are reported responsibly.
+    resume: "Built a layered prompt-injection filter blocking <N>% of held-out attacks at <N>% false positives."
+    skills: [AI security, classifiers, middleware]
+    defend:
+      - Why can no filter be perfect here?
+      - What does defence in depth mean for agents?
+
+  - id: 17
+    code: LEDGER
+    name: Tamper-evident audit log service for AI decisions
+    tagline: If an AI did it, LEDGER can prove when, why and under whose approval.
+    problem: Regulators and incident responders need trustworthy records of automated decisions.
+    art: |2
+          [blk 1]--hash-->[blk 2]--hash-->[blk 3]--hash-->[blk 4]
+             |               |               |               |
+           who/what       who/what        who/what        who/what
+          edit one block ==> every later hash breaks ==> DETECTED
+    flow: "event API -> hash chain + periodic signed checkpoints -> verifier CLI -> export for auditors"
+    stack: [Go or Python, Ed25519, SQLite or Postgres, OpenAPI]
+    hardware: None
+    budget: "€0"
+    months: 2
+    level: 2
+    phases:
+      - Event schema aligned with logging duties for high-risk AI
+      - Hash chain and signed checkpoints
+      - Verifier and tamper tests
+      - Integrate with TRIPWIRE or LANTERN's Guardian
+    metrics: [write throughput, verification time per 1M events, tamper detection rate (target 100%)]
+    ethics: Logs can hold personal data; retention limits built in.
+    resume: "Built a tamper-evident decision log verifying 1M events in <N> s with signed checkpoints."
+    skills: [cryptography, systems design, compliance engineering]
+    defend:
+      - What can a hash chain not protect against?
+      - Why signed checkpoints and not a blockchain?
+
+  - id: 18
+    code: REDCELL
+    name: Automated red-team harness for AI agents
+    tagline: Attack your own agent every night so nobody else does it first.
+    problem: Agent safety is tested by hand, once, before launch.
+    art: |2
+            ____                           ____
+           |REDC| -- 300 attack cases --> |AGNT|
+           |ELL |  <-- responses -------- |____|
+           |____|  ==> scorecard: 287 held, 13 failed -> issues filed
+    flow: "attack library -> scheduled runs -> judge -> scorecard -> GitHub issues for failures"
+    stack: [Python, YAML attack specs, GitHub Actions, LLM judge with human spot checks]
+    hardware: None
+    budget: "€10/month"
+    months: 3
+    level: 3
+    phases:
+      - Attack taxonomy (injection, data exfiltration, excessive agency)
+      - Runner and judge with human-checked calibration
+      - Nightly CI with trend tracking
+      - Case study on one of your agent projects
+    metrics: [attacks per category, judge agreement with humans, time to detect a regression]
+    ethics: Only used against systems you own or have permission to test.
+    resume: "Built a nightly agent red-team pipeline (300+ cases) that caught <N> regressions before release."
+    skills: [AI security, evaluation, automation]
+    defend:
+      - How do you keep the attack set from leaking into training?
+      - Why is the judge itself an attack surface?
+
+  - id: 19
+    code: CHARTER
+    name: AI Act documentation generator
+    tagline: From repo to technical documentation file, half-written for you.
+    problem: Teams building AI systems in the EU must keep technical documentation and risk records; it is usually written last and badly.
+    art: |2
+           repo + model cards + test results
+                       |
+                 [ C H A R T E R ]
+                       |
+           technical file draft  +  gaps checklist  (red = missing)
+    flow: "scan repo artefacts -> map to documentation headings -> draft + gap list -> human edits"
+    stack: [Python, Markdown/Docs export, YAML templates]
+    hardware: None
+    budget: "€0"
+    months: 2
+    level: 2
+    phases:
+      - Template derived from the regulation's documentation requirements (cite articles)
+      - Extractors for model cards, data cards, test results
+      - Gap checklist
+      - Run it on LANTERN
+    metrics: [sections auto-filled, gaps found vs manual review, time saved]
+    ethics: Output is a draft for qualified review, not a compliance certificate.
+    resume: "Built a documentation generator that drafts <N>% of an AI technical file from repo artefacts."
+    skills: [regulation, documentation, tooling]
+    defend:
+      - Why can't a tool make a system compliant?
+      - How do you keep templates current when guidance changes?
+
+  - id: 20
+    code: FAIRLINE
+    name: Bias audit toolkit for tabular models
+    tagline: Same model, every group, side by side.
+    problem: Models for credit, hiring or services can treat groups differently without anyone noticing.
+    art: |2
+          group A  [##########] 0.81
+          group B  [#######...] 0.64   <-- gap 0.17 > threshold 0.05
+          group C  [#########.] 0.78
+    flow: "model + dataset -> sliced metrics -> fairness criteria -> report with mitigation options"
+    stack: [Python, Fairlearn, scikit-learn, Jupyter, HTML report]
+    hardware: None
+    budget: "€0"
+    months: 2
+    level: 2
+    phases:
+      - Public benchmark datasets and their known issues
+      - Sliced metrics and confidence intervals
+      - Mitigation experiments and trade-offs
+      - Report template for non-technical readers
+    metrics: [metric gaps with CIs, accuracy cost of mitigation, report readability]
+    ethics: Explains trade-offs; does not declare a model "fair".
+    resume: "Built a bias audit toolkit with CI-backed group metrics; mitigation cut the gap from <N> to <N>."
+    skills: [responsible AI, statistics, communication]
+    defend:
+      - Why can't all fairness criteria be met at once?
+      - Why confidence intervals?
+
+  - id: 21
+    code: SANDBOX
+    name: Capability-limited sandbox for agent tools
+    tagline: Give the agent a key that only opens one door, for five minutes.
+    problem: Agents get broad API keys and file access they don't need.
+    art: |2
+          agent --> [ token: read:/docs  ttl:5m ] --> tool
+                      |
+          tries /etc/passwd ===> DENIED, logged
+    flow: "agent request -> policy -> short-lived scoped token -> containerised tool run -> audit"
+    stack: [Docker or gVisor, OPA/Rego, Python, LEDGER]
+    hardware: None
+    budget: "€0"
+    months: 3
+    level: 4
+    phases:
+      - Threat model for agent tool use
+      - Scoped token issuer with policy
+      - Container isolation for code/file tools
+      - Escape attempts and results report
+    metrics: [blocked out-of-scope actions, overhead per call, escape attempts that succeeded (target 0)]
+    ethics: Defensive.
+    resume: "Built a least-privilege agent sandbox with scoped short-lived tokens, blocking 100% of tested escapes."
+    skills: [security engineering, containers, policy-as-code]
+    defend:
+      - What is least privilege for an agent?
+      - Where is your sandbox weakest?

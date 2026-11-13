@@ -1,0 +1,238 @@
+track:
+  id: A
+  name: Edge AI and Robotics
+  motto: "Intelligence where the cloud can't reach."
+projects:
+  - id: 1
+    code: TIDEWATCH
+    name: River-gauge early warning on solar sensor nodes
+    tagline: Cheap sensor nodes that warn a village before the river does.
+    problem: Small streams flood fast and official gauges are far apart. Villages along tributaries get minutes, not hours.
+    art: |2
+         ~~~~~~~~~~~~~~~~~~~~~~~~~
+          ~~  [|]  ~~~  [|]  ~~     [|] = solar gauge node
+         ~~~~~~|~~~~~~~~~|~~~~~~~
+               '--LoRa---'--> gateway --> siren / SMS
+    flow: "ultrasonic level sensor -> microcontroller TinyML anomaly model -> LoRaWAN -> gateway -> alert rules"
+    stack: [ESP32-S3, TensorFlow Lite Micro, LoRaWAN, The Things Stack, Grafana]
+    hardware: 3 sensor nodes + 1 LoRa gateway
+    budget: "€250"
+    months: 4
+    level: 2
+    phases:
+      - Build one node, log water level to a dashboard
+      - Train a rise-rate anomaly model on public gauge history (PEGELONLINE)
+      - Deploy the model on the microcontroller, 3-node mesh
+      - Field test on a safe creek with landowner permission
+    metrics: [time-to-alert vs official gauge, battery life in days, false alarms per month]
+    ethics: Warning aid only; never replaces official warnings (NINA, KATWARN).
+    resume: "Deployed TinyML flood-warning nodes on ESP32 with LoRaWAN, alerting <N> min before reference gauges at <N> mW."
+    skills: [TinyML, embedded C, LoRaWAN, time series]
+    defend:
+      - Why run the model on the node instead of the gateway?
+      - How do you tell a real rise from debris hitting the sensor?
+
+  - id: 2
+    code: HIVEMIND
+    name: Beehive health monitor with on-device audio AI
+    tagline: Listen to the hive; hear trouble before you see it.
+    problem: Beekeepers lose colonies to swarming and queen loss that show up in the hive's sound days earlier.
+    art: |2
+           _  _  _
+          / \/ \/ \      )))  buzz spectrum
+         | HIVE  |  -->  )))  -> "queenless?" 0.82
+          \_/\_/\_/      )))
+    flow: "MEMS microphone + temp/humidity -> spectrogram -> tiny CNN on device -> weekly hive report"
+    stack: [Arduino Nano 33 BLE Sense, Edge Impulse, Python, SQLite]
+    hardware: 1 sensor board per hive
+    budget: "€120"
+    months: 3
+    level: 2
+    phases:
+      - Record hive audio and label with a local beekeeper
+      - Build spectrogram features and a baseline model
+      - Quantise and run on the board
+      - Season-long monitoring report
+    metrics: [queen-loss detection recall, days of early warning, battery life]
+    ethics: Partner with a beekeeper; no hive disturbance beyond normal inspection.
+    resume: "Built an on-device audio classifier detecting hive anomalies with <N>% recall, <N> days before visual signs."
+    skills: [audio ML, quantisation, embedded deployment]
+    defend:
+      - Why spectrograms and not raw audio?
+      - How did you get labels you can trust?
+
+  - id: 3
+    code: FORESTER
+    name: Wildfire smoke spotter for the Palatinate Forest
+    tagline: A camera on a tower that never blinks.
+    problem: Dry summers raise forest fire risk in the Pfälzerwald; early smoke detection saves hectares.
+    art: |2
+              .-~~-.
+           .-(  smoke )-.        [cam]
+          (______________)        |##|   tower
+          /\  /\  /\  /\  /\      |##|
+         /  \/  \/  \/  \/  \  ___|##|___
+    flow: "PTZ camera -> Jetson smoke/cloud classifier -> geolocation by bearing -> alert to fire service mock"
+    stack: [Jetson Orin Nano, YOLO-family detector, TensorRT, OpenCV, FastAPI]
+    hardware: Jetson + outdoor camera (tested from a balcony or hill, not a real tower)
+    budget: "€400"
+    months: 5
+    level: 3
+    phases:
+      - Curate public smoke datasets; data card
+      - Train smoke vs cloud vs fog classifier
+      - TensorRT INT8 on Jetson, live stream test
+      - Bearing-based location estimate and alert UI
+    metrics: [time to first detection, false alarms per day, fps]
+    ethics: Demonstrator only; no claim to replace fire watch services.
+    resume: "Shipped an edge smoke detector on Jetson (INT8, <N> fps) separating smoke from cloud at <N>% precision."
+    skills: [computer vision, TensorRT, geolocation]
+    defend:
+      - Why is cloud vs smoke the hard part?
+      - What is your false-alarm budget and who decided it?
+
+  - id: 4
+    code: BRIDGEKEEPER
+    name: Concrete crack inspection with an edge vision pipeline
+    tagline: Find the crack before the crack finds the truck.
+    problem: Bridge inspections are manual and periodic; small cracks are missed between visits.
+    art: |2
+         ____________________________
+        |____|____|____|____|____|___|   deck
+             \\    /\/\/\/   //
+              \\  crack!    //
+        ~~~~~~~\\~~~~~~~~~~//~~~~~~~~
+    flow: "camera on handheld pole or sim drone -> segmentation model -> crack width estimate -> inspection report PDF"
+    stack: [PyTorch, U-Net, ONNX Runtime, Gazebo, ReportLab]
+    hardware: Laptop + phone camera; drone only in simulation
+    budget: "€0–50"
+    months: 4
+    level: 3
+    phases:
+      - Public crack datasets (e.g. SDNET2018) and data card
+      - Segmentation model with width estimation
+      - Edge runtime on a small device
+      - Generate an inspection report in a standard layout
+    metrics: [IoU on crack pixels, width error in mm, report generation time]
+    ethics: Advisory tool; engineers sign inspections.
+    resume: "Built crack segmentation (IoU <N>) with mm-level width estimation and automated inspection reports."
+    skills: [segmentation, metrology, reporting]
+    defend:
+      - How do you convert pixels to millimetres?
+      - What does a missed crack cost compared to a false one?
+
+  - id: 5
+    code: VINEGUARD
+    name: Vineyard disease detection for Pfalz winemakers
+    tagline: Catch mildew on the leaf, not in the bottle.
+    problem: Downy and powdery mildew spread fast; spraying everything is costly and bad for soil.
+    art: |2
+          \|/  \|/  \|/  \|/        row by row
+         --@----@----@----@--       @ = vine
+           |    |  [!]    |         [!] = mildew 0.88
+         ~~~~~~~~~~~~~~~~~~~~~
+    flow: "phone or rover camera -> leaf disease classifier on device -> row map -> targeted spray plan"
+    stack: [TensorFlow Lite, Android or Jetson, QGIS, PlantVillage-style datasets]
+    hardware: Phone; optional Jetson rover from LANTERN
+    budget: "€0–100"
+    months: 4
+    level: 2
+    phases:
+      - Dataset and data card; partner winery if possible
+      - Classifier with per-class metrics
+      - On-device app with GPS tagging
+      - Row-level disease map and spray recommendation (advisory)
+    metrics: [per-disease recall, false positive rate, reduction in sprayed area (simulated)]
+    ethics: Advisory only; spraying follows plant protection law.
+    resume: "Deployed on-device grapevine disease detection with GPS row mapping, cutting simulated spray area by <N>%."
+    skills: [mobile ML, geospatial, agri-tech]
+    defend:
+      - Why might a model trained on lab photos fail in a real vineyard?
+      - How do you validate without a lab confirming each leaf?
+
+  - id: 6
+    code: QUIETNET
+    name: Cloud-free voice control for the home
+    tagline: Your house listens, but only to you, and only at home.
+    problem: Smart speakers send audio to the cloud; many households don't want that.
+    art: |2
+           _______
+          | ((o)) |   "lights off"
+          |_______|      |
+             |        [keyword model] --> MQTT --> lamp
+          no cloud.  no account.  no upload.
+    flow: "mic -> wake-word + intent model on device -> MQTT -> Home Assistant"
+    stack: [Raspberry Pi 5, openWakeWord, Whisper tiny, Home Assistant, MQTT]
+    hardware: Raspberry Pi 5 + USB mic
+    budget: "€120"
+    months: 2
+    level: 1
+    phases:
+      - Wake word running locally
+      - Intent parsing for 10 commands
+      - Home Assistant integration
+      - Privacy test proving zero outbound traffic
+    metrics: [command accuracy, latency, outbound packets during use (target 0)]
+    ethics: Household members agree to the device.
+    resume: "Built a fully offline voice assistant (<N> ms latency) with network-verified zero cloud traffic."
+    skills: [speech, home automation, privacy engineering]
+    defend:
+      - How did you prove no audio leaves the house?
+      - How do you handle German and English speakers in one home?
+
+  - id: 7
+    code: PACKMULE
+    name: Follow-me cargo rover for volunteers
+    tagline: Carries the sandbags so people don't have to.
+    problem: Volunteers carry heavy loads over rough ground during cleanups and events.
+    art: |2
+          o        ,--------.
+         /|\  --> |  ====  |=]   follows at 2 m
+         / \      '--------'
+                   (O)  (O)
+    flow: "UWB or camera person tracking -> ROS 2 follow controller -> obstacle stop -> e-stop"
+    stack: [ROS 2 Humble, UWB modules, Nav2, Jetson or Raspberry Pi]
+    hardware: Reuses the LANTERN rover chassis
+    budget: "€80 extra"
+    months: 3
+    level: 3
+    phases:
+      - Person following in simulation
+      - UWB tracking on real hardware
+      - Safety layer with obstacle stop and e-stop
+      - Load test on a closed course
+    metrics: [following distance error, stop distance, payload kg]
+    ethics: Closed-course testing; speed limit; never near children unsupervised.
+    resume: "Built a ROS 2 follow-me rover with UWB tracking and a certified-style safety stop under <N> s."
+    skills: [ROS 2, control, functional safety]
+    defend:
+      - What happens if it loses the person?
+      - Why is UWB more robust than vision here?
+
+  - id: 8
+    code: ICEROAD
+    name: Road ice prediction from low-cost roadside sensors
+    tagline: Know the road is black ice before the first car does.
+    problem: Local roads are salted on schedules, not conditions; ice forms in specific shaded spots.
+    art: |2
+          *   .   *    .   *
+        ======[#]=======[#]=====   [#] = sensor post
+          -2.1C  ice 0.76  -0.4C
+    flow: "road surface temp + air temp + humidity -> edge model -> ice probability -> map for road crews"
+    stack: [ESP32, DS18B20 sensors, DWD open weather data, scikit-learn, Leaflet]
+    hardware: 2–3 sensor posts
+    budget: "€150"
+    months: 3
+    level: 2
+    phases:
+      - Sensor posts and data logging
+      - Join with DWD weather observations
+      - Ice probability model and calibration
+      - Map for a municipal crew (mock)
+    metrics: [Brier score, lead time, sensor uptime]
+    ethics: Advisory; municipalities decide on salting.
+    resume: "Built calibrated road-ice prediction from edge sensors and open weather data (Brier <N>, <N> h lead)."
+    skills: [IoT, calibration, open data]
+    defend:
+      - What is a Brier score and why use it here?
+      - Why does sensor placement matter more than the model?

@@ -1,0 +1,174 @@
+track:
+  id: F
+  name: Computer Vision and Geospatial
+  motto: "See the world from the ground and from orbit."
+projects:
+  - id: 36
+    code: ORBITAL
+    name: Sentinel-2 change detection for floods and burn scars
+    tagline: Before and after, measured from space.
+    problem: Emergency mapping is fast but limited to activations; continuous free monitoring is possible with open satellite data.
+    art: |2
+               .  *   [ SENTINEL-2 ]   *   .
+                          | |
+          before: ......  | |  after: ..~~~~..
+                  ......  v v         .~~~~~~.   changed: 4.2 km2
+    flow: "Copernicus data -> cloud masking -> index differencing + segmentation model -> polygons -> map"
+    stack: [Sentinel Hub or openEO, rasterio, PyTorch, GeoPandas, QGIS]
+    hardware: Laptop
+    budget: "€0"
+    months: 3
+    level: 3
+    phases:
+      - Data pipeline with cloud masking
+      - Index differencing baseline (NDWI, NBR)
+      - Learned change model
+      - Validate against Copernicus EMS maps (e.g. EMSR517)
+    metrics: [IoU vs EMS delineation, processing time per tile, cloud-cover failure rate]
+    ethics: Open data with attribution.
+    resume: "Built Sentinel-2 change detection matching Copernicus EMS flood maps at IoU <N>."
+    skills: [remote sensing, geospatial ML]
+    defend:
+      - Why do clouds break optical flood mapping?
+      - When would you switch to Sentinel-1 radar?
+
+  - id: 37
+    code: ROOFTOP
+    name: Solar potential map from open elevation data
+    tagline: Which roofs in your town should have panels?
+    problem: Homeowners don't know if their roof is worth it.
+    art: |2
+            /\        /\/\        __
+           /##\      /####\      |##|      ## = high yield
+          /####\    /######\     |##|
+    flow: "laser-scan surface model -> roof segmentation -> slope/aspect -> sun simulation -> kWh/year map"
+    stack: [GDAL, PDAL, pvlib, GeoPandas, Leaflet]
+    hardware: Laptop
+    budget: "€0"
+    months: 3
+    level: 3
+    phases:
+      - Open DOM/DGM and building footprints for one town
+      - Roof planes and shading
+      - Yield estimate with pvlib
+      - Validate against a few real installations
+    metrics: [yield error vs real systems, roofs processed per minute]
+    ethics: Building-level outputs shown only in aggregate unless the owner asks.
+    resume: "Mapped rooftop solar potential for <N> buildings with <N>% error against measured systems."
+    skills: [geospatial, physics modelling, energy]
+    defend:
+      - How does shading from trees change the estimate?
+      - Why is aspect as important as slope?
+
+  - id: 38
+    code: TRAFFICLENS
+    name: Privacy-first traffic counting at the edge
+    tagline: Counts cars, bikes and people. Stores no faces, no plates.
+    problem: Towns want traffic counts but cameras raise privacy concerns.
+    art: |2
+          cam --> [ detect ] --> [ track ] --> counts only:  cars 412 | bikes 88 | peds 130
+                       \__ frames deleted on device, never stored __/
+    flow: "camera -> detector + tracker on edge -> line-crossing counts -> aggregated API"
+    stack: [Jetson or Raspberry Pi + Hailo, YOLO, ByteTrack, MQTT]
+    hardware: Edge device + camera on your own property
+    budget: "€150"
+    months: 3
+    level: 3
+    phases:
+      - Detector and tracker on recorded public videos
+      - Line-crossing counting with ground truth
+      - On-device deletion of frames; privacy test
+      - DPIA-style write-up
+    metrics: [count error %, fps, bytes of image data stored (target 0)]
+    ethics: GDPR by design; only film areas you are allowed to film.
+    resume: "Built edge traffic counting with <N>% error that stores no images, documented with a DPIA."
+    skills: [tracking, edge AI, privacy by design]
+    defend:
+      - How do you prove frames are never stored?
+      - What does double-counting look like and how did you fix it?
+
+  - id: 39
+    code: GREENLINE
+    name: Urban tree canopy and heat map
+    tagline: Where the shade is, and where it's missing.
+    problem: Heat waves hit treeless neighbourhoods hardest; planners need canopy data.
+    art: |2
+           @@@  @@     @@@@    @ = canopy
+          @@@@@   ..........    . = hot pavement
+           @@     ..........
+    flow: "aerial imagery + satellite thermal -> canopy segmentation -> heat overlay -> priority planting map"
+    stack: [PyTorch, rasterio, Landsat thermal, GeoPandas]
+    hardware: Laptop
+    budget: "€0"
+    months: 2
+    level: 2
+    phases:
+      - Canopy segmentation on open orthophotos
+      - Land surface temperature layer
+      - Correlation and priority scoring
+      - Map story for a non-technical audience
+    metrics: [canopy IoU, temperature correlation, priority areas found]
+    ethics: Open data; neighbourhood-level only.
+    resume: "Mapped tree canopy (IoU <N>) and surface heat to rank <N> priority planting areas."
+    skills: [segmentation, remote sensing, storytelling]
+    defend:
+      - Land surface temperature vs air temperature: why it matters?
+      - Who should decide planting priorities?
+
+  - id: 40
+    code: POTHOLE-PATROL
+    name: Dashcam road damage detection
+    tagline: Your commute, turned into a road survey.
+    problem: Road damage reports come late and by complaint.
+    art: |2
+          ====================================
+             car  >>>      (o)   (O)  <-- pothole 0.91 @ 49.6N 7.8E
+          ====================================
+    flow: "dashcam video + GPS -> detector -> dedupe by location -> map + weekly report"
+    stack: [YOLO, RDD2022 dataset, OpenCV, GeoJSON, Leaflet]
+    hardware: Phone or dashcam with GPS
+    budget: "€0–60"
+    months: 2
+    level: 2
+    phases:
+      - Train on public road-damage dataset
+      - GPS sync and deduplication
+      - Map and severity ranking
+      - Blur faces and plates before anything is saved
+    metrics: [mAP, duplicate rate, km surveyed]
+    ethics: Blur people and plates; respect local dashcam rules.
+    resume: "Built dashcam road-damage mapping (mAP <N>) with automatic face and plate blurring."
+    skills: [detection, geotagging, privacy]
+    defend:
+      - Why is deduplication harder than detection here?
+      - What are the dashcam rules in Germany?
+
+  - id: 41
+    code: HERITAGE3D
+    name: 3D scans of Palatinate castle ruins
+    tagline: Walk Trifels from your browser.
+    problem: Ruins erode; digital records are expensive.
+    art: |2
+               |>
+              _|_       _
+          ___|   |_____| |__
+         |  _     _     _   |   [ 3D gaussian splat ]
+         |_| |___| |___| |__|
+    flow: "phone photos/video -> structure from motion -> 3D Gaussian splatting -> web viewer"
+    stack: [COLMAP, nerfstudio or gsplat, three.js]
+    hardware: Phone + rented GPU hours
+    budget: "€30"
+    months: 2
+    level: 3
+    phases:
+      - Capture protocol and permissions
+      - Reconstruction pipeline
+      - Web viewer with annotations
+      - Quality comparison of methods
+    metrics: [reconstruction error on known distances, viewer load time, model size]
+    ethics: Follow site rules on photography and drones; no drones without permission.
+    resume: "Produced web-viewable 3D reconstructions of heritage sites with <N> cm accuracy on reference distances."
+    skills: [3D vision, photogrammetry, web graphics]
+    defend:
+      - Gaussian splatting vs mesh: when each?
+      - How do you check scale accuracy?

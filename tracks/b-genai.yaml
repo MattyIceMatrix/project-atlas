@@ -1,0 +1,206 @@
+track:
+  id: B
+  name: Generative AI and LLM Systems
+  motto: "Language models that earn their answers."
+projects:
+  - id: 9
+    code: AMTSDEUTSCH
+    name: Offline explainer for German government letters
+    tagline: Your Behörde letter, in plain words, without uploading it anywhere.
+    problem: Official German letters are dense; newcomers and international families struggle, and uploading them to cloud AI exposes personal data.
+    art: |2
+         .-----------------------.
+         | Sehr geehrte Damen... |     -->   "Your tax office needs form X
+         | gem. § 149 AO ...     |            by 30 June. Here is what to do."
+         '-----------------------'
+            [ OCR ] -> [ local LLM ] -> [ plain-language summary + deadlines ]
+    flow: "phone scan -> on-device OCR -> local LLM with glossary RAG -> summary, deadlines, next steps"
+    stack: [Tesseract or PaddleOCR, llama.cpp, small instruct model, SQLite FTS, Streamlit]
+    hardware: Laptop with 16 GB RAM
+    budget: "€0"
+    months: 3
+    level: 2
+    phases:
+      - Glossary of official terms with sources
+      - OCR + summary pipeline on synthetic letters
+      - Deadline extraction with tests
+      - Bilingual UI and privacy test (no network)
+    metrics: [deadline extraction accuracy, summary faithfulness, run time per page]
+    ethics: Not legal advice; always shows the original text next to the summary.
+    resume: "Built an offline bilingual letter explainer with <N>% deadline-extraction accuracy and zero data upload."
+    skills: [OCR, RAG, local LLMs, privacy]
+    defend:
+      - How do you stop the model from inventing a deadline?
+      - Why synthetic letters for testing?
+
+  - id: 10
+    code: VERITAS
+    name: Citation-checked RAG for technical manuals
+    tagline: Every sentence shows its receipt.
+    problem: RAG systems cite sources that don't actually support the claim.
+    art: |2
+         answer:  "Torque the bolt to 45 Nm [3]"
+                                         |
+         source [3]: "...tighten to 45 Nm..."   ==> SUPPORTED
+         source [5]: "...inspect annually..."   ==> NOT SUPPORTED (removed)
+    flow: "retrieve -> generate with citations -> claim splitter -> entailment checker -> keep only supported claims"
+    stack: [Python, sentence-transformers, NLI model, Qdrant, pytest]
+    hardware: Laptop or cloud GPU hours
+    budget: "€0–30"
+    months: 3
+    level: 3
+    phases:
+      - Corpus of public manuals and a question set
+      - Baseline RAG and citation precision measurement
+      - Claim-level entailment verification
+      - Report showing before/after faithfulness
+    metrics: [citation precision, answer faithfulness, latency overhead]
+    ethics: Use public-domain or permissively licensed manuals.
+    resume: "Raised RAG citation precision from <N>% to <N>% with claim-level entailment checks."
+    skills: [RAG, evaluation, NLI]
+    defend:
+      - Why check claims and not whole answers?
+      - What does your verifier get wrong?
+
+  - id: 11
+    code: SKILLBRIDGE-COPILOT
+    name: Military-to-civilian skills translator
+    tagline: From MOS to job post, in words a recruiter understands.
+    problem: Veterans undersell real skills because military language doesn't map cleanly to civilian job descriptions.
+    art: |2
+          [ MOS / duties ]  ===>  [ O*NET skills ]  ===>  [ resume bullets ]
+              ___                    ___                     ___
+             |>> |                  |{ }|                   |---|
+             |___|                  |___|                   |___|
+    flow: "duty text -> skill extraction -> O*NET occupation matching -> bullet drafts with evidence prompts"
+    stack: [O*NET open data, embeddings, small LLM, FastAPI, React]
+    hardware: Laptop
+    budget: "€0"
+    months: 3
+    level: 2
+    phases:
+      - Load O*NET and public MOS crosswalk data
+      - Skill extraction and matching with evaluation set
+      - Bullet drafting that asks the user for real numbers
+      - Usability test with 5 veterans
+    metrics: [match precision@5, user rating, time to first resume draft]
+    ethics: Never invents achievements; the user supplies the facts.
+    resume: "Built a veteran skills translator matching duties to O*NET occupations at precision@5 of <N>."
+    skills: [NLP, matching, product design]
+    defend:
+      - How do you stop it from inflating a resume?
+      - How did you evaluate the matching?
+
+  - id: 12
+    code: LOOM
+    name: Distil a big model's skill into a tiny one
+    tagline: Teach a 1B model one job, really well.
+    problem: Large models are too heavy for edge devices; small ones are weak at specialised tasks.
+    art: |2
+            [ teacher 70B ]
+                  |  thousands of graded examples
+                  v
+            [ student 1B ]  --> runs on a Jetson
+    flow: "task spec -> teacher generates + grades data -> LoRA fine-tune student -> eval vs teacher"
+    stack: [Hugging Face TRL, PEFT, vLLM, llama.cpp]
+    hardware: Rented GPU hours + Jetson for deployment
+    budget: "€50"
+    months: 3
+    level: 4
+    phases:
+      - Define one narrow task and a held-out test set
+      - Generate and filter synthetic training data
+      - LoRA fine-tune and quantise the student
+      - Compare quality, speed and cost to the teacher
+    metrics: [task accuracy vs teacher, tokens/s on device, cost per 1k tasks]
+    ethics: Respect model licences on synthetic data use.
+    resume: "Distilled a task into a 1B model reaching <N>% of teacher accuracy at <N>x speed on Jetson."
+    skills: [fine-tuning, distillation, quantisation]
+    defend:
+      - How do you avoid training on test examples?
+      - When is distillation the wrong choice?
+
+  - id: 13
+    code: ECHO
+    name: Offline meeting notes on a laptop
+    tagline: Minutes, decisions and to-dos, with the recording never leaving your desk.
+    problem: Meeting transcription tools upload sensitive audio to vendors.
+    art: |2
+          (( speaker A ))   (( speaker B ))
+                 \               /
+              [ local ASR + diarisation ]
+                       |
+           decisions | actions | owners | dates
+    flow: "audio -> Whisper -> speaker diarisation -> local LLM summary -> markdown minutes"
+    stack: [whisper.cpp, pyannote, llama.cpp, Python]
+    hardware: Laptop (NPU or GPU helps)
+    budget: "€0"
+    months: 2
+    level: 2
+    phases:
+      - Transcription + diarisation on public meeting corpora
+      - Action-item extraction with evaluation
+      - Minutes template and export
+      - No-network verification
+    metrics: [word error rate, action-item F1, real-time factor]
+    ethics: Everyone in the meeting consents to recording.
+    resume: "Built offline meeting minutes with <N>% action-item F1 at <N>x real time on a laptop."
+    skills: [speech, summarisation, evaluation]
+    defend:
+      - How did you measure action-item quality?
+      - What fails with overlapping speakers?
+
+  - id: 14
+    code: PATCHWORK
+    name: Code-review agent that writes the missing tests
+    tagline: Reviews the PR, then proves its own comments with a failing test.
+    problem: Review bots leave vague comments; developers ignore them.
+    art: |2
+          PR #42  ------>  [ reviewer agent ]
+                              |         |
+                         comment    failing test  --> CI shows red --> fix --> green
+    flow: "diff -> risk analysis -> generated test that fails on the bug -> PR comment with the test"
+    stack: [GitHub Actions, Python, pytest, LLM API or local model]
+    hardware: None (CI)
+    budget: "€0–20/month"
+    months: 3
+    level: 3
+    phases:
+      - Benchmark on known bug-fix commits
+      - Test generation that must fail before the fix
+      - GitHub App or Action integration
+      - Measure useful-comment rate on your own repos
+    metrics: [bugs caught with a failing test, false-alarm comments, cost per PR]
+    ethics: Runs only on repositories where the owner installs it.
+    resume: "Built a review agent that backs <N>% of its findings with a failing test, cutting noise by <N>%."
+    skills: [agents, testing, CI/CD]
+    defend:
+      - Why require a failing test?
+      - What stops the agent from running untrusted code unsafely?
+
+  - id: 15
+    code: GRANITE
+    name: Regression-test harness for LLM applications
+    tagline: Unit tests, but for prompts.
+    problem: A prompt or model change silently breaks answers that used to be right.
+    art: |2
+         prompt v1  ===  97/100  [##########]
+         prompt v2  ===  91/100  [#########.]   <-- BLOCK MERGE
+    flow: "test cases -> run against app -> graders (exact, rubric, model-graded) -> CI gate"
+    stack: [Python, pytest plugin, SQLite results store, GitHub Actions]
+    hardware: None
+    budget: "€0–10/month"
+    months: 2
+    level: 2
+    phases:
+      - Test case format and runner
+      - Graders with agreement checks against human labels
+      - CI gate and trend dashboard
+      - Use it on two of your other projects
+    metrics: [grader agreement with humans, run time, regressions caught]
+    ethics: None special.
+    resume: "Built an LLM regression harness used as a CI gate; model-graded checks agree with humans <N>% of the time."
+    skills: [evaluation, testing, developer tools]
+    defend:
+      - How do you know the model grader is trustworthy?
+      - What is flakiness and how do you handle it?

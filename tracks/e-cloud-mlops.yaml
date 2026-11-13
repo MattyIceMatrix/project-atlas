@@ -1,0 +1,203 @@
+track:
+  id: E
+  name: Cloud, Data and MLOps
+  motto: "Models are easy. Production is the project."
+projects:
+  - id: 29
+    code: CONVEYOR
+    name: End-to-end MLOps platform on k3s
+    tagline: From git push to monitored model, no hands.
+    problem: Most ML projects stop at a notebook; nothing about retraining, rollout or rollback is automated.
+    art: |2
+         git push -> [train] -> [eval gate] -> [registry] -> [canary 10%] -> [100%]
+                                    |                            |
+                                 FAIL: stop                 drift? -> rollback
+    flow: "GitHub Actions -> MLflow tracking + registry -> KServe or BentoML on k3s -> canary -> monitoring"
+    stack: [k3s, MLflow, BentoML or KServe, Argo CD, Prometheus, Grafana]
+    hardware: Home lab (3 small VMs)
+    budget: "€0"
+    months: 4
+    level: 4
+    phases:
+      - k3s cluster with GitOps (Argo CD)
+      - Training pipeline with an evaluation gate
+      - Canary deployment and automatic rollback
+      - Load test and a written runbook
+    metrics: [lead time commit-to-prod, rollback time, p95 latency]
+    ethics: None special.
+    resume: "Built GitOps MLOps on k3s with eval-gated canaries; commit-to-prod <N> min, rollback <N> s."
+    skills: [Kubernetes, GitOps, MLOps]
+    defend:
+      - What does the evaluation gate check, exactly?
+      - Why canary instead of blue-green here?
+
+  - id: 30
+    code: RIVERFLOW
+    name: Streaming lakehouse for German open water data
+    tagline: Every river gauge in Germany, live, queryable.
+    problem: Open gauge data exists (PEGELONLINE) but is hard to analyse historically and in real time.
+    art: |2
+          PEGELONLINE API ~~> [ ingest ] ~~> bronze ~~> silver ~~> gold
+                                                              |
+                                            "Which gauges rose fastest in the last 6 h?"
+    flow: "API poller -> Kafka/Redpanda -> Delta or Iceberg tables -> dbt models -> dashboard"
+    stack: [Redpanda, Apache Iceberg or Delta Lake, DuckDB, dbt, Superset]
+    hardware: Laptop or one cloud VM
+    budget: "€0–10/month"
+    months: 3
+    level: 3
+    phases:
+      - Ingest with schema and data-quality checks
+      - Medallion layers and dbt models
+      - Rise-rate analytics and alerts
+      - Feeds TIDEWATCH and LANTERN with history
+    metrics: [ingest lag, data quality test pass rate, query time]
+    ethics: Follow the data licence and attribution.
+    resume: "Built a streaming lakehouse over <N> German river gauges with <N> s ingest lag and tested data quality."
+    skills: [data engineering, streaming, dbt]
+    defend:
+      - Why bronze/silver/gold?
+      - How do you handle a gauge that sends nonsense?
+
+  - id: 31
+    code: FEATUREFORGE
+    name: Minimal feature store built from scratch
+    tagline: The same feature at training time and at 3 a.m. in production.
+    problem: Training/serving skew silently ruins models.
+    art: |2
+          offline store (parquet) <---- same definitions ----> online store (redis)
+                 |                                                   |
+              training                                            serving
+    flow: "feature definitions in code -> batch materialisation -> online sync -> point-in-time joins"
+    stack: [Python, DuckDB, Redis, Feast for comparison]
+    hardware: Laptop
+    budget: "€0"
+    months: 3
+    level: 3
+    phases:
+      - Feature definition DSL
+      - Point-in-time correct joins with tests
+      - Online store sync
+      - Compare to Feast and write up the trade-offs
+    metrics: [skew detected in tests, online read p99, materialisation time]
+    ethics: None special.
+    resume: "Built a feature store with point-in-time joins, eliminating measured train/serve skew."
+    skills: [data systems, correctness, MLOps]
+    defend:
+      - What is data leakage in a point-in-time join?
+      - When would you just use Feast?
+
+  - id: 32
+    code: COLDSTART
+    name: Serverless inference cost optimiser
+    tagline: Same predictions, a fraction of the bill.
+    problem: Teams over-provision GPUs for spiky inference traffic.
+    art: |2
+          cost/day
+           |  ####                     before
+           |  #### ##
+           |  ## ## ## ..  ..  ..       after
+           +---------------------- time
+    flow: "traffic replay -> try configs (batching, quantisation, CPU vs GPU, serverless) -> pick Pareto front"
+    stack: [Python, Locust, ONNX Runtime, AWS Lambda or Azure Functions, Terraform]
+    hardware: Cloud free tier + small budget
+    budget: "€20"
+    months: 2
+    level: 3
+    phases:
+      - Benchmark harness with recorded traffic
+      - Quantisation and batching experiments
+      - Serverless vs container comparison
+      - Cost/latency report with a recommendation
+    metrics: [cost per 1k predictions, p95 latency, cold start time]
+    ethics: None special.
+    resume: "Cut inference cost by <N>% at equal p95 latency through quantisation, batching and serverless."
+    skills: [cloud cost, performance, IaC]
+    defend:
+      - What is a Pareto front and why show it?
+      - When do cold starts make serverless wrong?
+
+  - id: 33
+    code: WATCHTOWER
+    name: Model drift and data-quality monitoring
+    tagline: Notices the world changed before your users do.
+    problem: Models degrade silently as input data shifts.
+    art: |2
+               _
+              |#|      feature "age" PSI 0.31  [!] drift
+              |#|      label rate  +12%        [!] check
+          ____|#|____  missing values 0.2%     ok
+    flow: "prediction logs -> drift tests (PSI, KS) -> data-quality checks -> alerts -> retrain ticket"
+    stack: [Evidently or custom, Great Expectations, Prometheus, Grafana]
+    hardware: None
+    budget: "€0"
+    months: 2
+    level: 2
+    phases:
+      - Logging of inputs and predictions
+      - Drift and quality checks with thresholds
+      - Alert routing and retrain tickets
+      - Simulated drift scenarios to validate
+    metrics: [time to detect injected drift, false alerts, coverage of features]
+    ethics: None special.
+    resume: "Built drift monitoring that detected injected shifts within <N> h with <N> false alerts/week."
+    skills: [monitoring, statistics, MLOps]
+    defend:
+      - PSI vs KS test: when each?
+      - Why is drift not always a problem?
+
+  - id: 34
+    code: DATACOMPASS
+    name: Data lineage and catalogue
+    tagline: Click a dashboard number, see every table it came from.
+    problem: Nobody knows which dashboards break when a source changes.
+    art: |2
+          src.orders --> stg_orders --> fct_sales --> "Revenue" tile
+                \                         ^
+                 '--> stg_customers ------'
+    flow: "parse dbt/SQL -> lineage graph -> catalogue UI -> impact analysis on PRs"
+    stack: [OpenLineage, Marquez or DataHub, dbt, Python]
+    hardware: Laptop
+    budget: "€0"
+    months: 2
+    level: 2
+    phases:
+      - Lineage capture from dbt and SQL
+      - Catalogue with owners and descriptions
+      - PR impact comments
+      - Demo on RIVERFLOW
+    metrics: [tables covered, impact analysis accuracy, 'time to answer "what breaks?"']
+    ethics: None special.
+    resume: "Added lineage and PR impact analysis across <N> tables, answering 'what breaks?' in seconds."
+    skills: [data governance, graphs, tooling]
+    defend:
+      - Column-level vs table-level lineage: worth it?
+      - Who owns a dataset and why does it matter?
+
+  - id: 35
+    code: SPOTFLEET
+    name: Fault-tolerant GPU training on spot instances
+    tagline: Train on cheap GPUs that can vanish at any second.
+    problem: Spot GPUs are much cheaper but get reclaimed mid-training.
+    art: |2
+          [gpu A] train..train..X  reclaimed
+                              |
+                         checkpoint --> [gpu B] resume..train..done
+    flow: "job queue -> spot provisioning -> frequent checkpoints to object storage -> auto-resume"
+    stack: [SkyPilot or Terraform, PyTorch, S3-compatible storage]
+    hardware: Cloud spot GPUs
+    budget: "€40"
+    months: 2
+    level: 3
+    phases:
+      - Checkpoint/resume that is bit-for-bit correct
+      - Interruption handling and auto-resubmit
+      - Cost and time comparison vs on-demand
+      - Chaos test: kill instances randomly
+    metrics: [cost saving, wasted GPU minutes, resume correctness]
+    ethics: None special.
+    resume: "Built spot-instance training with auto-resume, cutting GPU cost <N>% with <N>% wasted compute."
+    skills: [distributed training, cloud, reliability]
+    defend:
+      - How do you prove resume is correct?
+      - How often should you checkpoint, and why?

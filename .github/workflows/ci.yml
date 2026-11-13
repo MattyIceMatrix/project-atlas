@@ -1,0 +1,18 @@
+# CI: the atlas data and the rendered pages must agree
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pyyaml pytest
+      - run: pytest -q
+      - run: python tools/render.py --check
