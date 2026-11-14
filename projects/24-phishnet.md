@@ -62,7 +62,7 @@ Users don't trust a red banner they don't understand.
   P1  [=====]                     m0-0.8    Public phishing and ham corpora; data card
   P2        [=====]               m0.8-1.5  Interpretable model with reason codes
   P3              [=====]         m1.5-2.2  Mail client add-in
-  P4                    [=====]   m2.2-3    {'User study': 'does the explanation change decisions?'}
+  P4                    [=====]   m2.2-3    User study: does the explanation change decisions?
 ```
 
 ## Gate: done when you can show

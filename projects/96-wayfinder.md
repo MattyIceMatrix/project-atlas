@@ -119,7 +119,7 @@ Co-designed; assistive aid, not a replacement for cane or guide dog.
 
 1. Why co-design and not just test at the end?
 2. What failure is most dangerous and how is it handled?
-3. {'Audio vs haptic': 'what did users prefer?'}
+3. Audio vs haptic: what did users prefer?
 
 ## Masterpiece standard
 

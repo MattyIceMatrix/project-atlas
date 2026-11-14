@@ -60,7 +60,7 @@ Self-learners quit when material is too easy, too hard or too dry.
   P1  [=====]                     m0-3.5    Skill graph for one domain (e.g. DevOps)
   P2        [=====]               m3.5-7    Knowledge tracing on learner attempts
   P3              [=====]         m7-10.5   Mission generation with auto-graded labs
-  P4                    [=====]   m10.5-14  {'Study with 20 learners': 'retention and learning gain'}
+  P4                    [=====]   m10.5-14  Study with 20 learners: retention and learning gain
 ```
 
 ## Gate: done when you can show
@@ -122,7 +122,7 @@ Learner data private; no dark-pattern engagement tricks.
 
 1. What is knowledge tracing?
 2. How do you grade labs automatically and fairly?
-3. {'Fun vs effective': 'how did you measure both?'}
+3. Fun vs effective: how did you measure both?
 
 ## Masterpiece standard
 

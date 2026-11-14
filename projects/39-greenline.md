@@ -92,7 +92,7 @@ Grow into a heat early-warning service piloted with a city office.
 
 ## Defend it
 
-1. {'Land surface temperature vs air temperature': 'why it matters?'}
+1. Land surface temperature vs air temperature: why it matters?
 2. Who should decide planting priorities?
 
 ## Masterpiece standard

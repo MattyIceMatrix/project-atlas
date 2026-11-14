@@ -59,7 +59,7 @@ Governments are investing in quantum communication infrastructure; engineers who
   P1  [=====]                     m0-3      Protocol simulation and validation against published rates
   P2        [=====]               m3-6      Network topologies with trusted nodes
   P3              [=====]         m6-9      Attack scenarios and detection
-  P4                    [=====]   m9-12     {'Policy paper': 'where QKD vs post-quantum crypto makes sense'}
+  P4                    [=====]   m9-12     Policy paper: where QKD vs post-quantum crypto makes sense
 ```
 
 ## Gate: done when you can show

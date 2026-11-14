@@ -98,7 +98,7 @@ Monitoring for federated and edge fleets, with privacy-preserving drift detectio
 
 ## Defend it
 
-1. {'PSI vs KS test': 'when each?'}
+1. PSI vs KS test: when each?
 2. Why is drift not always a problem?
 
 ## Masterpiece standard

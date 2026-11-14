@@ -143,7 +143,7 @@ projects:
     resume: "Built drift monitoring that detected injected shifts within <N> h with <N> false alerts/week."
     skills: [monitoring, statistics, MLOps]
     defend:
-      - PSI vs KS test: when each?
+      - "PSI vs KS test: when each?"
       - Why is drift not always a problem?
 
   - id: 34
@@ -171,7 +171,7 @@ projects:
     resume: "Added lineage and PR impact analysis across <N> tables, answering 'what breaks?' in seconds."
     skills: [data governance, graphs, tooling]
     defend:
-      - Column-level vs table-level lineage: worth it?
+      - "Column-level vs table-level lineage: worth it?"
       - Who owns a dataset and why does it matter?
 
   - id: 35
@@ -193,7 +193,7 @@ projects:
       - Checkpoint/resume that is bit-for-bit correct
       - Interruption handling and auto-resubmit
       - Cost and time comparison vs on-demand
-      - Chaos test: kill instances randomly
+      - "Chaos test: kill instances randomly"
     metrics: [cost saving, wasted GPU minutes, resume correctness]
     ethics: None special.
     resume: "Built spot-instance training with auto-resume, cutting GPU cost <N>% with <N>% wasted compute."

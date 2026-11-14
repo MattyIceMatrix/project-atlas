@@ -55,7 +55,7 @@ Spot GPUs are much cheaper but get reclaimed mid-training.
   P1  [=====]                     m0-0.5    Checkpoint/resume that is bit-for-bit correct
   P2        [=====]               m0.5-1    Interruption handling and auto-resubmit
   P3              [=====]         m1-1.5    Cost and time comparison vs on-demand
-  P4                    [=====]   m1.5-2    {'Chaos test': 'kill instances randomly'}
+  P4                    [=====]   m1.5-2    Chaos test: kill instances randomly
 ```
 
 ## Gate: done when you can show

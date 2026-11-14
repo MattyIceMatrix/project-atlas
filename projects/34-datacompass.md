@@ -92,7 +92,7 @@ Lineage across data, models and provenance attestations for full audit trails.
 
 ## Defend it
 
-1. {'Column-level vs table-level lineage': 'worth it?'}
+1. Column-level vs table-level lineage: worth it?
 2. Who owns a dataset and why does it matter?
 
 ## Masterpiece standard

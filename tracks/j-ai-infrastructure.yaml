@@ -332,7 +332,7 @@ projects:
     resume: "Built an IaC-managed GPU cluster with fair-share scheduling at <N>% GPU utilisation."
     skills: [HPC, Kubernetes, infrastructure as code]
     defend:
-      - Slurm vs Kubernetes for ML: which and why?
+      - "Slurm vs Kubernetes for ML: which and why?"
       - What is preemption and when is it fair?
       - How do you recover a dead node?
     components: [provisioning, scheduler, storage, tracking, monitoring]

@@ -1,9 +1,15 @@
-# CI: the atlas data and the rendered pages must agree
+# CI: the atlas data, the rendered pages and the counts the README states must agree
 name: ci
 
 on:
   push:
   pull_request:
+
+# Least privilege: this workflow only reads the repository. Without an
+# explicit block a workflow inherits the repository default, which may be
+# read/write for every token it is handed.
+permissions:
+  contents: read
 
 jobs:
   check:
@@ -16,3 +22,6 @@ jobs:
       - run: pip install pyyaml pytest
       - run: pytest -q
       - run: python tools/render.py --check
+      # schema, phase order, gates, page sections, internal links, upgrade
+      # references, README counts and the NATIONSTACK capacity report
+      - run: python tools/validate.py
