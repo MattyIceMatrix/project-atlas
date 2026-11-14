@@ -90,7 +90,7 @@ projects:
     phases:
       - Build model organisms that sandbag on a benign task under a trigger
       - Implement and compare detection methods
-      - Blind test: detector vs held-out organisms built by someone else
+      - "Blind test: detector vs held-out organisms built by someone else"
       - Release as an Inspect eval with documentation
     metrics: [detection AUROC on held-out organisms, false positive rate on honest models, compute cost]
     ethics: Benign tasks only; no dangerous capability domains.
@@ -124,7 +124,7 @@ projects:
     phases:
       - Replicate a published emergent-misalignment result on a small model
       - Ablations over data, model size and training length
-      - Interpretability: find what changes internally
+      - "Interpretability: find what changes internally"
       - Test mitigations (data filtering, regularisation, probes) and publish
     metrics: [misalignment rate on held-out prompts, effect of each ablation, mitigation effectiveness]
     ethics: Small models, gated release of misaligned checkpoints, no harmful capability uplift.
@@ -327,7 +327,7 @@ projects:
     level: 5
     phases:
       - Literature and policy review (compute governance proposals)
-      - Workload classifier: training vs inference vs other from telemetry
+      - "Workload classifier: training vs inference vs other from telemetry"
       - Attested, tamper-evident logging prototype
       - Evasion red-team and policy write-up
     metrics: [workload classification accuracy, evasion success rate, overhead]

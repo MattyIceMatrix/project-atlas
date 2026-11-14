@@ -122,7 +122,7 @@ Mind electricity costs and noise for the household.
 
 ## Defend it
 
-1. {'Slurm vs Kubernetes for ML': 'which and why?'}
+1. Slurm vs Kubernetes for ML: which and why?
 2. What is preemption and when is it fair?
 3. How do you recover a dead node?
 

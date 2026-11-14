@@ -81,7 +81,7 @@ projects:
       - Public phishing and ham corpora; data card
       - Interpretable model with reason codes
       - Mail client add-in
-      - User study: does the explanation change decisions?
+      - "User study: does the explanation change decisions?"
     metrics: [precision/recall, explanation usefulness rating, inference time]
     ethics: Defensive; trained on public corpora only.
     resume: "Built an explainable phishing detector (F1 <N>) whose reason codes improved user decisions by <N>%."
@@ -116,7 +116,7 @@ projects:
     skills: [supply-chain security, DevSecOps]
     defend:
       - Why is "vulnerable dependency present" not the same as "exploitable"?
-      - CycloneDX vs SPDX: why pick one?
+      - "CycloneDX vs SPDX: why pick one?"
 
   - id: 26
     code: ZEROTRUST-LAB
@@ -137,7 +137,7 @@ projects:
       - Identity provider with MFA
       - Proxy with per-app policies
       - Device posture checks
-      - Attack walk-through: stolen password, stolen session
+      - "Attack walk-through: stolen password, stolen session"
     metrics: [apps behind proxy, blocked policy violations, login latency]
     ethics: Lab environment.
     resume: "Built a zero-trust access lab (OIDC, identity-aware proxy, device posture) replacing VPN access."

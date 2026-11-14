@@ -99,7 +99,7 @@ Extend from software SBOMs to signed, provenance-tracked ML models with admissio
 ## Defend it
 
 1. Why is "vulnerable dependency present" not the same as "exploitable"?
-2. {'CycloneDX vs SPDX': 'why pick one?'}
+2. CycloneDX vs SPDX: why pick one?
 
 ## Masterpiece standard
 

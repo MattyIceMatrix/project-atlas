@@ -10,9 +10,27 @@
 
 # Project Atlas
 
-**One hundred build-ready project briefs for an edge-AI, security and data engineer, each one sized,
-budgeted, phased and gated. Seventy are level-5 masterpieces, twenty sit at the frontier of AI
-alignment and quantum computing, and one is a sovereign AI blueprint for a nation of 100 million.**
+**121 build-ready project briefs for an edge-AI, security and data engineer, each one sized,
+budgeted, phased and gated. Seventy-one are level-5: fifty masterpieces, twenty at the frontier of AI
+alignment and quantum computing, and one sovereign AI blueprint for a nation of 100 million.**
+
+This repo is a **map, not an implementation**. Every brief is a plan for a project that has not been
+built yet. Nothing here claims a measured result. What it does claim is that the plans are complete and
+consistent, and that claim is machine-checked: the briefs are generated from `tracks/*.yaml`, and CI
+fails if the pages, the index, the counts or the cross-references drift apart.
+
+```text
+   by the numbers            counted from tracks/*.yaml by tools/validate.py
+     briefs = 121    tracks = 16    level-5 = 71
+     masterpiece tier = 50    frontier tier = 20    grand master = 1
+     every brief: 4 phases, 2+ gate metrics, 2+ defend questions, an ethics line
+
+   verify it yourself        don't take the prose on trust
+     pip install pyyaml pytest
+     pytest -q                        # schema and consistency checks over every brief
+     python tools/validate.py         # fields, sections, links, counts, upgrade paths
+     python tools/render.py --check    # the pages still match the data that generated them
+```
 
 The flagship project is [LANTERN](https://github.com/MattyIceMatrix/lantern), an offline flood search-and-rescue kit.
 The atlas is the map of what comes next. Each brief has the mission, the architecture, the kit, a phased

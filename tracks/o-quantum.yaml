@@ -227,7 +227,7 @@ projects:
       - Protocol simulation and validation against published rates
       - Network topologies with trusted nodes
       - Attack scenarios and detection
-      - Policy paper: where QKD vs post-quantum crypto makes sense
+      - "Policy paper: where QKD vs post-quantum crypto makes sense"
     metrics: [secret key rate vs distance, QBER under attacks, cost comparison with PQC]
     ethics: None special.
     resume: "Simulated QKD networks and attacks, and published a QKD vs PQC trade-off analysis for critical communications."

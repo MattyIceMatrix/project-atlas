@@ -48,7 +48,7 @@ Safety decisions rely on evals; a model that strategically underperforms could s
 ```text
   P1  [=====]                     m0-3      Build model organisms that sandbag on a benign task under a trigger
   P2        [=====]               m3-6      Implement and compare detection methods
-  P3              [=====]         m6-9      {'Blind test': 'detector vs held-out organisms built by someone else'}
+  P3              [=====]         m6-9      Blind test: detector vs held-out organisms built by someone else
   P4                    [=====]   m9-12     Release as an Inspect eval with documentation
 ```
 

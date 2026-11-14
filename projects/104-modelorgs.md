@@ -54,7 +54,7 @@ Narrow fine-tuning can produce broad, unexpected misaligned behaviour. Studying 
 ```text
   P1  [=====]                     m0-3.5    Replicate a published emergent-misalignment result on a small model
   P2        [=====]               m3.5-7    Ablations over data, model size and training length
-  P3              [=====]         m7-10.5   {'Interpretability': 'find what changes internally'}
+  P3              [=====]         m7-10.5   Interpretability: find what changes internally
   P4                    [=====]   m10.5-14  Test mitigations (data filtering, regularisation, probes) and publish
 ```
 

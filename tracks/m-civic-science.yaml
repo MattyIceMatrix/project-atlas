@@ -198,7 +198,7 @@ projects:
     defend:
       - Why co-design and not just test at the end?
       - What failure is most dangerous and how is it handled?
-      - Audio vs haptic: what did users prefer?
+      - "Audio vs haptic: what did users prefer?"
     components: [mapper, localiser, obstacle detector, guidance engine, app]
     trl: "TRL 4 -> 6"
     venue: "ASSETS (ACM accessibility conference)"
@@ -256,7 +256,7 @@ projects:
       - Skill graph for one domain (e.g. DevOps)
       - Knowledge tracing on learner attempts
       - Mission generation with auto-graded labs
-      - Study with 20 learners: retention and learning gain
+      - "Study with 20 learners: retention and learning gain"
     metrics: [knowledge tracing AUC, learning gain, 30-day retention]
     ethics: Learner data private; no dark-pattern engagement tricks.
     resume: "Built an adaptive training engine (KT AUC <N>) that raised 30-day learner retention <N>%."
@@ -264,7 +264,7 @@ projects:
     defend:
       - What is knowledge tracing?
       - How do you grade labs automatically and fairly?
-      - Fun vs effective: how did you measure both?
+      - "Fun vs effective: how did you measure both?"
     components: [skill graph, tracer, mission writer, lab grader, game layer]
     trl: "TRL 4 -> 6"
     venue: "Learning at Scale or educational data mining conference"

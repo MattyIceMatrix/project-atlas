@@ -112,7 +112,7 @@ projects:
     resume: "Mapped tree canopy (IoU <N>) and surface heat to rank <N> priority planting areas."
     skills: [segmentation, remote sensing, storytelling]
     defend:
-      - Land surface temperature vs air temperature: why it matters?
+      - "Land surface temperature vs air temperature: why it matters?"
       - Who should decide planting priorities?
 
   - id: 40
@@ -170,5 +170,5 @@ projects:
     resume: "Produced web-viewable 3D reconstructions of heritage sites with <N> cm accuracy on reference distances."
     skills: [3D vision, photogrammetry, web graphics]
     defend:
-      - Gaussian splatting vs mesh: when each?
+      - "Gaussian splatting vs mesh: when each?"
       - How do you check scale accuracy?

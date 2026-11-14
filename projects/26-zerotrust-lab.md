@@ -61,7 +61,7 @@ Flat networks and VPNs give too much access once inside.
   P1  [=====]                     m0-0.5    Identity provider with MFA
   P2        [=====]               m0.5-1    Proxy with per-app policies
   P3              [=====]         m1-1.5    Device posture checks
-  P4                    [=====]   m1.5-2    {'Attack walk-through': 'stolen password, stolen session'}
+  P4                    [=====]   m1.5-2    Attack walk-through: stolen password, stolen session
 ```
 
 ## Gate: done when you can show

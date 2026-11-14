@@ -93,7 +93,7 @@ Heritage twin with change monitoring over years and an open dataset for research
 
 ## Defend it
 
-1. {'Gaussian splatting vs mesh': 'when each?'}
+1. Gaussian splatting vs mesh: when each?
 2. How do you check scale accuracy?
 
 ## Masterpiece standard

@@ -53,7 +53,7 @@ International AI agreements need ways to verify compute use. Your security backg
 
 ```text
   P1  [=====]                     m0-3.5    Literature and policy review (compute governance proposals)
-  P2        [=====]               m3.5-7    {'Workload classifier': 'training vs inference vs other from telemetry'}
+  P2        [=====]               m3.5-7    Workload classifier: training vs inference vs other from telemetry
   P3              [=====]         m7-10.5   Attested, tamper-evident logging prototype
   P4                    [=====]   m10.5-14  Evasion red-team and policy write-up
 ```
